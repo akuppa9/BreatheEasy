@@ -1,3 +1,6 @@
+# Explicitly track my source code
+!venv/src
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
