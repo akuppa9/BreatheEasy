@@ -1,5 +1,5 @@
 
-# Breath Easy
+# Breathe Easy
 
 Breathe Easy is an iOS app that estimates a users relative peakflow based on a multitude of environmental and health related variables 
 
