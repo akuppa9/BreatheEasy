@@ -52,7 +52,7 @@ let drop1 = [
 ]
 struct DropdownMenuComponentGender: View {
     @State var show = false
-    @State var name = ""
+    @Binding var name: String
     var body: some View {
             VStack {
                 ZStack{
@@ -114,7 +114,7 @@ struct DropdownMenuComponentGender: View {
 
 struct DropdownMenuComponentJob: View {
     @State var show = false
-    @State var name = ""
+    @Binding var name: String
     var body: some View {
             VStack {
                 ZStack{
@@ -175,7 +175,7 @@ struct DropdownMenuComponentJob: View {
 
 struct DropdownMenuComponentActivity: View {
     @State var show = false
-    @State var name = ""
+    @Binding var name: String
     var body: some View {
             VStack {
                 ZStack{
@@ -236,8 +236,12 @@ struct DropdownMenuComponentActivity: View {
 
 
 struct StartTracking: View{
+    @AppStorage("tracked") var tracked = false
     @State private var sliderValue: Int = 50
     @State private var sliderWidth: CGFloat = 300.0
+    @State private var sex: String = ""
+    @State private var work: String = ""
+    @State private var activity: String = ""
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
@@ -264,7 +268,7 @@ struct StartTracking: View{
                             .font(.system(.title2, design: .rounded))
                             .fontWeight(.bold)
                             
-                        DropdownMenuComponentGender()
+                        DropdownMenuComponentGender(name: $sex)
                             .padding()
                             .padding()
                             .padding()
@@ -274,7 +278,7 @@ struct StartTracking: View{
                             .font(.system(.title2, design: .rounded))
                             .fontWeight(.bold)
                         
-                        DropdownMenuComponentJob()
+                        DropdownMenuComponentJob(name: $work)
                             .padding()
                             .padding()
                             .padding()
@@ -285,11 +289,16 @@ struct StartTracking: View{
                             .font(.system(.title2, design: .rounded))
                             .fontWeight(.bold)
                         
-                        DropdownMenuComponentActivity()
+                        DropdownMenuComponentActivity(name: $activity)
                             .padding()
                             .padding()
                             .padding()
                         Button{
+                            if(sex != "" && work != "" && activity != ""){
+                                withAnimation{
+                                    tracked = true
+                                }
+                            }
                         } label: {
                             Text("Start Tracking")
                                 .padding()
@@ -543,6 +552,7 @@ struct ProfileView: View{
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false
     @AppStorage("name") var name = ""
+    @AppStorage("tracked") var tracked = false
     @State private var showAlertDel = false
     @State private var showAlertLogOut = false
     var body: some View{
@@ -629,6 +639,7 @@ struct ProfileView: View{
                             withAnimation{
                                 log_Status = false
                                 log_Status2 = false
+                                tracked = false
                             }
                         }
                     }, message: {
@@ -642,36 +653,46 @@ struct ProfileView: View{
     }
 }
 
+struct MainView: View{
+    var body: some View{
+        TabView{
+            // HOME VIEW
+            Home()
+                .tabItem(){
+                    Image(systemName: "lungs.fill")
+                    Text("Home")
+                }.toolbarBackground(Color.white, for: .tabBar)
+            
+            // ABOUT VIEW
+            ViewAbout()
+                .tabItem(){
+                    Image(systemName: "info.circle")
+                    Text("About")
+                }.toolbarBackground(Color.white, for: .tabBar)
+            
+            // PROFILE VIEW
+           ProfileView()
+                .tabItem(){
+                Image(systemName: "person.fill")
+                Text("Profile")
+            }.toolbarBackground(Color.white, for: .tabBar)
+        }
+    }
+}
+
 struct ContentView: View {
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false
+    @AppStorage("tracked") var tracked = false
+    @AppStorage("uid") var uid = ""
     var body: some View{
-        if (log_Status || log_Status2){
-            TabView{
-                // HOME VIEW
-                Home()
-                    .tabItem(){
-                        Image(systemName: "lungs.fill")
-                        Text("Home")
-                    }.toolbarBackground(Color.white, for: .tabBar)
-                
-                // ABOUT VIEW
-                ViewAbout()
-                    .tabItem(){
-                        Image(systemName: "info.circle")
-                        Text("About")
-                    }.toolbarBackground(Color.white, for: .tabBar)
-                
-                // PROFILE VIEW
-               ProfileView()
-                    .tabItem(){
-                    Image(systemName: "person.fill")
-                    Text("Profile")
-                }.toolbarBackground(Color.white, for: .tabBar)
-            }
+        if ((log_Status || log_Status2) && tracked){
+            MainView()
+        }else if((log_Status || log_Status2) && !tracked){
+            StartTracking()
         }else{
-            // LoginPage()
-           StartTracking()
+             LoginPage()
+//           StartTracking()
 //           ProfileView()
         }
         

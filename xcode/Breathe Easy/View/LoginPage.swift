@@ -11,6 +11,7 @@ struct LoginPage: View {
     // For Google Sign In
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("name") var name = ""
+    @AppStorage("uid") var uid = ""
     
     // For Apple Sign In
     @StateObject var loginData = LoginViewModel()
@@ -110,8 +111,6 @@ struct LoginPage: View {
                 
                 VStack(alignment: .center){
                     Color(UIColor.darkGray).ignoresSafeArea()
-                   
-                    
                 }
             }
             .overlay(
@@ -186,6 +185,7 @@ struct LoginPage: View {
                 
                 print(user2.displayName ?? "Success!")
                 name = user2.displayName ?? "Name Undefined"
+                uid = user2.uid
                 
                 // updating user as logged in
                 withAnimation{
