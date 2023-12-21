@@ -237,11 +237,11 @@ struct DropdownMenuComponentActivity: View {
 
 struct StartTracking: View{
     @AppStorage("tracked") var tracked = false
-    @State private var sliderValue: Int = 50
+    @Binding var sliderValue: Int
     @State private var sliderWidth: CGFloat = 300.0
-    @State private var sex: String = ""
-    @State private var work: String = ""
-    @State private var activity: String = ""
+    @Binding var sex: String
+    @Binding var work: String
+    @Binding var activity: String
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
@@ -680,16 +680,37 @@ struct MainView: View{
     }
 }
 
+struct TestView: View{
+    @AppStorage("uid") var uid = ""
+    @Binding var sliderValue: Int
+    @Binding var sex: String
+    @Binding var work: String
+    @Binding var activity: String
+    var body: some View{
+        Text("\(uid)")
+        Text("\(sliderValue)")
+        Text("\(sex)")
+        Text("\(work)")
+        Text("\(activity)")
+    }
+}
+
 struct ContentView: View {
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false
     @AppStorage("tracked") var tracked = false
     @AppStorage("uid") var uid = ""
+    @State private var sliderValue: Int = 50
+    @State private var sex: String = ""
+    @State private var work: String = ""
+    @State private var activity: String = ""
+    
     var body: some View{
         if ((log_Status || log_Status2) && tracked){
-            MainView()
+//            MainView()
+            TestView(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity)
         }else if((log_Status || log_Status2) && !tracked){
-            StartTracking()
+            StartTracking(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity)
         }else{
              LoginPage()
 //           StartTracking()
