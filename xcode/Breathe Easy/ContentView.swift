@@ -46,9 +46,9 @@ let drop = [
     DropMenu(title: "Female")
 ]
 let drop1 = [
-    DropMenu(title: "Frequent"),
-    DropMenu(title: "Occasional"),
-    DropMenu(title: "Rare")
+    DropMenu(title: "Frequently"),
+    DropMenu(title: "Occasionally"),
+    DropMenu(title: "Rarely")
 ]
 struct DropdownMenuComponentGender: View {
     @State var show = false
@@ -277,7 +277,6 @@ struct StartTracking: View{
                             .foregroundStyle(Color.white)
                             .font(.system(.title2, design: .rounded))
                             .fontWeight(.bold)
-                        
                         DropdownMenuComponentJob(name: $work)
                             .padding()
                             .padding()
@@ -707,8 +706,7 @@ struct ContentView: View {
     
     var body: some View{
         if ((log_Status || log_Status2) && tracked){
-//            MainView()
-            TestView(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity)
+            MainView()
         }else if((log_Status || log_Status2) && !tracked){
             StartTracking(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity)
         }else{
