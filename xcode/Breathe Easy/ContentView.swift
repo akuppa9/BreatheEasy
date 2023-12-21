@@ -16,34 +16,297 @@ struct MyVars {
     var DataPoints: [Double]
 }
 
+struct SliderComponent: View {
+    @Binding var sliderValue: Int
+    var sliderWidth: CGFloat
+    var body: some View {
+        VStack {
+            Text("Age: \(sliderValue)")
+                .foregroundStyle(Color.white)
+                .font(.system(.title2, design: .rounded))
+                .fontWeight(.bold)
+
+            Slider(value: Binding(
+                get: { Double(sliderValue) },
+                set: { sliderValue = Int($0) }
+                ),
+                in: 0...100, step: 1.0)
+                .accentColor(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                .frame(width: sliderWidth)
+        }
+    }
+}
+
+struct DropMenu: Identifiable {
+    var id = UUID()
+    var title = String()
+}
+let drop = [
+    DropMenu(title: "Male"),
+    DropMenu(title: "Female")
+]
+let drop1 = [
+    DropMenu(title: "Frequent"),
+    DropMenu(title: "Occasional"),
+    DropMenu(title: "Rare")
+]
+struct DropdownMenuComponentGender: View {
+    @State var show = false
+    @State var name = ""
+    var body: some View {
+            VStack {
+                ZStack{
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                        ScrollView {
+                            VStack(spacing: 17){
+                                ForEach(drop) { item in Button {
+                                    withAnimation {
+                                        name =  item.title
+                                        show.toggle()
+                                    }
+                                } label: {
+                                    Text(item.title).foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                                        .bold()
+                                    Spacer()
+                                }
+                                }
+                                .padding(.horizontal)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical, 15)
+                        }
+                    }
+                    .frame(height: show ? 65 : 0)
+                    .offset(y: show ? 0 : -110)
+                    .foregroundStyle(Color((UIColor.gray)))
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10).frame(height: 60)
+                            .foregroundStyle(Color(red: 0.55, green: 0.55, blue: 0.55))
+                        HStack {
+                            Text(name).font(.title2)
+                                .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                            Spacer()
+                            
+                            Image(systemName: "chevron.right")
+                                .rotationEffect(.degrees(show ? 90 : 0))
+                                .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                            
+                        }
+                        .bold()
+                        .padding(.horizontal)
+                        .foregroundStyle(Color(.white))
+                    }
+                    .offset(y: -75)
+                    .onTapGesture {
+                        withAnimation {
+                            show.toggle()
+                    }
+                }
+                
+            }
+        }
+        .padding()
+        .frame(height: 60).offset(y: 30)
+    }
+}
+
+
+struct DropdownMenuComponentJob: View {
+    @State var show = false
+    @State var name = ""
+    var body: some View {
+            VStack {
+                ZStack{
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                        ScrollView {
+                            VStack(spacing: 17){
+                                ForEach(drop1) { item in Button {
+                                    withAnimation {
+                                        name =  item.title
+                                        show.toggle()
+                                    }
+                                } label: {
+                                    Text(item.title).foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                                        .bold()
+                                    Spacer()
+                                }
+                                }
+                                .padding(.horizontal)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical, 15)
+                        }
+                    }
+                    .frame(height: show ? 65 : 0)
+                    .offset(y: show ? 0 : -110)
+                    .foregroundStyle(Color((UIColor.gray)))
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10).frame(height: 60)
+                            .foregroundStyle(Color(red: 0.55, green: 0.55, blue: 0.55))
+                        HStack {
+                            Text(name).font(.title2)
+                                .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                            Spacer()
+                            
+                            Image(systemName: "chevron.right")
+                                .rotationEffect(.degrees(show ? 90 : 0))
+                                .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                            
+                        }
+                        .bold()
+                        .padding(.horizontal)
+                        .foregroundStyle(Color(.white))
+                    }
+                    .offset(y: -75)
+                    .onTapGesture {
+                        withAnimation {
+                            show.toggle()
+                    }
+                }
+                
+            }
+        }
+        .padding()
+        .frame(height: 60).offset(y: 30)
+    }
+}
+
+struct DropdownMenuComponentActivity: View {
+    @State var show = false
+    @State var name = ""
+    var body: some View {
+            VStack {
+                ZStack{
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                        ScrollView {
+                            VStack(spacing: 17){
+                                ForEach(drop1) { item in Button {
+                                    withAnimation {
+                                        name =  item.title
+                                        show.toggle()
+                                    }
+                                } label: {
+                                    Text(item.title).foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                                        .bold()
+                                    Spacer()
+                                }
+                                }
+                                .padding(.horizontal)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.vertical, 15)
+                        }
+                    }
+                    .frame(height: show ? 65 : 0)
+                    .offset(y: show ? 0 : -110)
+                    .foregroundStyle(Color((UIColor.gray)))
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10).frame(height: 60)
+                            .foregroundStyle(Color(red: 0.55, green: 0.55, blue: 0.55))
+                        HStack {
+                            Text(name).font(.title2)
+                                .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                            Spacer()
+                            
+                            Image(systemName: "chevron.right")
+                                .rotationEffect(.degrees(show ? 90 : 0))
+                                .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                            
+                        }
+                        .bold()
+                        .padding(.horizontal)
+                        .foregroundStyle(Color(.white))
+                    }
+                    .offset(y: -75)
+                    .onTapGesture {
+                        withAnimation {
+                            show.toggle()
+                    }
+                }
+                
+            }
+        }
+        .padding()
+        .frame(height: 60).offset(y: 30)
+    }
+}
+
+
 struct StartTracking: View{
+    @State private var sliderValue: Int = 50
+    @State private var sliderWidth: CGFloat = 300.0
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
                 Color(UIColor.darkGray).ignoresSafeArea()
                 VStack (spacing: 50){
-                    Text("Receive real-time alerts regarding your asthma risks. Powered by Machine Learning.")
-                        .multilineTextAlignment(.center)
-                        .foregroundStyle(Color.white)
-                        .font(.system(.title2, design: .rounded))
-                        .fontWeight(.bold)
-                    Button{
-
-                    } label: {
-                        Text("Start Tracking")
+                    Color(UIColor.darkGray)
+                        .frame(height: 0.1)
+                    ScrollView {
+                        Text("Maximize the accuracy and quality of your predictions by answering a few questions: ")
                             .padding()
-                            .frame(width: geometry.size.width * 0.6)
-                            .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                            .multilineTextAlignment(.center)
+                            .foregroundStyle(Color.white)
                             .font(.system(.title2, design: .rounded))
                             .fontWeight(.bold)
+                        
+                        SliderComponent(sliderValue: $sliderValue,
+                                        sliderWidth: sliderWidth)
+                        .padding()
+                        .padding()
+                        .padding()
+                        Text("Biological Sex")
+                            .multilineTextAlignment(.center)
+                            .foregroundStyle(Color.white)
+                            .font(.system(.title2, design: .rounded))
+                            .fontWeight(.bold)
+                            
+                        DropdownMenuComponentGender()
+                            .padding()
+                            .padding()
+                            .padding()
+                        Text("Outdoor Work")
+                            .multilineTextAlignment(.center)
+                            .foregroundStyle(Color.white)
+                            .font(.system(.title2, design: .rounded))
+                            .fontWeight(.bold)
+                        
+                        DropdownMenuComponentJob()
+                            .padding()
+                            .padding()
+                            .padding()
+                        
+                        Text("Outdoor Activity")
+                            .multilineTextAlignment(.center)
+                            .foregroundStyle(Color.white)
+                            .font(.system(.title2, design: .rounded))
+                            .fontWeight(.bold)
+                        
+                        DropdownMenuComponentActivity()
+                            .padding()
+                            .padding()
+                            .padding()
+                        Button{
+                        } label: {
+                            Text("Start Tracking")
+                                .padding()
+                                .frame(width: geometry.size.width * 0.6)
+                                .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                                .font(.system(.title2, design: .rounded))
+                                .fontWeight(.bold)
+                        }
+                        .background(Color(red: 72/255, green: 72/255, blue: 72/255))
+                        .cornerRadius(30)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 30)
+                                .stroke(Color(red: 72/255, green: 72/255, blue: 72/255)))
+                        
+                        Spacer().frame(width: .infinity, height: 30)
+                           
                     }
-                    .background(Color(red: 72/255, green: 72/255, blue: 72/255))
-                    .cornerRadius(30)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 30)
-                            .stroke(Color(red: 72/255, green: 72/255, blue: 72/255)))
-
-                    Spacer().frame(height: 20)
                 }
 
             }
@@ -407,9 +670,9 @@ struct ContentView: View {
                 }.toolbarBackground(Color.white, for: .tabBar)
             }
         }else{
-             LoginPage()
-//            StartTracking()
-//            ProfileView()
+            // LoginPage()
+           StartTracking()
+//           ProfileView()
         }
         
     }
