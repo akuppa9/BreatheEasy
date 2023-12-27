@@ -311,6 +311,10 @@ struct StartTracking: View{
                                 ]
                                 
                                 docRef.setData(docData)
+                                sex = "";
+                                work = "";
+                                activity = "";
+                                sliderValue = 50;
                             }
                         } label: {
                             Text("Start Tracking")
