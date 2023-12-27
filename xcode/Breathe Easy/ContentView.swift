@@ -570,7 +570,6 @@ struct ProfileView: View{
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false
     @AppStorage("name") var name = ""
-    @AppStorage("tracked") var tracked = false
     @State private var showAlertDel = false
     @State private var showAlertLogOut = false
     var body: some View{
@@ -657,8 +656,19 @@ struct ProfileView: View{
                             withAnimation{
                                 log_Status = false
                                 log_Status2 = false
-                                tracked = false
+                                
+                                let db = Firestore.firestore()
+                                let documentRef = db.collection("users").document(uid)
+                                
+                                documentRef.delete() { err in
+                                    if let err = err {
+                                        print("Error removing document: \(err)")
+                                    } else {
+                                        print("Document successfully removed!")
+                                    }
+                                }
                             }
+
                         }
                     }, message: {
                         Text("Deleting this account will delete all stored data")
@@ -714,6 +724,8 @@ struct TestView: View{
 }
 
 struct ContentView: View {
+    @AppStorage("GM") var GM = false
+    @AppStorage("GT") var GT = false
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false
     @AppStorage("tracked") var tracked = false

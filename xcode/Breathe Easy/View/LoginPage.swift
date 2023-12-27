@@ -12,6 +12,7 @@ struct LoginPage: View {
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("name") var name = ""
     @AppStorage("uid") var uid = ""
+    @AppStorage("tracked") var tracked = false
     @Binding var sliderValue: Int
     @Binding var sex: String
     @Binding var work: String
@@ -194,9 +195,25 @@ struct LoginPage: View {
                 // updating user as logged in
                 withAnimation{
                     log_Status = true
-                }
+                    let db = Firestore.firestore()
                     
+                    db.collection("users").getDocuments() { (querySnapshot, err) in
+                        if let err = err {
+                            print("Error getting documents: \(err)")
+                        } else {
+                            tracked = false
+                            for document in querySnapshot!.documents {
+                                
+                                if document.documentID == uid{
+                                    tracked = true
+                                }
+            //                        print("\(document.documentID) => \(document.data())")
+                            }
+                        }
+                    }
+                }
             }
+            
         }
         
     }
