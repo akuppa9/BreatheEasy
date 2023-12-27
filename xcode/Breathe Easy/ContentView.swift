@@ -78,7 +78,7 @@ struct DropdownMenuComponentGender: View {
                         }
                     }
                     .frame(height: show ? 65 : 0)
-                    .offset(y: show ? 0 : -110)
+                    .offset(y: show ? 0 : -105)
                     .foregroundStyle(Color((UIColor.gray)))
                     ZStack {
                         RoundedRectangle(cornerRadius: 10).frame(height: 60)
@@ -140,7 +140,7 @@ struct DropdownMenuComponentJob: View {
                         }
                     }
                     .frame(height: show ? 65 : 0)
-                    .offset(y: show ? 0 : -110)
+                    .offset(y: show ? 0 : -105)
                     .foregroundStyle(Color((UIColor.gray)))
                     ZStack {
                         RoundedRectangle(cornerRadius: 10).frame(height: 60)
@@ -201,7 +201,7 @@ struct DropdownMenuComponentActivity: View {
                         }
                     }
                     .frame(height: show ? 65 : 0)
-                    .offset(y: show ? 0 : -110)
+                    .offset(y: show ? 0 : -105)
                     .foregroundStyle(Color((UIColor.gray)))
                     ZStack {
                         RoundedRectangle(cornerRadius: 10).frame(height: 60)
@@ -240,6 +240,7 @@ struct StartTracking: View{
     @AppStorage("uid") var uid = ""
     @Binding var sliderValue: Int
     @State private var sliderWidth: CGFloat = 300.0
+    @State private var showAlert = false
     @Binding var sex: String
     @Binding var work: String
     @Binding var activity: String
@@ -294,11 +295,10 @@ struct StartTracking: View{
                             .padding()
                             .padding()
                         Button{
-                            if(sex != "" && work != "" && activity != ""){
-                                withAnimation{
-                                    tracked = true
-                                }
-                                
+                            if (sex == "" || work == "" || activity == ""){
+                                showAlert = true;
+                            }
+                            else if(sex != "" && work != "" && activity != ""){
                                 let db = Firestore.firestore()
                                 
                                 let docRef = db.document("users/\(uid)")
@@ -315,8 +315,13 @@ struct StartTracking: View{
                                 work = "";
                                 activity = "";
                                 sliderValue = 50;
+                                
+                                withAnimation{
+                                    tracked = true
+                                }
                             }
-                        } label: {
+                        }
+                        label: {
                             Text("Start Tracking")
                                 .padding()
                                 .frame(width: geometry.size.width * 0.6)
@@ -324,8 +329,17 @@ struct StartTracking: View{
                                 .font(.system(.title2, design: .rounded))
                                 .fontWeight(.bold)
                         }
+                        .alert(isPresented: $showAlert) {
+                            Alert(
+                                title: Text("Incomplete Information"),
+                                message: Text("One or more fields are empty"),
+                                dismissButton: .default(Text("OK")) {
+                                    showAlert = false
+                                }
+                            )
+                        }
                         .background(Color(red: 72/255, green: 72/255, blue: 72/255))
-                        .cornerRadius(30)
+                        .cornerRadius(10)
                         .overlay(
                             RoundedRectangle(cornerRadius: 30)
                                 .stroke(Color(red: 72/255, green: 72/255, blue: 72/255)))
