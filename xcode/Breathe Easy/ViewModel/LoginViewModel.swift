@@ -45,7 +45,6 @@ class LoginViewModel: ObservableObject{
             // Directing user to home page
             withAnimation {
                 self.log_Status2 = true
-            
             }
         }
         

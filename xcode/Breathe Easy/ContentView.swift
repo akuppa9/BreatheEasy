@@ -237,6 +237,7 @@ struct DropdownMenuComponentActivity: View {
 
 struct StartTracking: View{
     @AppStorage("tracked") var tracked = false
+    @AppStorage("uid") var uid = ""
     @Binding var sliderValue: Int
     @State private var sliderWidth: CGFloat = 300.0
     @Binding var sex: String
@@ -297,6 +298,19 @@ struct StartTracking: View{
                                 withAnimation{
                                     tracked = true
                                 }
+                                
+                                let db = Firestore.firestore()
+                                
+                                let docRef = db.document("users/\(uid)")
+                                
+                                let docData: [String: Any] = [
+                                    "age": sliderValue,
+                                    "sex": sex,
+                                    "work": work,
+                                    "activity": activity
+                                ]
+                                
+                                docRef.setData(docData)
                             }
                         } label: {
                             Text("Start Tracking")
@@ -548,6 +562,7 @@ Breathe Easy is here to provide you with the tools you need to manage your asthm
     }
 
 struct ProfileView: View{
+    @AppStorage("uid") var uid = ""
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false
     @AppStorage("name") var name = ""
@@ -710,7 +725,7 @@ struct ContentView: View {
         }else if((log_Status || log_Status2) && !tracked){
             StartTracking(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity)
         }else{
-             LoginPage()
+            LoginPage(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity)
 //           StartTracking()
 //           ProfileView()
         }

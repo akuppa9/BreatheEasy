@@ -12,6 +12,10 @@ struct LoginPage: View {
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("name") var name = ""
     @AppStorage("uid") var uid = ""
+    @Binding var sliderValue: Int
+    @Binding var sex: String
+    @Binding var work: String
+    @Binding var activity: String
     
     // For Apple Sign In
     @StateObject var loginData = LoginViewModel()
@@ -191,6 +195,7 @@ struct LoginPage: View {
                 withAnimation{
                     log_Status = true
                 }
+                    
             }
         }
         
@@ -198,9 +203,9 @@ struct LoginPage: View {
     
 }
 
-#Preview {
-    LoginPage()
-}
+//#Preview {
+//    LoginPage(sliderValue: sliderValue, sex: sex, work: work, activity: <#Binding<String>#>)
+//}
 
 // extending view to get screen bounds
 extension View{
