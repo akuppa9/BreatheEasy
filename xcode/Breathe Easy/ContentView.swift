@@ -590,6 +590,7 @@ struct ProfileView: View{
     @AppStorage("name") var name = ""
     @State private var showAlertDel = false
     @State private var showAlertLogOut = false
+    @State private var showEditAccount = false
     var body: some View{
         NavigationView {
             ZStack{
@@ -604,6 +605,30 @@ struct ProfileView: View{
                         }
                         .padding(EdgeInsets(top: 10, leading: 21, bottom: 10, trailing: 21))
                     }
+                    // edit profile button
+                    Button{
+                        showEditAccount = true
+                    } label: {
+                        VStack{
+                            Divider().background(Color(UIColor.systemGray5))
+                            HStack{
+                                Text("Edit Profile")
+                                    .font(.body).foregroundStyle(Color(UIColor.systemGray5))
+                                Spacer()
+                            }
+                            .padding(EdgeInsets(top: 10, leading: 21, bottom: 10, trailing: 21))
+                        }
+                    }
+                    .alert(isPresented: $showEditAccount) {
+                                    Alert(
+                                        title: Text("Edit Profile"),
+                                        message: Text("Would you like to edit your account info?"),
+                                        primaryButton: .default(Text("Yes")) {
+                                        page = 2
+                                        },
+                                        secondaryButton: .cancel(Text("No")) {}
+                                    )
+                                }
                     
                     // log out button
                     Button{
