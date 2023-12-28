@@ -301,11 +301,6 @@ struct StartTracking: View{
                             }
                             else if(sex != "" && work != "" && activity != ""){
                                 
-                                withAnimation{
-                                    tracked = true
-                                    page = 3
-                                }
-                                
                                 let db = Firestore.firestore()
                                 
                                 let docRef = db.document("users/\(uid)")
@@ -322,6 +317,12 @@ struct StartTracking: View{
                                 work = "";
                                 activity = "";
                                 sliderValue = 50;
+                                
+                                tracked = true
+                                
+                                withAnimation{
+                                    page = 3
+                                }
                             }
                         }
                         label: {

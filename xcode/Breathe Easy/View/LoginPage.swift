@@ -215,9 +215,13 @@ struct LoginPage: View {
                             }
                             
                             if count == 1{
-                                page = 3
+                                withAnimation{
+                                    page = 3
+                                }
                             }else{
-                                page = 2
+                                withAnimation{
+                                    page = 2
+                                }
                             }
                         }
                     }
