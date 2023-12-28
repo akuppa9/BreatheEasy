@@ -5,6 +5,8 @@ import AuthenticationServices
 
 struct LoginPage: View {
     
+    @AppStorage("page") var page = 1
+    
     // Loading Indicator
     @State var isLoading: Bool = false
     
@@ -201,13 +203,21 @@ struct LoginPage: View {
                         if let err = err {
                             print("Error getting documents: \(err)")
                         } else {
-                            tracked = false
+                            var count = 0;
+//                            tracked = false
                             for document in querySnapshot!.documents {
                                 
                                 if document.documentID == uid{
-                                    tracked = true
+                                    count = count + 1
+//                                    tracked = true
                                 }
             //                        print("\(document.documentID) => \(document.data())")
+                            }
+                            
+                            if count == 1{
+                                page = 3
+                            }else{
+                                page = 2
                             }
                         }
                     }

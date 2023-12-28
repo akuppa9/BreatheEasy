@@ -14,6 +14,9 @@ class LoginViewModel: ObservableObject{
     
     @Published var nonce = ""
     @AppStorage("log_Status2") var log_Status2 = false
+    @AppStorage("tracked") var tracked = false
+    @AppStorage("uid") var uid = ""
+    @AppStorage("page") var page = 1
     
     func authenticate(credential: ASAuthorizationAppleIDCredential){
         
@@ -45,6 +48,31 @@ class LoginViewModel: ObservableObject{
             // Directing user to home page
             withAnimation {
                 self.log_Status2 = true
+                
+                let db = Firestore.firestore()
+                
+                db.collection("users").getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                    } else {
+                        var count = 0;
+//                            tracked = false
+                        for document in querySnapshot!.documents {
+                            
+                            if document.documentID == self.uid{
+                                count = count + 1
+//                                    tracked = true
+                            }
+        //                        print("\(document.documentID) => \(document.data())")
+                        }
+                        
+                        if count == 1{
+                            self.page = 3
+                        }else{
+                            self.page = 2
+                        }
+                    }
+                }
             }
         }
         

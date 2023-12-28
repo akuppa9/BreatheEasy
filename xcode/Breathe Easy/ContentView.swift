@@ -236,6 +236,7 @@ struct DropdownMenuComponentActivity: View {
 
 
 struct StartTracking: View{
+    @AppStorage("page") var page = 1
     @AppStorage("tracked") var tracked = false
     @AppStorage("uid") var uid = ""
     @Binding var sliderValue: Int
@@ -302,6 +303,7 @@ struct StartTracking: View{
                                 
                                 withAnimation{
                                     tracked = true
+                                    page = 3
                                 }
                                 
                                 let db = Firestore.firestore()
@@ -581,6 +583,7 @@ Breathe Easy is here to provide you with the tools you need to manage your asthm
     }
 
 struct ProfileView: View{
+    @AppStorage("page") var page = 1
     @AppStorage("uid") var uid = ""
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false
@@ -624,6 +627,7 @@ struct ProfileView: View{
                                 try? Auth.auth().signOut()
                                 withAnimation{
                                     log_Status = false
+                                    page = 1
                                 }
                             }
                             else if log_Status2{
@@ -634,6 +638,7 @@ struct ProfileView: View{
                                 
                                 withAnimation{
                                     log_Status2 = false
+                                    page = 1
                                 }
                             }
                         }
@@ -672,8 +677,10 @@ struct ProfileView: View{
                                 log_Status = false
                                 log_Status2 = false
                                 
+                                page = 1
+                                
                                 let db = Firestore.firestore()
-                                let documentRef = db.collection("users").document(uid)
+                                let documentRef = db.collection("users").document("\(uid)")
                                 
                                 documentRef.delete() { err in
                                     if let err = err {
@@ -739,8 +746,7 @@ struct TestView: View{
 }
 
 struct ContentView: View {
-    @AppStorage("GM") var GM = false
-    @AppStorage("GT") var GT = false
+    @AppStorage("page") var page = 1
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false
     @AppStorage("tracked") var tracked = false
@@ -751,9 +757,9 @@ struct ContentView: View {
     @State private var activity: String = ""
     
     var body: some View{
-        if ((log_Status || log_Status2) && tracked){
+        if (page == 3){
             MainView()
-        }else if((log_Status || log_Status2) && !tracked){
+        }else if(page == 2){
             StartTracking(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity)
         }else{
             LoginPage(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity)
