@@ -236,6 +236,8 @@ struct DropdownMenuComponentActivity: View {
 
 
 struct StartTracking: View{
+    @ObservedObject var locationManager = LocationManager.shared
+    @AppStorage("coords") var coords = ""
     @AppStorage("page") var page = 1
     @AppStorage("tracked") var tracked = false
     @AppStorage("uid") var uid = ""
@@ -296,6 +298,10 @@ struct StartTracking: View{
                             .padding()
                             .padding()
                         Button{
+                            
+                            LocationManager.shared.requestLocation()
+                            coords = "\(String(describing: locationManager.userLocation?.coordinate))"
+                            
                             if (sex == "" || work == "" || activity == ""){
                                 showAlert = true;
                             }
@@ -756,20 +762,13 @@ struct MainView: View{
     }
 }
 
-//struct TestView: View{
-//    @AppStorage("uid") var uid = ""
-//    @Binding var sliderValue: Int
-//    @Binding var sex: String
-//    @Binding var work: String
-//    @Binding var activity: String
-//    var body: some View{
-//        Text("\(uid)")
-//        Text("\(sliderValue)")
-//        Text("\(sex)")
-//        Text("\(work)")
-//        Text("\(activity)")
-//    }
-//}
+struct TestView: View{
+    @ObservedObject var locationManager = LocationManager.shared
+    @AppStorage("coords") var coords = ""
+    var body: some View{
+        Text(coords)
+    }
+}
 
 struct ContentView: View {
     @AppStorage("page") var page = 1
@@ -783,16 +782,18 @@ struct ContentView: View {
     @State private var activity: String = ""
     
     var body: some View{
-        if (page == 3){
-            MainView()
-        }else if(page == 2){
-            StartTracking(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity)
-        }else{
-            LoginPage(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity)
-//           StartTracking()
-//           ProfileView()
-        }
-        
+        ZStack{
+            if (page == 1){
+                LoginPage(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .opacity, removal: .opacity))
+            }
+            if(page == 2){
+                StartTracking(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .opacity, removal: .opacity))
+            }
+            if(page == 3){
+                MainView().transition(.asymmetric(insertion: .opacity, removal: .opacity))
+//                TestView().transition(.asymmetric(insertion: .opacity, removal: .opacity))
+            }
+        }.animation(.default, value: page)
     }
 }
 

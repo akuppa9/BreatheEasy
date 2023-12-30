@@ -103,6 +103,7 @@ struct LoginPage: View {
                             print("error with firebase")
                             return
                         }
+                        
                         loginData.authenticate(credential: credential)
                     case.failure(let error):
                         print(error.localizedDescription)

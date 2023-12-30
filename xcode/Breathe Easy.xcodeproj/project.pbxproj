@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		383C2A272B12CCD100B36651 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383C2A262B12CCD100B36651 /* LoginViewModel.swift */; };
+		38A1BBA12B40BB70006D04CF /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A1BBA02B40BB70006D04CF /* LocationManager.swift */; };
 		38BDC3992B10164100D212BF /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BDC3982B10164100D212BF /* LoginPage.swift */; };
 		38BDC39D2B1029E500D212BF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 38BDC39C2B1029E500D212BF /* GoogleService-Info.plist */; };
 		38BDC3A12B10349600D212BF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 38BDC3A02B10349600D212BF /* FirebaseAuth */; };
@@ -71,6 +72,7 @@
 /* Begin PBXFileReference section */
 		383C2A242B12C53A00B36651 /* Breathe Easy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Breathe Easy.entitlements"; sourceTree = "<group>"; };
 		383C2A262B12CCD100B36651 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		38A1BBA02B40BB70006D04CF /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		38BDC3982B10164100D212BF /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		38BDC39C2B1029E500D212BF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		38BDC39E2B102A4600D212BF /* Breathe-Easy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Breathe-Easy-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -183,6 +185,7 @@
 				AC4A5CA12AED652A0001CB8A /* ContentView.swift */,
 				AC4A5CA32AED652C0001CB8A /* Assets.xcassets */,
 				AC4A5CA52AED652C0001CB8A /* Preview Content */,
+				38A1BBA02B40BB70006D04CF /* LocationManager.swift */,
 			);
 			path = "Breathe Easy";
 			sourceTree = "<group>";
@@ -407,6 +410,7 @@
 			files = (
 				383C2A272B12CCD100B36651 /* LoginViewModel.swift in Sources */,
 				AC4A5CA22AED652A0001CB8A /* ContentView.swift in Sources */,
+				38A1BBA12B40BB70006D04CF /* LocationManager.swift in Sources */,
 				38BDC3992B10164100D212BF /* LoginPage.swift in Sources */,
 				AC4A5CA02AED652A0001CB8A /* Breathe_EasyApp.swift in Sources */,
 			);
@@ -594,6 +598,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Breathe-Easy-Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow Breathe Easy to use your location to enhance your experience";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -626,6 +631,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Breathe-Easy-Info.plist";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow Breathe Easy to use your location to enhance your experience";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
