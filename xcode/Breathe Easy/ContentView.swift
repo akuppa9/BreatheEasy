@@ -678,7 +678,7 @@ struct ProfileView: View{
                     
                     // delete account button
                     Button{
-                        showAlertDel = true
+                        page = 4
                     } label: {
                         VStack{
                             HStack{
@@ -690,43 +690,6 @@ struct ProfileView: View{
                             Divider().background(Color(UIColor.systemGray5))
                         }
                     }
-                    .alert("Are you sure?", isPresented: $showAlertDel, actions: {
-                        Button("Delete", role: .destructive) {
-                            let user = Auth.auth().currentUser
-                            
-                            user?.delete { error in
-                                if let error = error {
-                                    print(error.localizedDescription)
-                                } else {
-                                    print("Deletion Success")
-                                }
-                            }
-                            
-                            GIDSignIn.sharedInstance.signOut()
-                            try? Auth.auth().signOut()
-                            
-                            withAnimation{
-                                log_Status = false
-                                log_Status2 = false
-                                
-                                page = 1
-                                
-                                let db = Firestore.firestore()
-                                let documentRef = db.collection("users").document("\(uid)")
-                                
-                                documentRef.delete() { err in
-                                    if let err = err {
-                                        print("Error removing document: \(err)")
-                                    } else {
-                                        print("Document successfully removed!")
-                                    }
-                                }
-                            }
-
-                        }
-                    }, message: {
-                        Text("Deleting this account will delete all stored data")
-                    })
                     Spacer()
                 }
 //                .navigationBarTitle(Text(name))
@@ -791,6 +754,9 @@ struct ContentView: View {
             }
             if(page == 3){
                 MainView().transition(.asymmetric(insertion: .opacity, removal: .opacity))
+            }
+            if(page == 4){
+                DeleteAccountView().transition(.asymmetric(insertion: .opacity, removal: .opacity))
 //                TestView().transition(.asymmetric(insertion: .opacity, removal: .opacity))
             }
         }.animation(.default, value: page)

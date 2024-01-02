@@ -29,6 +29,7 @@
 		AC4A5CDB2AED65BF0001CB8A /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A5CDA2AED65BF0001CB8A /* AppIntent.swift */; };
 		AC4A5CDD2AED65C10001CB8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC4A5CDC2AED65C10001CB8A /* Assets.xcassets */; };
 		AC4A5CE12AED65C10001CB8A /* Breathe Easy WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AC4A5CCD2AED65BF0001CB8A /* Breathe Easy WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		AC6C60562B44CC2900FC8B67 /* DeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C60552B44CC2900FC8B67 /* DeleteAccountView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		AC4A5CDA2AED65BF0001CB8A /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		AC4A5CDC2AED65C10001CB8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC4A5CDE2AED65C10001CB8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC6C60552B44CC2900FC8B67 /* DeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 		38BDC3972B10161600D212BF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AC6C60552B44CC2900FC8B67 /* DeleteAccountView.swift */,
 				38BDC3982B10164100D212BF /* LoginPage.swift */,
 			);
 			path = View;
@@ -413,6 +416,7 @@
 				38A1BBA12B40BB70006D04CF /* LocationManager.swift in Sources */,
 				38BDC3992B10164100D212BF /* LoginPage.swift in Sources */,
 				AC4A5CA02AED652A0001CB8A /* Breathe_EasyApp.swift in Sources */,
+				AC6C60562B44CC2900FC8B67 /* DeleteAccountView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
