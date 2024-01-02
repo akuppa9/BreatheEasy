@@ -236,7 +236,7 @@ struct LoginPage: View {
 }
 
 //#Preview {
-//    LoginPage(sliderValue: sliderValue, sex: sex, work: work, activity: <#Binding<String>#>)
+//    LoginPage(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity)
 //}
 
 // extending view to get screen bounds
