@@ -53,30 +53,18 @@ class LoginViewModel: ObservableObject{
             }
             
             self.uid = user2.uid
-            self.name = user2.displayName ?? "Name Undefined"
-            
-//            if let newUser = result?.additionalUserInfo?.isNewUser, newUser,
-//                       let appleFullName = credential.fullName {
-//                        let formatter = PersonNameComponentsFormatter()
-//                        let nameString = formatter.string(from: appleFullName)
-//
-//                        // Set the displayName in Firebase Auth
-//                        let changeRequest = result?.user.createProfileChangeRequest()
-//                        changeRequest?.displayName = nameString
-//                        changeRequest?.commitChanges { error in
-//                            if let error = error {
-//                                print("Error setting display name: \(error.localizedDescription)")
-//                            } else {
-//                                // Successfully set the display name
-//                                self.name = nameString
-//                            }
-//                        }
-//                    } else {
-//                        // For existing users or if fullName is not available
-//                        self.name = user2.displayName ?? "Name Undefined"
-//                    }
-            
-            
+            self.name = "\(credential.fullName?.givenName ?? "Name") \(credential.fullName?.familyName ?? "Undefined")"
+                
+            // Attempt to fetch the full name
+//            if let fullName = credential.fullName?.givenName {
+//                self.name += fullName
+//            } else if let displayName = user2.displayName {
+//                // If fullName is not available, try to use user2.displayName
+//                self.name = displayName
+//            } else {
+//                // If both are nil, use a default value
+//                self.name = "Name Undefined"
+//            }
             
             // Directing user to home page
             withAnimation {
