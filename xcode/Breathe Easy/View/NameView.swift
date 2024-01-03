@@ -1,9 +1,16 @@
+//
+//  NameView.swift
+//  Breathe Easy
+//
+//  Created by Nikhil Kumar on 1/3/24.
+//
+
 import SwiftUI
 
 struct NameView: View {
     @State private var name: String = ""
     var placeholder: String = "e.g. John Doe"
-    
+
     var body: some View {
         VStack{
             Color(.darkGray)
@@ -11,7 +18,7 @@ struct NameView: View {
             TextField(placeholder, text: $name)
                 .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
                 .font(.system(size: UIScreen.main.bounds.height / 38, design: .rounded))
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                .fontWeight(.bold)
                 .textFieldStyle(OvalTextFieldStyle())
         }
     }
@@ -36,5 +43,5 @@ struct ContentView_Previews: PreviewProvider {
 
 
 /* Section {
- Text("You typed: \(name)")
+ Text("You typed: (name)")
  }*/

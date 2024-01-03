@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		383C2A272B12CCD100B36651 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 383C2A262B12CCD100B36651 /* LoginViewModel.swift */; };
+		387DD06F2B461743002C4BE7 /* NameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 387DD06E2B461743002C4BE7 /* NameView.swift */; };
 		38954F1C2B460AE7007094E0 /* DeviceLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38954F1B2B460AE7007094E0 /* DeviceLocationService.swift */; };
 		38A1BBA12B40BB70006D04CF /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A1BBA02B40BB70006D04CF /* LocationManager.swift */; };
 		38BDC3992B10164100D212BF /* LoginPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BDC3982B10164100D212BF /* LoginPage.swift */; };
@@ -74,6 +75,7 @@
 /* Begin PBXFileReference section */
 		383C2A242B12C53A00B36651 /* Breathe Easy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Breathe Easy.entitlements"; sourceTree = "<group>"; };
 		383C2A262B12CCD100B36651 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		387DD06E2B461743002C4BE7 /* NameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameView.swift; sourceTree = "<group>"; };
 		38954F1B2B460AE7007094E0 /* DeviceLocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceLocationService.swift; sourceTree = "<group>"; };
 		38A1BBA02B40BB70006D04CF /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		38BDC3982B10164100D212BF /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 			children = (
 				AC6C60552B44CC2900FC8B67 /* DeleteAccountView.swift */,
 				38BDC3982B10164100D212BF /* LoginPage.swift */,
+				387DD06E2B461743002C4BE7 /* NameView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				38A1BBA12B40BB70006D04CF /* LocationManager.swift in Sources */,
 				38BDC3992B10164100D212BF /* LoginPage.swift in Sources */,
 				38954F1C2B460AE7007094E0 /* DeviceLocationService.swift in Sources */,
+				387DD06F2B461743002C4BE7 /* NameView.swift in Sources */,
 				AC4A5CA02AED652A0001CB8A /* Breathe_EasyApp.swift in Sources */,
 				AC6C60562B44CC2900FC8B67 /* DeleteAccountView.swift in Sources */,
 			);
