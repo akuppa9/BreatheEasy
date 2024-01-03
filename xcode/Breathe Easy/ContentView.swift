@@ -26,14 +26,14 @@ struct SliderComponent: View {
                 .foregroundStyle(Color.white)
                 .font(.system(.title2, design: .rounded))
                 .fontWeight(.bold)
-
+            
             Slider(value: Binding(
                 get: { Double(sliderValue) },
                 set: { sliderValue = Int($0) }
-                ),
-                in: 0...100, step: 1.0)
-                .accentColor(Color(red: 0.4627, green: 0.8392, blue: 1.0))
-                .frame(width: sliderWidth)
+            ),
+                   in: 0...100, step: 1.0)
+            .accentColor(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+            .frame(width: sliderWidth)
         }
     }
 }
@@ -55,53 +55,53 @@ struct DropdownMenuComponentGender: View {
     @State var show = false
     @Binding var name: String
     var body: some View {
-            VStack {
-                ZStack{
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                        ScrollView {
-                            VStack(spacing: 17){
-                                ForEach(drop) { item in Button {
-                                    withAnimation {
-                                        name =  item.title
-                                        show.toggle()
-                                    }
-                                } label: {
-                                    Text(item.title).foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
-                                        .bold()
-                                    Spacer()
+        VStack {
+            ZStack{
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                    ScrollView {
+                        VStack(spacing: 17){
+                            ForEach(drop) { item in Button {
+                                withAnimation {
+                                    name =  item.title
+                                    show.toggle()
                                 }
-                                }
-                                .padding(.horizontal)
+                            } label: {
+                                Text(item.title).foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                                    .bold()
+                                Spacer()
                             }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.vertical, 15)
+                            }
+                            .padding(.horizontal)
                         }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.vertical, 15)
                     }
-                    .frame(height: show ? 65 : 0)
-                    .offset(y: show ? 0 : -105)
-                    .foregroundStyle(Color((UIColor.gray)))
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10).frame(height: 60)
-                            .foregroundStyle(Color(red: 0.55, green: 0.55, blue: 0.55))
-                        HStack {
-                            Text(name).font(.title2)
-                                .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .rotationEffect(.degrees(show ? 90 : 0))
-                                .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
-                            
-                        }
-                        .bold()
-                        .padding(.horizontal)
-                        .foregroundStyle(Color(.white))
+                }
+                .frame(height: show ? 65 : 0)
+                .offset(y: show ? 0 : -105)
+                .foregroundStyle(Color((UIColor.gray)))
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10).frame(height: 60)
+                        .foregroundStyle(Color(red: 0.55, green: 0.55, blue: 0.55))
+                    HStack {
+                        Text(name).font(.title2)
+                            .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                        Spacer()
+                        
+                        Image(systemName: "chevron.right")
+                            .rotationEffect(.degrees(show ? 90 : 0))
+                            .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                        
                     }
-                    .offset(y: -75)
-                    .onTapGesture {
-                        withAnimation {
-                            show.toggle()
+                    .bold()
+                    .padding(.horizontal)
+                    .foregroundStyle(Color(.white))
+                }
+                .offset(y: -75)
+                .onTapGesture {
+                    withAnimation {
+                        show.toggle()
                     }
                 }
                 
@@ -117,53 +117,53 @@ struct DropdownMenuComponentJob: View {
     @State var show = false
     @Binding var name: String
     var body: some View {
-            VStack {
-                ZStack{
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                        ScrollView {
-                            VStack(spacing: 17){
-                                ForEach(drop1) { item in Button {
-                                    withAnimation {
-                                        name =  item.title
-                                        show.toggle()
-                                    }
-                                } label: {
-                                    Text(item.title).foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
-                                        .bold()
-                                    Spacer()
+        VStack {
+            ZStack{
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                    ScrollView {
+                        VStack(spacing: 17){
+                            ForEach(drop1) { item in Button {
+                                withAnimation {
+                                    name =  item.title
+                                    show.toggle()
                                 }
-                                }
-                                .padding(.horizontal)
+                            } label: {
+                                Text(item.title).foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                                    .bold()
+                                Spacer()
                             }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.vertical, 15)
+                            }
+                            .padding(.horizontal)
                         }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.vertical, 15)
                     }
-                    .frame(height: show ? 65 : 0)
-                    .offset(y: show ? 0 : -105)
-                    .foregroundStyle(Color((UIColor.gray)))
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10).frame(height: 60)
-                            .foregroundStyle(Color(red: 0.55, green: 0.55, blue: 0.55))
-                        HStack {
-                            Text(name).font(.title2)
-                                .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .rotationEffect(.degrees(show ? 90 : 0))
-                                .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
-                            
-                        }
-                        .bold()
-                        .padding(.horizontal)
-                        .foregroundStyle(Color(.white))
+                }
+                .frame(height: show ? 65 : 0)
+                .offset(y: show ? 0 : -105)
+                .foregroundStyle(Color((UIColor.gray)))
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10).frame(height: 60)
+                        .foregroundStyle(Color(red: 0.55, green: 0.55, blue: 0.55))
+                    HStack {
+                        Text(name).font(.title2)
+                            .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                        Spacer()
+                        
+                        Image(systemName: "chevron.right")
+                            .rotationEffect(.degrees(show ? 90 : 0))
+                            .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                        
                     }
-                    .offset(y: -75)
-                    .onTapGesture {
-                        withAnimation {
-                            show.toggle()
+                    .bold()
+                    .padding(.horizontal)
+                    .foregroundStyle(Color(.white))
+                }
+                .offset(y: -75)
+                .onTapGesture {
+                    withAnimation {
+                        show.toggle()
                     }
                 }
                 
@@ -178,53 +178,53 @@ struct DropdownMenuComponentActivity: View {
     @State var show = false
     @Binding var name: String
     var body: some View {
-            VStack {
-                ZStack{
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10)
-                        ScrollView {
-                            VStack(spacing: 17){
-                                ForEach(drop1) { item in Button {
-                                    withAnimation {
-                                        name =  item.title
-                                        show.toggle()
-                                    }
-                                } label: {
-                                    Text(item.title).foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
-                                        .bold()
-                                    Spacer()
+        VStack {
+            ZStack{
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10)
+                    ScrollView {
+                        VStack(spacing: 17){
+                            ForEach(drop1) { item in Button {
+                                withAnimation {
+                                    name =  item.title
+                                    show.toggle()
                                 }
-                                }
-                                .padding(.horizontal)
+                            } label: {
+                                Text(item.title).foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                                    .bold()
+                                Spacer()
                             }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.vertical, 15)
+                            }
+                            .padding(.horizontal)
                         }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.vertical, 15)
                     }
-                    .frame(height: show ? 65 : 0)
-                    .offset(y: show ? 0 : -105)
-                    .foregroundStyle(Color((UIColor.gray)))
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 10).frame(height: 60)
-                            .foregroundStyle(Color(red: 0.55, green: 0.55, blue: 0.55))
-                        HStack {
-                            Text(name).font(.title2)
-                                .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
-                            Spacer()
-                            
-                            Image(systemName: "chevron.right")
-                                .rotationEffect(.degrees(show ? 90 : 0))
-                                .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
-                            
-                        }
-                        .bold()
-                        .padding(.horizontal)
-                        .foregroundStyle(Color(.white))
+                }
+                .frame(height: show ? 65 : 0)
+                .offset(y: show ? 0 : -105)
+                .foregroundStyle(Color((UIColor.gray)))
+                ZStack {
+                    RoundedRectangle(cornerRadius: 10).frame(height: 60)
+                        .foregroundStyle(Color(red: 0.55, green: 0.55, blue: 0.55))
+                    HStack {
+                        Text(name).font(.title2)
+                            .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                        Spacer()
+                        
+                        Image(systemName: "chevron.right")
+                            .rotationEffect(.degrees(show ? 90 : 0))
+                            .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                        
                     }
-                    .offset(y: -75)
-                    .onTapGesture {
-                        withAnimation {
-                            show.toggle()
+                    .bold()
+                    .padding(.horizontal)
+                    .foregroundStyle(Color(UIColor.systemGray5))
+                }
+                .offset(y: -75)
+                .onTapGesture {
+                    withAnimation {
+                        show.toggle()
                     }
                 }
                 
@@ -257,7 +257,7 @@ struct StartTracking: View{
                         Text("Maximize the accuracy and quality of your predictions by answering a few questions: ")
                             .padding()
                             .multilineTextAlignment(.center)
-                            .foregroundStyle(Color.white)
+                            .foregroundStyle(Color(UIColor.systemGray5))
                             .font(.system(.title2, design: .rounded))
                             .fontWeight(.bold)
                         
@@ -268,17 +268,17 @@ struct StartTracking: View{
                         .padding()
                         Text("What is your biological sex?")
                             .multilineTextAlignment(.center)
-                            .foregroundStyle(Color.white)
+                            .foregroundStyle(Color(UIColor.systemGray5))
                             .font(.system(.title2, design: .rounded))
                             .fontWeight(.bold)
-                            
+                        
                         DropdownMenuComponentGender(name: $sex)
                             .padding()
                             .padding()
                             .padding()
                         Text("How often do you work outdoors?")
                             .multilineTextAlignment(.center)
-                            .foregroundStyle(Color.white)
+                            .foregroundStyle(Color(UIColor.systemGray5))
                             .font(.system(.title2, design: .rounded))
                             .fontWeight(.bold)
                         DropdownMenuComponentJob(name: $work)
@@ -288,7 +288,7 @@ struct StartTracking: View{
                         
                         Text("How often do you participate in outdoor activity?")
                             .multilineTextAlignment(.center)
-                            .foregroundStyle(Color.white)
+                            .foregroundStyle(Color(UIColor.systemGray5))
                             .font(.system(.title2, design: .rounded))
                             .fontWeight(.bold)
                         
@@ -326,34 +326,34 @@ struct StartTracking: View{
                                 }
                             }
                         }
-                        label: {
-                            Text("Start Tracking")
-                                .padding()
-                                .frame(width: geometry.size.width * 0.6)
-                                .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
-                                .font(.system(.title2, design: .rounded))
-                                .fontWeight(.bold)
-                        }
-                        .alert(isPresented: $showAlert) {
-                            Alert(
-                                title: Text("Incomplete Information"),
-                                message: Text("One or more fields are empty"),
-                                dismissButton: .default(Text("OK")) {
-                                    showAlert = false
-                                }
-                            )
-                        }
-                        .background(Color(red: 72/255, green: 72/255, blue: 72/255))
-                        .cornerRadius(10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 30)
-                                .stroke(Color(red: 72/255, green: 72/255, blue: 72/255)))
+                    label: {
+                        Text("Start Tracking")
+                            .padding()
+                            .frame(width: geometry.size.width * 0.6)
+                            .foregroundStyle(Color(red: 0.4627, green: 0.8392, blue: 1.0))
+                            .font(.system(.title2, design: .rounded))
+                            .fontWeight(.bold)
+                    }
+                    .alert(isPresented: $showAlert) {
+                        Alert(
+                            title: Text("Incomplete Information"),
+                            message: Text("One or more fields are empty"),
+                            dismissButton: .default(Text("OK")) {
+                                showAlert = false
+                            }
+                        )
+                    }
+                    .background(Color(red: 72/255, green: 72/255, blue: 72/255))
+                    .cornerRadius(10)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 30)
+                            .stroke(Color(red: 72/255, green: 72/255, blue: 72/255)))
                         
                         Spacer().frame(width: .infinity, height: 30)
-                           
+                        
                     }
                 }
-
+                
             }
         }
     }
@@ -556,10 +556,10 @@ struct Home: View{
 struct ViewAbout: View{
     var body: some View{
         ZStack(alignment: .center){
-                Color(UIColor.darkGray)
-                    .ignoresSafeArea()
-                ScrollView{
-                    Text("""
+            Color(UIColor.darkGray)
+                .ignoresSafeArea()
+            ScrollView{
+                Text("""
 Welcome to Breathe Easy, your trusted companion in the management of asthma. This documentation serves as an in-app guide to help you maximize the benefits of our application, designed to assist you in monitoring your peak flow and preventing asthma attacks.
                  
 Breathe Easy boasts several key features that empower you in managing your asthma effectively. It provides real-time peak flow predictions powered by a machine learning regression model. The app leverages heart rate data from your Apple Watch and takes into account factors such as air quality and temperature to offer personalized insights.
@@ -574,15 +574,15 @@ You can easily customize your alert thresholds and notification preferences to s
 
 Breathe Easy is here to provide you with the tools you need to manage your asthma with confidence and peace of mind. Thank you for choosing Breathe Easy.
 """)
-                    .foregroundStyle(Color(UIColor.white)).padding()
-                    .multilineTextAlignment(.center)
-                }
-                .frame(width: .infinity, height: 660)
-                .zIndex(1)
+                .foregroundStyle(Color(UIColor.white)).padding()
+                .multilineTextAlignment(.center)
             }
-            .zIndex(2)
+            .frame(width: .infinity, height: 660)
+            .zIndex(1)
         }
+        .zIndex(2)
     }
+}
 
 struct ProfileView: View{
     @AppStorage("page") var page = 1
@@ -622,15 +622,15 @@ struct ProfileView: View{
                         }
                     }
                     .alert(isPresented: $showEditAccount) {
-                                    Alert(
-                                        title: Text("Edit Profile"),
-                                        message: Text("Would you like to edit your account info?"),
-                                        primaryButton: .default(Text("Yes")) {
-                                        page = 2
-                                        },
-                                        secondaryButton: .cancel(Text("No")) {}
-                                    )
-                                }
+                        Alert(
+                            title: Text("Edit Profile"),
+                            message: Text("Would you like to edit your account info?"),
+                            primaryButton: .default(Text("Yes")) {
+                                page = 2
+                            },
+                            secondaryButton: .cancel(Text("No")) {}
+                        )
+                    }
                     
                     // log out button
                     Button{
@@ -687,7 +687,7 @@ struct ProfileView: View{
                     }
                     Spacer()
                 }
-//                .navigationBarTitle(Text(name))
+                //                .navigationBarTitle(Text(name))
             }
         }
     }
@@ -711,55 +711,55 @@ struct MainView: View{
                 }.toolbarBackground(Color.white, for: .tabBar)
             
             // PROFILE VIEW
-           ProfileView()
+            ProfileView()
                 .tabItem(){
-                Image(systemName: "person.fill")
-                Text("Profile")
-            }.toolbarBackground(Color.white, for: .tabBar)
+                    Image(systemName: "person.fill")
+                    Text("Profile")
+                }.toolbarBackground(Color.white, for: .tabBar)
         }
     }
 }
 
 struct TestView: View{
     
-       @StateObject var deviceLocationService = DeviceLocationService.shared
-
-       @State var tokens: Set<AnyCancellable> = []
-       @State var coordinates: (lat: Double, lon: Double) = (0, 0)
-       
-       var body: some View {
-           VStack {
-               Text("Latitude: \(coordinates.lat)")
-                   .font(.largeTitle)
-               Text("Longitude: \(coordinates.lon)")
-                   .font(.largeTitle)
-           }
-           .onAppear {
-               observeCoordinateUpdates()
-               observeDeniedLocationAccess()
-               deviceLocationService.requestLocationUpdates()
-           }
-       }
-       
-       func observeCoordinateUpdates() {
-           deviceLocationService.coordinatesPublisher
-               .receive(on: DispatchQueue.main)
-               .sink { completion in
-                   print("Handle \(completion) for error and finished subscription.")
-               } receiveValue: { coordinates in
-                   self.coordinates = (coordinates.latitude, coordinates.longitude)
-               }
-               .store(in: &tokens)
-       }
-
-       func observeDeniedLocationAccess() {
-           deviceLocationService.deniedLocationAccessPublisher
-               .receive(on: DispatchQueue.main)
-               .sink {
-                   print("Handle access denied event, possibly with an alert.")
-               }
-               .store(in: &tokens)
-       }
+    @StateObject var deviceLocationService = DeviceLocationService.shared
+    
+    @State var tokens: Set<AnyCancellable> = []
+    @State var coordinates: (lat: Double, lon: Double) = (0, 0)
+    
+    var body: some View {
+        VStack {
+            Text("Latitude: \(coordinates.lat)")
+                .font(.largeTitle)
+            Text("Longitude: \(coordinates.lon)")
+                .font(.largeTitle)
+        }
+        .onAppear {
+            observeCoordinateUpdates()
+            observeDeniedLocationAccess()
+            deviceLocationService.requestLocationUpdates()
+        }
+    }
+    
+    func observeCoordinateUpdates() {
+        deviceLocationService.coordinatesPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                print("Handle \(completion) for error and finished subscription.")
+            } receiveValue: { coordinates in
+                self.coordinates = (coordinates.latitude, coordinates.longitude)
+            }
+            .store(in: &tokens)
+    }
+    
+    func observeDeniedLocationAccess() {
+        deviceLocationService.deniedLocationAccessPublisher
+            .receive(on: DispatchQueue.main)
+            .sink {
+                print("Handle access denied event, possibly with an alert.")
+            }
+            .store(in: &tokens)
+    }
     
 }
 
@@ -781,11 +781,11 @@ struct ContentView: View {
             }
             if(page == 2){
                 StartTracking(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-
+                
             }
             if(page == 3){
                 MainView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-//                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
+                //                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
             }
             if(page == 4){
                 DeleteAccountView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
