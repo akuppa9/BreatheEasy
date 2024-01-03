@@ -790,6 +790,9 @@ struct ContentView: View {
             if(page == 4){
                 DeleteAccountView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
             }
+            if(page == 5){
+                NameView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
+            }
         }
         .animation(.default, value: page)
     }

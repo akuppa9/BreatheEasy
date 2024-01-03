@@ -93,7 +93,7 @@ class LoginViewModel: ObservableObject{
                             }
                         }else{
                             withAnimation{
-                                self.page = 2
+                                self.page = 5
                             }
                         }
                     }
