@@ -3,6 +3,7 @@ import SwiftUI
 import Charts
 import Firebase
 import GoogleSignIn
+import Combine
 struct Pf:Codable{
     let value:Float
 }
@@ -236,8 +237,6 @@ struct DropdownMenuComponentActivity: View {
 
 
 struct StartTracking: View{
-    @ObservedObject var locationManager = LocationManager.shared
-    @AppStorage("coords") var coords = ""
     @AppStorage("page") var page = 1
     @AppStorage("tracked") var tracked = false
     @AppStorage("uid") var uid = ""
@@ -298,10 +297,6 @@ struct StartTracking: View{
                             .padding()
                             .padding()
                         Button{
-                            
-                            LocationManager.shared.requestLocation()
-                            coords = "\(String(describing: locationManager.userLocation?.coordinate))"
-                            
                             if (sex == "" || work == "" || activity == ""){
                                 showAlert = true;
                             }
@@ -726,11 +721,46 @@ struct MainView: View{
 }
 
 struct TestView: View{
-    @ObservedObject var locationManager = LocationManager.shared
-    @AppStorage("coords") var coords = ""
-    var body: some View{
-        Text(coords)
-    }
+    
+       @StateObject var deviceLocationService = DeviceLocationService.shared
+
+       @State var tokens: Set<AnyCancellable> = []
+       @State var coordinates: (lat: Double, lon: Double) = (0, 0)
+       
+       var body: some View {
+           VStack {
+               Text("Latitude: \(coordinates.lat)")
+                   .font(.largeTitle)
+               Text("Longitude: \(coordinates.lon)")
+                   .font(.largeTitle)
+           }
+           .onAppear {
+               observeCoordinateUpdates()
+               observeDeniedLocationAccess()
+               deviceLocationService.requestLocationUpdates()
+           }
+       }
+       
+       func observeCoordinateUpdates() {
+           deviceLocationService.coordinatesPublisher
+               .receive(on: DispatchQueue.main)
+               .sink { completion in
+                   print("Handle \(completion) for error and finished subscription.")
+               } receiveValue: { coordinates in
+                   self.coordinates = (coordinates.latitude, coordinates.longitude)
+               }
+               .store(in: &tokens)
+       }
+
+       func observeDeniedLocationAccess() {
+           deviceLocationService.deniedLocationAccessPublisher
+               .receive(on: DispatchQueue.main)
+               .sink {
+                   print("Handle access denied event, possibly with an alert.")
+               }
+               .store(in: &tokens)
+       }
+    
 }
 
 struct ContentView: View {
@@ -747,19 +777,21 @@ struct ContentView: View {
     var body: some View{
         ZStack{
             if (page == 1){
-                LoginPage(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .opacity, removal: .opacity))
+                LoginPage(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .opacity, removal: .move(edge: .leading)))
             }
             if(page == 2){
-                StartTracking(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .opacity, removal: .opacity))
+                StartTracking(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+
             }
             if(page == 3){
-                MainView().transition(.asymmetric(insertion: .opacity, removal: .opacity))
+                MainView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+//                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
             }
             if(page == 4){
-                DeleteAccountView().transition(.asymmetric(insertion: .opacity, removal: .opacity))
-//                TestView().transition(.asymmetric(insertion: .opacity, removal: .opacity))
+                DeleteAccountView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
             }
-        }.animation(.default, value: page)
+        }
+        .animation(.default, value: page)
     }
 }
 

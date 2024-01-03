@@ -41,22 +41,22 @@ struct DeleteAccountView: View {
                     GIDSignIn.sharedInstance.signOut()
                     try? Auth.auth().signOut()
                     
-                    withAnimation {
-                        log_Status = false
-                        log_Status2 = false
-                        page = 1
-                        
-                        let db = Firestore.firestore()
-                        let documentRef = db.collection("users").document(uid)
-                        
-                        documentRef.delete { err in
-                            if let err = err {
-                                print("Error removing document: \(err)")
-                            } else {
-                                print("Document successfully removed!")
-                            }
+                   
+                    log_Status = false
+                    log_Status2 = false
+                    page = 1
+                    
+                    let db = Firestore.firestore()
+                    let documentRef = db.collection("users").document(uid)
+                    
+                    documentRef.delete { err in
+                        if let err = err {
+                            print("Error removing document: \(err)")
+                        } else {
+                            print("Document successfully removed!")
                         }
                     }
+                    
                 }, label: {
                     Text("Delete Account")
                         .foregroundStyle(Color(.red))
