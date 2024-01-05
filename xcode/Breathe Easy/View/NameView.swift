@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NameView: View {
     @AppStorage("page") var page = 1
-    @AppStorage("uid") var fullname = ""
+    @AppStorage("fullname") var fullname = ""
     @State private var alert2 = false
     var placeholder: String = "e.g. John Doe"
     var body: some View {
@@ -84,18 +84,15 @@ struct OvalTextFieldStyle: TextFieldStyle {
    }
 }
 
-
-
-
-
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
+struct NameViewRender: View {
+    @State private var fullname: String = ""
+    var body: some View {
         NameView()
     }
 }
 
+#Preview {
+    NameViewRender()
+}
 
-/* Section {
- Text("You typed: (name)")
- }*/
+

@@ -243,6 +243,7 @@ struct StartTracking: View{
     @Binding var sliderValue: Int
     @State private var sliderWidth: CGFloat = 300.0
     @State private var showAlert = false
+    @AppStorage("fullname") var fullname = ""
     @Binding var sex: String
     @Binding var work: String
     @Binding var activity: String
@@ -307,6 +308,7 @@ struct StartTracking: View{
                                 let docRef = db.document("users/\(uid)")
                                 
                                 let docData: [String: Any] = [
+                                    "name": fullname,
                                     "age": sliderValue,
                                     "sex": sex,
                                     "work": work,
@@ -314,6 +316,7 @@ struct StartTracking: View{
                                 ]
                                 
                                 docRef.setData(docData)
+                                fullname = "";
                                 sex = "";
                                 work = "";
                                 activity = "";
@@ -586,10 +589,12 @@ Breathe Easy is here to provide you with the tools you need to manage your asthm
 
 struct ProfileView: View{
     @AppStorage("page") var page = 1
+    
     @AppStorage("uid") var uid = ""
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false
     @AppStorage("name") var name = ""
+    @AppStorage("fullname") var fullname = ""
     @State private var showAlertDel = false
     @State private var showAlertLogOut = false
     @State private var showEditAccount = false
@@ -601,7 +606,7 @@ struct ProfileView: View{
                     
                     VStack{
                         HStack{
-                            Text(name)
+                            Text(fullname)
                                 .font(.largeTitle).foregroundStyle(Color(UIColor.systemGray5)).fontWeight(.bold)
                             Spacer()
                         }
@@ -784,6 +789,7 @@ struct ContentView: View {
     @AppStorage("log_Status2") var log_Status2 = false
     @AppStorage("tracked") var tracked = false
     @AppStorage("uid") var uid = ""
+    @AppStorage("fullname") var fullname = ""
     @State private var sliderValue: Int = 50
     @State private var sex: String = ""
     @State private var work: String = ""
@@ -795,12 +801,12 @@ struct ContentView: View {
                 LoginPage(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .opacity, removal: .move(edge: .leading)))
             }
             if(page == 2){
-                StartTracking(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                StartTracking(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity ).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                 
             }
             if(page == 3){
-//                MainView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
+                MainView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+              //  TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
             }
             if(page == 4){
                 DeleteAccountView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))

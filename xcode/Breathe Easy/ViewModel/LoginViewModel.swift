@@ -18,6 +18,7 @@ class LoginViewModel: ObservableObject{
     @AppStorage("uid") var uid = ""
     @AppStorage("page") var page = 1
     @AppStorage("name") var name = ""
+    @AppStorage("fullname") var fullname = ""
     
     func authenticate(credential: ASAuthorizationAppleIDCredential){
         
@@ -53,7 +54,7 @@ class LoginViewModel: ObservableObject{
             }
             
             self.uid = user2.uid
-            self.name = "\(credential.fullName?.givenName ?? "Name") \(credential.fullName?.familyName ?? "Undefined")"
+            self.name = self.fullname
                 
             // Attempt to fetch the full name
 //            if let fullName = credential.fullName?.givenName {
