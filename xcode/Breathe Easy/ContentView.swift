@@ -596,22 +596,93 @@ struct ProfileView: View{
     @State private var showAlertDel = false
     @State private var showAlertLogOut = false
     @State private var showEditAccount = false
+    @Binding var sliderValue: Int
+    @Binding var sex: String
+    @Binding var work: String
+    @Binding var activity: String
     
-    func fetchName(){
+    func fetchName()->String{
+        let db = Firestore.firestore()
+        let docRef = db.collection("users").document("\(uid)")
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                if let name = data?["name"] as? String {
+                    fullname = name
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+        return fullname;
+    }
+    
+    func fetchAge()->Int{
         let db = Firestore.firestore()
         let docRef = db.collection("users").document("\(uid)")
         
         docRef.getDocument { (document, error) in
             if let document = document, document.exists {
                 let data = document.data()
-                if let name = data?["name"] as? String {
-                    fullname = name
-                    // Now you can use `name` as needed
+                if let name = data?["age"] as? Int {
+                    sliderValue = name
                 }
             } else {
                 print("Document does not exist")
             }
         }
+        return sliderValue;
+    }
+    
+    func fetchSex()->String{
+        let db = Firestore.firestore()
+        let docRef = db.collection("users").document("\(uid)")
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                if let name = data?["sex"] as? String {
+                    sex = name
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+        return sex;
+    }
+    
+    func fetchWork()->String{
+        let db = Firestore.firestore()
+        let docRef = db.collection("users").document("\(uid)")
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                if let name = data?["work"] as? String {
+                    work = name
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+        return work;
+    }
+    
+    func fetchActivity()->String{
+        let db = Firestore.firestore()
+        let docRef = db.collection("users").document("\(uid)")
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                if let name = data?["activity"] as? String {
+                    activity = name
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+        return activity;
     }
     
     
@@ -648,7 +719,11 @@ struct ProfileView: View{
                             title: Text("Edit Profile"),
                             message: Text("Would you like to edit your account info?"),
                             primaryButton: .default(Text("Yes")) {
-                                page = 2
+                                page = 2;
+                                sliderValue = fetchAge();
+                                sex = fetchSex();
+                                work = fetchWork();
+                                activity = fetchActivity();
                             },
                             secondaryButton: .cancel(Text("No")) {}
                         )
@@ -719,6 +794,11 @@ struct ProfileView: View{
 }
 
 struct MainView: View{
+    @AppStorage("fullname") var fullname = ""
+    @Binding var sliderValue: Int
+    @Binding var sex: String
+    @Binding var work: String
+    @Binding var activity: String
     var body: some View{
         TabView{
             // HOME VIEW
@@ -736,7 +816,7 @@ struct MainView: View{
                 }.toolbarBackground(Color.white, for: .tabBar)
             
             // PROFILE VIEW
-            ProfileView()
+            ProfileView(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity)
                 .tabItem(){
                     Image(systemName: "person.fill")
                     Text("Profile")
@@ -825,7 +905,7 @@ struct ContentView: View {
                 
             }
             if(page == 3){
-                MainView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                MainView(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
               //  TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
             }
             if(page == 4){
