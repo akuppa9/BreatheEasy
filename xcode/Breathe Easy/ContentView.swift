@@ -727,6 +727,8 @@ struct TestView: View{
     @State var tokens: Set<AnyCancellable> = []
     @State var coordinates: (lat: Double, lon: Double) = (0, 0)
     
+    @Environment(\.scenePhase) var scenePhase
+    
     var body: some View {
         VStack {
             Text("Latitude: \(coordinates.lat)")
@@ -738,6 +740,19 @@ struct TestView: View{
             observeCoordinateUpdates()
             observeDeniedLocationAccess()
             deviceLocationService.requestLocationUpdates()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
+            deviceLocationService.startMonitoringSignificantLocationChanges()
+        }
+        .onChange(of: scenePhase) { newScenePhase, _ in
+            switch newScenePhase {
+            case .active:
+                deviceLocationService.requestLocationUpdates()
+            case .background:
+                deviceLocationService.startMonitoringSignificantLocationChanges()
+            default:
+                break
+            }
         }
     }
     
@@ -784,8 +799,8 @@ struct ContentView: View {
                 
             }
             if(page == 3){
-                MainView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                //                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
+//                MainView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
             }
             if(page == 4){
                 DeleteAccountView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))

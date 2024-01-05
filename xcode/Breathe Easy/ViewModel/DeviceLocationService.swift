@@ -7,24 +7,25 @@
 
 import Combine
 import CoreLocation
+import UIKit
 
 class DeviceLocationService: NSObject, CLLocationManagerDelegate, ObservableObject {
-
+    
     var coordinatesPublisher = PassthroughSubject<CLLocationCoordinate2D, Error>()
     var deniedLocationAccessPublisher = PassthroughSubject<Void, Never>()
-
+    
     private override init() {
         super.init()
     }
     static let shared = DeviceLocationService()
-
+    
     private lazy var locationManager: CLLocationManager = {
         let manager = CLLocationManager()
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.delegate = self
         return manager
     }()
-
+    
     func requestLocationUpdates() {
         switch locationManager.authorizationStatus {
             
@@ -38,12 +39,20 @@ class DeviceLocationService: NSObject, CLLocationManagerDelegate, ObservableObje
             deniedLocationAccessPublisher.send()
         }
     }
+    
+    func startMonitoringSignificantLocationChanges(){
+        locationManager.startMonitoringSignificantLocationChanges()
+    }
 
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
             
         case .authorizedWhenInUse, .authorizedAlways:
-            manager.startUpdatingLocation()
+            if UIApplication.shared.applicationState == .active {
+                manager.startUpdatingLocation()
+            } else {
+                startMonitoringSignificantLocationChanges()
+            }
             
         default:
             manager.stopUpdatingLocation()

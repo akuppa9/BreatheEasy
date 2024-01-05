@@ -8,6 +8,8 @@
 import SwiftUI
 import Firebase
 import GoogleSignIn
+import CoreLocation
+import UIKit
 
 @main
 struct Breathe_EasyApp: App {
@@ -22,10 +24,22 @@ struct Breathe_EasyApp: App {
 }
 
 class AppDelegate: NSObject,UIApplicationDelegate{
+    
+    var locationManager: CLLocationManager?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         
         // initialize firebase
         FirebaseApp.configure()
+        
+        // handle when app is relaunched in background due to location change
+        locationManager = CLLocationManager()
+        locationManager?.delegate = DeviceLocationService.shared
+
+        // Check if launched due to a location event
+        if launchOptions?[.location] != nil {
+            DeviceLocationService.shared.startMonitoringSignificantLocationChanges()
+        }
         
         return true
     }
