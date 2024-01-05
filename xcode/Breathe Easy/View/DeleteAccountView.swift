@@ -7,6 +7,7 @@ struct DeleteAccountView: View {
     @AppStorage("uid") var uid = ""
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false
+    @AppStorage("fullname") var fullname = ""
     var body: some View {
         ZStack {
             Color(.darkGray)
@@ -55,6 +56,8 @@ struct DeleteAccountView: View {
                             print("Document successfully removed!")
                         }
                     }
+                    
+                    fullname = ""
                     
                 }, label: {
                     Text("Delete Account")

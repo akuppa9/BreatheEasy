@@ -589,15 +589,32 @@ Breathe Easy is here to provide you with the tools you need to manage your asthm
 
 struct ProfileView: View{
     @AppStorage("page") var page = 1
-    
     @AppStorage("uid") var uid = ""
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false
-    @AppStorage("name") var name = ""
     @AppStorage("fullname") var fullname = ""
     @State private var showAlertDel = false
     @State private var showAlertLogOut = false
     @State private var showEditAccount = false
+    
+    func fetchName(){
+        let db = Firestore.firestore()
+        let docRef = db.collection("users").document("\(uid)")
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                if let name = data?["name"] as? String {
+                    fullname = name
+                    // Now you can use `name` as needed
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
+    
+    
     var body: some View{
         NavigationView {
             ZStack{
@@ -694,6 +711,9 @@ struct ProfileView: View{
                 }
                 //                .navigationBarTitle(Text(name))
             }
+        }
+        .onAppear(){
+            fetchName()
         }
     }
 }

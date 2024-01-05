@@ -12,7 +12,7 @@ struct LoginPage: View {
     
     // For Google Sign In
     @AppStorage("log_Status") var log_Status = false
-    @AppStorage("name") var name = ""
+    @AppStorage("fullname") var fullname = ""
     @AppStorage("uid") var uid = ""
     @AppStorage("tracked") var tracked = false
     @Binding var sliderValue: Int
@@ -192,7 +192,7 @@ struct LoginPage: View {
                 }
                 
                 print(user2.displayName ?? "Success!")
-                name = user2.displayName ?? "Name Undefined"
+                fullname = user2.displayName ?? "Name Undefined"
                 uid = user2.uid
                 
                 // updating user as logged in
