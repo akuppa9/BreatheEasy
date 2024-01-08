@@ -752,6 +752,7 @@ struct ProfileView: View{
                                 withAnimation{
                                     log_Status = false
                                     page = 1
+                                    fullname = ""
                                 }
                             }
                             else if log_Status2{
@@ -763,6 +764,7 @@ struct ProfileView: View{
                                 withAnimation{
                                     log_Status2 = false
                                     page = 1
+                                    fullname = ""
                                 }
                             }
                         }
