@@ -1,7 +1,7 @@
 
 # Breathe Easy
 
-Breathe Easy is an iOS app that estimates a users relative peakflow based on a multitude of environmental and health related variables 
+Breathe Easy is an iOS app that consistently estimates and notifies a users' relative ACT Score, a metric correlated to asthma control, based on a multitude of environmental and health related variables. The purpose of this application is to assist users that struggle with common asthma symptoms to ease the stress and difficulty that comes with constantly worrying about your next asthma attack. A deep convolutional neural network is used for the prediction. 
 
 
 ## Research Articles
