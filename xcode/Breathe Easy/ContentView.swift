@@ -691,10 +691,30 @@ struct ProfileView: View{
             ZStack{
                 Color(UIColor.darkGray).ignoresSafeArea()
                 VStack {
-                    
                     VStack{
                         HStack{
-                            Text(fullname)
+                            TextField("",text: $fullname, onCommit: {
+                                let db = Firestore.firestore()
+                                
+                                // Specify the document path (e.g., "collectionName/documentID")
+                                let docRef = db.collection("users").document("\(uid)")
+                                
+                                // Data to update
+                                let updateData = [
+                                    "name": fullname
+                                ]
+                                
+                                // Perform the update
+                                docRef.updateData(updateData) { error in
+                                    if let error = error {
+                                        // Handle any errors
+                                        print("Error updating document: \(error)")
+                                    } else {
+                                        // Update was successful
+                                        print("Document successfully updated")
+                                    }
+                                }
+                            })
                                 .font(.largeTitle).foregroundStyle(Color(UIColor.systemGray5)).fontWeight(.bold)
                             Spacer()
                         }
