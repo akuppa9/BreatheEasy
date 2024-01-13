@@ -855,11 +855,11 @@ struct TestView: View{
     @AppStorage("apikey") var apiKey = "0f9111decfea0ac7cd6457aebee611bb"
     
     // Weather variables
-    @AppStorage("humidity") var humidity = 1
-    @AppStorage("pressure") var pressure = 1
-    @AppStorage("temperature") var temperature = 1.0
-    @AppStorage("uvi") var uvi = 1.0
-    @AppStorage("windSpeed") var windSpeed = 1.0
+    @State var humidity = 1
+    @State var pressure = 1
+    @State var temperature = 1.0
+    @State var uvi = 1.0
+    @State var windSpeed = 1.0
     
     var body: some View {
         VStack {
@@ -903,7 +903,8 @@ struct TestView: View{
                 print("Handle \(completion) for error and finished subscription.")
             } receiveValue: { coordinates in
                 self.coordinates = (coordinates.latitude, coordinates.longitude)
-                fetchWeatherData(latitude: coordinates.latitude, longitude: coordinates.longitude)
+                fetchCurrentWeather(latitude: coordinates.latitude, longitude: coordinates.longitude)
+                fetchUVIndex(latitude: coordinates.latitude, longitude: coordinates.longitude)
             }
             .store(in: &tokens)
     }
@@ -917,42 +918,73 @@ struct TestView: View{
             .store(in: &tokens)
     }
 
-    // Function to fetch weather data
-    func fetchWeatherData(latitude: Double, longitude: Double) {
-        let urlString = "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&exclude=minutely,hourly,daily,alerts&appid=\(apiKey)&units=metric"
+    // Function to fetch current weather data
+    func fetchCurrentWeather(latitude: Double, longitude: Double) {
+        let weatherURLString = "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(apiKey)&units=metric"
 
+        fetchWeatherData(from: weatherURLString) { jsonResult in
+            DispatchQueue.main.async {
+                if let currentWeather = jsonResult as? [String: Any],
+                   let main = currentWeather["main"] as? [String: Any],
+                   let wind = currentWeather["wind"] as? [String: Any] {
+
+                    self.humidity = main["humidity"] as? Int ?? 0
+                    self.pressure = main["pressure"] as? Int ?? 0
+                    self.temperature = main["temp"] as? Double ?? 0.0
+                    self.windSpeed = wind["speed"] as? Double ?? 0.0
+                }
+            }
+        }
+    }
+
+    // Function to fetch UV index
+    func fetchUVIndex(latitude: Double, longitude: Double) {
+        let uvURLString = "https://api.openweathermap.org/data/2.5/uvi?lat=\(latitude)&lon=\(longitude)&appid=\(apiKey)"
+
+        fetchWeatherData(from: uvURLString) { jsonResult in
+            DispatchQueue.main.async {
+                if let uvData = jsonResult as? [String: Any] {
+                    self.uvi = uvData["value"] as? Double ?? 0.0
+                }
+            }
+        }
+    }
+
+    // Generic function to fetch weather data
+    func fetchWeatherData(from urlString: String, completion: @escaping (Any?) -> Void) {
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
+            completion(nil)
             return
         }
 
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("Error fetching data: \(error)")
+                completion(nil)
                 return
             }
 
             guard let data = data else {
                 print("No data returned")
+                completion(nil)
                 return
             }
 
-            // Parsing JSON response
             do {
-                if let jsonResult = try JSONSerialization.jsonObject(with: data) as? [String: Any],
-                   let currentWeather = jsonResult["current"] as? [String: Any] {
-                    
-                    humidity = currentWeather["humidity"] as? Int ?? 0
-                    pressure = currentWeather["pressure"] as? Int ?? 0
-                    temperature = currentWeather["temp"] as? Double ?? 0.0
-                    uvi = currentWeather["uvi"] as? Double ?? 0.0
-                    windSpeed = currentWeather["wind_speed"] as? Double ?? 0.0
-                }
+                let jsonResult = try JSONSerialization.jsonObject(with: data)
+                completion(jsonResult)
             } catch {
                 print("Error parsing JSON: \(error)")
+                completion(nil)
             }
         }.resume()
     }
+
+    // Call these functions when coordinates update
+//    fetchCurrentWeather(latitude: coordinates.lat, longitude: coordinates.lon)
+//    fetchUVIndex(latitude: coordinates.lat, longitude: coordinates.lon)
+
 }
 
 struct ContentView: View {
@@ -977,8 +1009,8 @@ struct ContentView: View {
                 
             }
             if(page == 3){
-                MainView(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-//                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
+//                MainView(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
             }
             if(page == 4){
                 DeleteAccountView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
