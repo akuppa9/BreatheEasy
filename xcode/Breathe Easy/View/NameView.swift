@@ -32,9 +32,7 @@ struct NameView: View {
                         .textFieldStyle(OvalTextFieldStyle())
                         .padding()
                     Button{
-                        withAnimation{
-                            page = 2
-                        }
+                        page = 2
                     }
                 label: {
                     HStack{

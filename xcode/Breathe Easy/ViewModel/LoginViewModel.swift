@@ -68,38 +68,33 @@ class LoginViewModel: ObservableObject{
 //            }
             
             // Directing user to home page
-            withAnimation {
-                self.log_Status2 = true
-                
-                let db = Firestore.firestore()
-                
-                db.collection("users").getDocuments() { (querySnapshot, err) in
-                    if let err = err {
-                        print("Error getting documents: \(err)")
-                    } else {
-                        var count = 0;
-//                            tracked = false
-                        for document in querySnapshot!.documents {
-                            
-                            if document.documentID == self.uid{
-                                count = count + 1
-//                                    tracked = true
-                            }
-        //                        print("\(document.documentID) => \(document.data())")
-                        }
+            self.log_Status2 = true
+            
+            let db = Firestore.firestore()
+            
+            db.collection("users").getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    var count = 0;
+                    //                            tracked = false
+                    for document in querySnapshot!.documents {
                         
-                        if count == 1{
-                            withAnimation{
-                                self.page = 3
-                            }
-                        }else{
-                            withAnimation{
-                                self.page = 5
-                            }
+                        if document.documentID == self.uid{
+                            count = count + 1
+                            //                                    tracked = true
                         }
+                        //                        print("\(document.documentID) => \(document.data())")
+                    }
+                    
+                    if count == 1{
+                        self.page = 3
+                    }else{
+                        self.page = 5
                     }
                 }
             }
+            
         }
         
     }

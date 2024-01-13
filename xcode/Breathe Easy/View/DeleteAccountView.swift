@@ -56,7 +56,6 @@ struct DeleteAccountView: View {
                         GIDSignIn.sharedInstance.signOut()
                         try? Auth.auth().signOut()
                         
-                        
                         log_Status = false
                         log_Status2 = false
                         page = 1

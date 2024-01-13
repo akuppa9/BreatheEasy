@@ -196,37 +196,33 @@ struct LoginPage: View {
                 uid = user2.uid
                 
                 // updating user as logged in
-                withAnimation{
-                    log_Status = true
-                    let db = Firestore.firestore()
-                    
-                    db.collection("users").getDocuments() { (querySnapshot, err) in
-                        if let err = err {
-                            print("Error getting documents: \(err)")
-                        } else {
-                            var count = 0;
-//                            tracked = false
-                            for document in querySnapshot!.documents {
-                                
-                                if document.documentID == uid{
-                                    count = count + 1
-//                                    tracked = true
-                                }
-            //                        print("\(document.documentID) => \(document.data())")
-                            }
+                
+                log_Status = true
+                let db = Firestore.firestore()
+                
+                db.collection("users").getDocuments() { (querySnapshot, err) in
+                    if let err = err {
+                        print("Error getting documents: \(err)")
+                    } else {
+                        var count = 0;
+                        //                            tracked = false
+                        for document in querySnapshot!.documents {
                             
-                            if count == 1{
-                                withAnimation{
-                                    page = 3
-                                }
-                            }else{
-                                withAnimation{
-                                    page = 2
-                                }
+                            if document.documentID == uid{
+                                count = count + 1
+                                //                                    tracked = true
                             }
+                            //                        print("\(document.documentID) => \(document.data())")
+                        }
+                        
+                        if count == 1{
+                            page = 3
+                        }else{
+                            page = 2
                         }
                     }
                 }
+                
             }
             
         }

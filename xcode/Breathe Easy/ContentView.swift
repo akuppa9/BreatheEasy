@@ -324,9 +324,7 @@ struct StartTracking: View{
                                 
                                 tracked = true
                                 
-                                withAnimation{
-                                    page = 3
-                                }
+                                page = 3
                             }
                         }
                     label: {
@@ -601,22 +599,6 @@ struct ProfileView: View{
     @Binding var work: String
     @Binding var activity: String
     
-    func fetchName()->String{
-        let db = Firestore.firestore()
-        let docRef = db.collection("users").document("\(uid)")
-        docRef.getDocument { (document, error) in
-            if let document = document, document.exists {
-                let data = document.data()
-                if let name = data?["name"] as? String {
-                    fullname = name
-                }
-            } else {
-                print("Document does not exist")
-            }
-        }
-        return fullname;
-    }
-    
     func fetchAge()->Int{
         let db = Firestore.firestore()
         let docRef = db.collection("users").document("\(uid)")
@@ -769,11 +751,9 @@ struct ProfileView: View{
                             if log_Status{
                                 GIDSignIn.sharedInstance.signOut()
                                 try? Auth.auth().signOut()
-                                withAnimation{
-                                    log_Status = false
-                                    page = 1
-                                    fullname = ""
-                                }
+                                log_Status = false
+                                page = 1
+                                fullname = ""
                             }
                             else if log_Status2{
                                 DispatchQueue.global(qos: .background).async {
@@ -781,11 +761,9 @@ struct ProfileView: View{
                                     try? Auth.auth().signOut()
                                 }
                                 
-                                withAnimation{
-                                    log_Status2 = false
-                                    page = 1
-                                    fullname = ""
-                                }
+                                log_Status2 = false
+                                page = 1
+                                fullname = ""
                             }
                         }
                     })
@@ -809,18 +787,32 @@ struct ProfileView: View{
                 //                .navigationBarTitle(Text(name))
             }
         }
-        .onAppear(){
-            fetchName()
-        }
     }
 }
 
 struct MainView: View{
     @AppStorage("fullname") var fullname = ""
+    @AppStorage("uid") var uid = ""
     @Binding var sliderValue: Int
     @Binding var sex: String
     @Binding var work: String
     @Binding var activity: String
+    
+    func fetchName(){
+        let db = Firestore.firestore()
+        let docRef = db.collection("users").document("\(uid)")
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                if let name = data?["name"] as? String {
+                    fullname = name
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+    }
+    
     var body: some View{
         TabView{
             // HOME VIEW
@@ -844,6 +836,9 @@ struct MainView: View{
                     Text("Profile")
                 }.toolbarBackground(Color.white, for: .tabBar)
         }
+        .onAppear(){
+            fetchName()
+        }
     }
 }
 
@@ -856,12 +851,29 @@ struct TestView: View{
     
     @Environment(\.scenePhase) var scenePhase
     
+    // Replace with your OpenWeatherMap API Key
+    @AppStorage("apikey") var apiKey = "0f9111decfea0ac7cd6457aebee611bb"
+    
+    // Weather variables
+    @AppStorage("humidity") var humidity = 1
+    @AppStorage("pressure") var pressure = 1
+    @AppStorage("temperature") var temperature = 1.0
+    @AppStorage("uvi") var uvi = 1.0
+    @AppStorage("windSpeed") var windSpeed = 1.0
+    
     var body: some View {
         VStack {
             Text("Latitude: \(coordinates.lat)")
                 .font(.largeTitle)
             Text("Longitude: \(coordinates.lon)")
                 .font(.largeTitle)
+            
+            // Display weather data
+            Text("Humidity: \(humidity)%")
+            Text("Pressure: \(pressure) hPa")
+            Text("Temperature: \(temperature)°C")
+            Text("UV Index: \(uvi)")
+            Text("Wind Speed: \(windSpeed) m/s")
         }
         .onAppear {
             observeCoordinateUpdates()
@@ -881,6 +893,7 @@ struct TestView: View{
                 break
             }
         }
+        
     }
     
     func observeCoordinateUpdates() {
@@ -890,6 +903,7 @@ struct TestView: View{
                 print("Handle \(completion) for error and finished subscription.")
             } receiveValue: { coordinates in
                 self.coordinates = (coordinates.latitude, coordinates.longitude)
+                fetchWeatherData(latitude: coordinates.latitude, longitude: coordinates.longitude)
             }
             .store(in: &tokens)
     }
@@ -902,7 +916,43 @@ struct TestView: View{
             }
             .store(in: &tokens)
     }
-    
+
+    // Function to fetch weather data
+    func fetchWeatherData(latitude: Double, longitude: Double) {
+        let urlString = "https://api.openweathermap.org/data/2.5/onecall?lat=\(latitude)&lon=\(longitude)&exclude=minutely,hourly,daily,alerts&appid=\(apiKey)&units=metric"
+
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL")
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Error fetching data: \(error)")
+                return
+            }
+
+            guard let data = data else {
+                print("No data returned")
+                return
+            }
+
+            // Parsing JSON response
+            do {
+                if let jsonResult = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                   let currentWeather = jsonResult["current"] as? [String: Any] {
+                    
+                    humidity = currentWeather["humidity"] as? Int ?? 0
+                    pressure = currentWeather["pressure"] as? Int ?? 0
+                    temperature = currentWeather["temp"] as? Double ?? 0.0
+                    uvi = currentWeather["uvi"] as? Double ?? 0.0
+                    windSpeed = currentWeather["wind_speed"] as? Double ?? 0.0
+                }
+            } catch {
+                print("Error parsing JSON: \(error)")
+            }
+        }.resume()
+    }
 }
 
 struct ContentView: View {
@@ -920,7 +970,7 @@ struct ContentView: View {
     var body: some View{
         ZStack{
             if (page == 1){
-                LoginPage(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .opacity, removal: .move(edge: .leading)))
+                LoginPage(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
             }
             if(page == 2){
                 StartTracking(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity ).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
@@ -928,13 +978,13 @@ struct ContentView: View {
             }
             if(page == 3){
                 MainView(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-              //  TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
+//                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
             }
             if(page == 4){
-                DeleteAccountView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
+                DeleteAccountView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
             }
             if(page == 5){
-                NameView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
+                NameView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
             }
         }
         .animation(.default, value: page)
