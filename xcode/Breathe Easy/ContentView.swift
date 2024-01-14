@@ -697,8 +697,11 @@ struct ProfileView: View{
                                     }
                                 }
                             })
-                                .font(.largeTitle).foregroundStyle(Color(UIColor.systemGray5)).fontWeight(.bold)
+                            .font(.largeTitle).foregroundStyle(Color(UIColor.systemGray5)).fontWeight(.bold)
                             Spacer()
+                            Image(systemName: "pencil")
+                                .font(.system(size: 0.08 * UIScreen.main.bounds.size.width)) // Adjust the multiplier as needed
+                                .foregroundColor(.gray)
                         }
                         .padding(EdgeInsets(top: 10, leading: 21, bottom: 10, trailing: 21))
                     }
@@ -917,17 +920,17 @@ struct TestView: View{
             }
             .store(in: &tokens)
     }
-
+    
     // Function to fetch current weather data
     func fetchCurrentWeather(latitude: Double, longitude: Double) {
         let weatherURLString = "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(apiKey)&units=metric"
-
+        
         fetchWeatherData(from: weatherURLString) { jsonResult in
             DispatchQueue.main.async {
                 if let currentWeather = jsonResult as? [String: Any],
                    let main = currentWeather["main"] as? [String: Any],
                    let wind = currentWeather["wind"] as? [String: Any] {
-
+                    
                     self.humidity = main["humidity"] as? Int ?? 0
                     self.pressure = main["pressure"] as? Int ?? 0
                     self.temperature = main["temp"] as? Double ?? 0.0
@@ -936,11 +939,11 @@ struct TestView: View{
             }
         }
     }
-
+    
     // Function to fetch UV index
     func fetchUVIndex(latitude: Double, longitude: Double) {
         let uvURLString = "https://api.openweathermap.org/data/2.5/uvi?lat=\(latitude)&lon=\(longitude)&appid=\(apiKey)"
-
+        
         fetchWeatherData(from: uvURLString) { jsonResult in
             DispatchQueue.main.async {
                 if let uvData = jsonResult as? [String: Any] {
@@ -949,7 +952,7 @@ struct TestView: View{
             }
         }
     }
-
+    
     // Generic function to fetch weather data
     func fetchWeatherData(from urlString: String, completion: @escaping (Any?) -> Void) {
         guard let url = URL(string: urlString) else {
@@ -957,20 +960,20 @@ struct TestView: View{
             completion(nil)
             return
         }
-
+        
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("Error fetching data: \(error)")
                 completion(nil)
                 return
             }
-
+            
             guard let data = data else {
                 print("No data returned")
                 completion(nil)
                 return
             }
-
+            
             do {
                 let jsonResult = try JSONSerialization.jsonObject(with: data)
                 completion(jsonResult)
@@ -980,11 +983,11 @@ struct TestView: View{
             }
         }.resume()
     }
-
+    
     // Call these functions when coordinates update
-//    fetchCurrentWeather(latitude: coordinates.lat, longitude: coordinates.lon)
-//    fetchUVIndex(latitude: coordinates.lat, longitude: coordinates.lon)
-
+    //    fetchCurrentWeather(latitude: coordinates.lat, longitude: coordinates.lon)
+    //    fetchUVIndex(latitude: coordinates.lat, longitude: coordinates.lon)
+    
 }
 
 struct ContentView: View {
@@ -1009,8 +1012,13 @@ struct ContentView: View {
                 
             }
             if(page == 3){
-//                MainView(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
+              //  ProfileView(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity)
+                 //   .tabItem(){
+                //        Image(systemName: "person.fill")
+                //        Text("Profile")
+               //     }.toolbarBackground(Color.white, for: .tabBar)
+                MainView(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                //TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
             }
             if(page == 4){
                 DeleteAccountView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
