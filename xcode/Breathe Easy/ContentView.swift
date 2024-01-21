@@ -786,6 +786,13 @@ struct ProfileView: View{
                         }
                     }
                     Spacer()
+                    Image("BreatheEasy")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 300, height: 300)
+                        .cornerRadius(14)
+                    Spacer()
+                    Spacer()
                 }
                 //                .navigationBarTitle(Text(name))
             }
@@ -840,7 +847,7 @@ struct MainView: View{
                 }.toolbarBackground(Color.white, for: .tabBar)
         }
         .onAppear(){
-            fetchName()
+//            fetchName()
         }
     }
 }
@@ -863,6 +870,7 @@ struct TestView: View{
     @State var temperature = 1.0
     @State var uvi = 1.0
     @State var windSpeed = 1.0
+    @State var ACTScore = 1.0
     
     var body: some View {
         VStack {
@@ -877,6 +885,7 @@ struct TestView: View{
             Text("Temperature: \(temperature)°C")
             Text("UV Index: \(uvi)")
             Text("Wind Speed: \(windSpeed) m/s")
+            Text("ACT Score: \(ACTScore)")
         }
         .onAppear {
             observeCoordinateUpdates()
@@ -908,6 +917,7 @@ struct TestView: View{
                 self.coordinates = (coordinates.latitude, coordinates.longitude)
                 fetchCurrentWeather(latitude: coordinates.latitude, longitude: coordinates.longitude)
                 fetchUVIndex(latitude: coordinates.latitude, longitude: coordinates.longitude)
+                parseACTScore()
             }
             .store(in: &tokens)
     }
@@ -953,8 +963,50 @@ struct TestView: View{
         }
     }
     
+    func parseACTScore(){
+        let ACTURLString = "https://nkumar04.pythonanywhere.com/predict?param1=1.1&param2=1.3"
+        fetchACTScore(from: ACTURLString) { jsonResult in
+            DispatchQueue.main.async {
+                if let ACTData = jsonResult as? [String: Any] {
+                    self.ACTScore = ACTData["prediction"] as? Double ?? 0.0
+                }
+            }
+        }
+    }
+    
     // Generic function to fetch weather data
     func fetchWeatherData(from urlString: String, completion: @escaping (Any?) -> Void) {
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL")
+            completion(nil)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Error fetching data: \(error)")
+                completion(nil)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data returned")
+                completion(nil)
+                return
+            }
+            
+            do {
+                let jsonResult = try JSONSerialization.jsonObject(with: data)
+                completion(jsonResult)
+            } catch {
+                print("Error parsing JSON: \(error)")
+                completion(nil)
+            }
+        }.resume()
+    }
+    
+    // fetch model value
+    func fetchACTScore(from urlString: String, completion: @escaping (Any?) -> Void) {
         guard let url = URL(string: urlString) else {
             print("Invalid URL")
             completion(nil)
@@ -991,7 +1043,7 @@ struct TestView: View{
 }
 
 struct ContentView: View {
-    @AppStorage("page") var page = 1
+    @AppStorage("page") var page = 3
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false
     @AppStorage("tracked") var tracked = false
@@ -1018,7 +1070,7 @@ struct ContentView: View {
                 //        Text("Profile")
                //     }.toolbarBackground(Color.white, for: .tabBar)
                 MainView(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                //TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
+//                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
             }
             if(page == 4){
                 DeleteAccountView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
