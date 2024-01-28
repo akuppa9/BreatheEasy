@@ -4,6 +4,8 @@ import Charts
 import Firebase
 import GoogleSignIn
 import Combine
+import UserNotifications
+
 struct Pf:Codable{
     let value:Float
 }
@@ -15,6 +17,54 @@ enum GHError: Error{
 
 struct MyVars {
     var DataPoints: [Double]
+}
+
+func checkForPermission() {
+    let notificationCenter = UNUserNotificationCenter.current()
+    notificationCenter.getNotificationSettings { settings in
+        switch settings.authorizationStatus {
+        case .authorized:
+            dispatchNotification()
+        case .denied:
+            return
+        case .notDetermined:
+            notificationCenter.requestAuthorization(options: [.alert, .sound]) {
+                didAllow, error in
+                if didAllow {
+                    dispatchNotification()
+                }
+            }
+        default:
+            return
+            
+        }
+    }
+}
+
+func dispatchNotification() {
+    let identifier = "morning"
+    let title = "Hello Breathe Easy"
+    let body = "test"
+    let hour = 19
+    let minute = 0
+    let isDaily = true
+    
+    let notificationCenter = UNUserNotificationCenter.current()
+    let content = UNMutableNotificationContent()
+    content.title = title
+    content.body = body
+    content.sound = .default
+    
+    let calendar = Calendar.current
+    var dateComponents = DateComponents(calendar: calendar, timeZone: TimeZone.current)
+    dateComponents.hour = hour
+    dateComponents.minute = minute
+    
+    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: isDaily)
+    let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+    notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
+    notificationCenter.add(request)
+    
 }
 
 struct SliderComponent: View {
@@ -326,6 +376,7 @@ struct StartTracking: View{
                                 
                                 page = 3
                             }
+                            checkForPermission()
                         }
                     label: {
                         Text("Start Tracking")
@@ -847,7 +898,7 @@ struct MainView: View{
                 }.toolbarBackground(Color.white, for: .tabBar)
         }
         .onAppear(){
-//            fetchName()
+            //            fetchName()
         }
     }
 }
@@ -1064,13 +1115,13 @@ struct ContentView: View {
                 
             }
             if(page == 3){
-              //  ProfileView(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity)
-                 //   .tabItem(){
+                //  ProfileView(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity)
+                //   .tabItem(){
                 //        Image(systemName: "person.fill")
                 //        Text("Profile")
-               //     }.toolbarBackground(Color.white, for: .tabBar)
+                //     }.toolbarBackground(Color.white, for: .tabBar)
                 MainView(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-//                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
+                //                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
             }
             if(page == 4){
                 DeleteAccountView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
