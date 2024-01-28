@@ -15,10 +15,10 @@ struct LoginPage: View {
     @AppStorage("fullname") var fullname = ""
     @AppStorage("uid") var uid = ""
     @AppStorage("tracked") var tracked = false
-    @Binding var sliderValue: Int
-    @Binding var sex: String
-    @Binding var work: String
-    @Binding var activity: String
+    @AppStorage("age") var sliderValue: Int = 50
+    @AppStorage("sex") var sex: String = ""
+    @AppStorage("work") var work: String = ""
+    @AppStorage("activity") var activity: String = ""
     
     // For Apple Sign In
     @StateObject var loginData = LoginViewModel()
@@ -216,6 +216,10 @@ struct LoginPage: View {
                             
                             if document.documentID == uid{
                                 count = count + 1
+                                sliderValue = fetchAge()
+                                sex = fetchSex()
+                                work = fetchWork()
+                                activity = fetchActivity()
                                 //                                    tracked = true
                             }
                             //                        print("\(document.documentID) => \(document.data())")
@@ -233,6 +237,74 @@ struct LoginPage: View {
             
         }
         
+    }
+    
+    func fetchAge()->Int{
+        let db = Firestore.firestore()
+        let docRef = db.collection("users").document("\(uid)")
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                if let name = data?["age"] as? Int {
+                    sliderValue = name
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+        return sliderValue;
+    }
+    
+    func fetchSex()->String{
+        let db = Firestore.firestore()
+        let docRef = db.collection("users").document("\(uid)")
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                if let name = data?["sex"] as? String {
+                    sex = name
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+        return sex;
+    }
+    
+    func fetchWork()->String{
+        let db = Firestore.firestore()
+        let docRef = db.collection("users").document("\(uid)")
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                if let name = data?["work"] as? String {
+                    work = name
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+        return work;
+    }
+    
+    func fetchActivity()->String{
+        let db = Firestore.firestore()
+        let docRef = db.collection("users").document("\(uid)")
+        
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let data = document.data()
+                if let name = data?["activity"] as? String {
+                    activity = name
+                }
+            } else {
+                print("Document does not exist")
+            }
+        }
+        return activity;
     }
     
 }

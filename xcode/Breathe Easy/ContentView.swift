@@ -290,13 +290,13 @@ struct StartTracking: View{
     @AppStorage("page") var page = 1
     @AppStorage("tracked") var tracked = false
     @AppStorage("uid") var uid = ""
-    @Binding var sliderValue: Int
     @State private var sliderWidth: CGFloat = 300.0
     @State private var showAlert = false
     @AppStorage("fullname") var fullname = ""
-    @Binding var sex: String
-    @Binding var work: String
-    @Binding var activity: String
+    @AppStorage("age") var sliderValue: Int = 50
+    @AppStorage("sex") var sex: String = ""
+    @AppStorage("work") var work: String = ""
+    @AppStorage("activity") var activity: String = ""
     var body: some View {
         GeometryReader{ geometry in
             ZStack{
@@ -645,10 +645,10 @@ struct ProfileView: View{
     @State private var showAlertDel = false
     @State private var showAlertLogOut = false
     @State private var showEditAccount = false
-    @Binding var sliderValue: Int
-    @Binding var sex: String
-    @Binding var work: String
-    @Binding var activity: String
+    @AppStorage("age") var sliderValue: Int = 50
+    @AppStorage("sex") var sex: String = ""
+    @AppStorage("work") var work: String = ""
+    @AppStorage("activity") var activity: String = ""
     
     func fetchAge()->Int{
         let db = Firestore.firestore()
@@ -854,10 +854,10 @@ struct ProfileView: View{
 struct MainView: View{
     @AppStorage("fullname") var fullname = ""
     @AppStorage("uid") var uid = ""
-    @Binding var sliderValue: Int
-    @Binding var sex: String
-    @Binding var work: String
-    @Binding var activity: String
+    @AppStorage("age") var sliderValue: Int = 50
+    @AppStorage("sex") var sex: String = ""
+    @AppStorage("work") var work: String = ""
+    @AppStorage("activity") var activity: String = ""
     
     func fetchName(){
         let db = Firestore.firestore()
@@ -891,14 +891,14 @@ struct MainView: View{
                 }.toolbarBackground(Color.white, for: .tabBar)
             
             // PROFILE VIEW
-            ProfileView(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity)
+            ProfileView()
                 .tabItem(){
                     Image(systemName: "person.fill")
                     Text("Profile")
                 }.toolbarBackground(Color.white, for: .tabBar)
         }
         .onAppear(){
-            //            fetchName()
+            fetchName()
         }
     }
 }
@@ -922,6 +922,20 @@ struct TestView: View{
     @State var uvi = 1.0
     @State var windSpeed = 1.0
     @State var ACTScore = 1.0
+    
+    @AppStorage("age") var sliderValue: Int = 50
+    @AppStorage("sex") var sex: String = ""
+    @AppStorage("work") var work: String = ""
+    @AppStorage("activity") var activity: String = ""
+    
+    // numerical versions of sex, work, activity
+    @AppStorage("sexNum") var sexNum: Int = 1
+    @AppStorage("workNum") var workNum: Int = 1
+    @AppStorage("activityNum") var activityNum: Int = 1
+    
+    // will be used to store the modified values for the model
+    @AppStorage("sliderValueModified") var sliderValueModified: Int = 1
+    @AppStorage("uviModified") var uviModified: Int = 1
     
     var body: some View {
         VStack {
@@ -1014,12 +1028,64 @@ struct TestView: View{
         }
     }
     
+    // set model parameters that need to be modified
+    func setModelValues(){
+        
+        // set age (4 possible values)
+        if(sliderValue > 50){
+            sliderValueModified = 3
+        } else if (sliderValue <= 50 && sliderValue >= 41){
+            sliderValueModified = 2
+        } else if (sliderValue <= 40 && sliderValue >= 31){
+            sliderValueModified = 1
+        } else if (sliderValue <= 30){
+            sliderValueModified = 0
+        }
+        
+        // set gender (male=1, female=0)
+        if(sex == "Male"){
+            sexNum = 1
+        } else{
+            sexNum = 0
+        }
+        
+        // set work (3 possible values)
+        if (work == "Occasionally"){
+            workNum = 1
+        } else if (work == "Frequently"){
+            workNum = 0
+        } else{
+            workNum = 2
+        }
+        
+        // set activity (3 possible values)
+        if (activity == "Occasionally"){
+            activityNum = 1
+        } else if (activity == "Frequently"){
+            activityNum = 0
+        } else{
+            activityNum = 2
+        }
+        
+        // set uvi
+        if (uvi <= 5){
+            uviModified = 1
+        } else{
+            uviModified = 0
+        }
+    }
+    
     func parseACTScore(){
-        let ACTURLString = "https://nkumar04.pythonanywhere.com/predict?param1=1.1&param2=1.3"
+        
+        setModelValues()
+        
+        let ACTURLString = "https://nkumar04.pythonanywhere.com/predict?param1=3&param2=\(sliderValueModified)&param3=\(sexNum)&param4=\(workNum)&param5=\(activityNum)&param6=\(humidity)&param7=\(pressure)&param8=\(temperature)&param9=\(uviModified)&param10=\(windSpeed)"
         fetchACTScore(from: ACTURLString) { jsonResult in
             DispatchQueue.main.async {
                 if let ACTData = jsonResult as? [String: Any] {
-                    self.ACTScore = ACTData["prediction"] as? Double ?? 0.0
+                    let pred = ACTData["prediction"] as? Double ?? 0.0
+                    self.ACTScore = pred > 25.0 ? 25 : pred.rounded()
+//                    self.ACTScore = ACTData["prediction"] as? Double ?? 0.0
                 }
             }
         }
@@ -1094,24 +1160,24 @@ struct TestView: View{
 }
 
 struct ContentView: View {
-    @AppStorage("page") var page = 3
+    @AppStorage("page") var page = 1
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false
     @AppStorage("tracked") var tracked = false
     @AppStorage("uid") var uid = ""
     @AppStorage("fullname") var fullname = ""
-    @State private var sliderValue: Int = 50
-    @State private var sex: String = ""
-    @State private var work: String = ""
-    @State private var activity: String = ""
+    @AppStorage("age") var sliderValue: Int = 50
+    @AppStorage("sex") var sex: String = ""
+    @AppStorage("work") var work: String = ""
+    @AppStorage("activity") var activity: String = ""
     
     var body: some View{
         ZStack{
             if (page == 1){
-                LoginPage(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
+                LoginPage().transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
             }
             if(page == 2){
-                StartTracking(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity ).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                StartTracking().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                 
             }
             if(page == 3){
@@ -1120,8 +1186,8 @@ struct ContentView: View {
                 //        Image(systemName: "person.fill")
                 //        Text("Profile")
                 //     }.toolbarBackground(Color.white, for: .tabBar)
-                MainView(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                //                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
+//                MainView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
             }
             if(page == 4){
                 DeleteAccountView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
