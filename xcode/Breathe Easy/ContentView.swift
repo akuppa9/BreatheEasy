@@ -412,6 +412,39 @@ struct StartTracking: View{
 }
 
 struct Home: View{
+    
+    @StateObject var deviceLocationService = DeviceLocationService.shared
+    
+    @State var tokens: Set<AnyCancellable> = []
+    @State var coordinates: (lat: Double, lon: Double) = (0, 0)
+    
+    @Environment(\.scenePhase) var scenePhase
+    
+    // Replace with your OpenWeatherMap API Key
+    @AppStorage("apikey") var apiKey = "0f9111decfea0ac7cd6457aebee611bb"
+    
+    // Weather variables
+    @State var humidity = 1
+    @State var pressure = 1
+    @State var temperature = 1.0
+    @State var uvi = 1.0
+    @State var windSpeed = 1.0
+    @State var ACTScore = 1.0
+    
+    @AppStorage("age") var sliderValue: Int = 50
+    @AppStorage("sex") var sex: String = ""
+    @AppStorage("work") var work: String = ""
+    @AppStorage("activity") var activity: String = ""
+    
+    // numerical versions of sex, work, activity
+    @AppStorage("sexNum") var sexNum: Int = 1
+    @AppStorage("workNum") var workNum: Int = 1
+    @AppStorage("activityNum") var activityNum: Int = 1
+    
+    // will be used to store the modified values for the model
+    @AppStorage("sliderValueModified") var sliderValueModified: Int = 1
+    @AppStorage("uviModified") var uviModified: Int = 1
+    
     func getPf(url: String) async throws -> Pf{
         let endpoint = url
         
@@ -437,171 +470,342 @@ struct Home: View{
         ZStack{
             Color(UIColor.darkGray).ignoresSafeArea()
             VStack(alignment: .center){
-                if user?.value ?? 0 >= 0 && user?.value ?? 0 < 0.50{
-                    Text("Peak Flow")
-                        .font(.system(size: 55, weight: .bold, design: .rounded))
-                        .multilineTextAlignment(.center).foregroundStyle(Color(UIColor.systemGray5))
-                    Image("redt").resizable().frame(width: 300, height: 300)
-                    Text(String(format: "%.0f%%",(user?.value ?? 0)*100))
-                        .font(.system(size: 55, weight: .bold)).foregroundStyle(Color(UIColor.systemGray5))
-                    Text("of predicted maximum peak flow value")
-                        .font(.system(size: 15, weight: .bold)).foregroundStyle(Color(UIColor.systemGray5))
-                        .padding()
-                    Text("You may be at severe risk of an asthma attack")
-                        .font(.system(size: 15, weight: .bold)).foregroundStyle(.red)
-                        .multilineTextAlignment(.center)
-                }
-                else if user?.value ?? 0 >= 0.50 && user?.value ?? 0 < 0.60{
-                    Text("Peak Flow")
-                        .font(.system(size: 55, weight: .bold, design: .rounded)).multilineTextAlignment(.center).foregroundStyle(Color(UIColor.systemGray5))
-                    Image("oranget").resizable().frame(width: 300, height: 300)
-                    Text(String(format: "%.0f%%",(user?.value ?? 0)*100))
-                        .font(.system(size: 55, weight: .bold)).foregroundStyle(Color(UIColor.systemGray5))
-                    Text("of predicted maximum peak flow value")
-                        .font(.system(size: 15, weight: .bold)).foregroundStyle(Color(UIColor.systemGray5))
-                        .padding()
-                    Text("You may be at moderate-severe risk of an asthma attack")
-                        .font(.system(size: 15, weight: .bold)).foregroundStyle(.orange)
-                        .multilineTextAlignment(.center)
-                }
-                else if user?.value ?? 0 >= 0.60 && user?.value ?? 0 < 0.70{
-                    Text("Peak Flow")
-                        .font(.system(size: 55, weight: .bold, design: .rounded)).multilineTextAlignment(.center).foregroundStyle(Color(UIColor.systemGray5))
-                    Image("yellowt").resizable().frame(width: 300, height: 300)
-                    Text(String(format: "%.0f%%",(user?.value ?? 0)*100))
-                        .font(.system(size: 55, weight: .bold)).foregroundStyle(Color(UIColor.systemGray5))
-                    Text("of predicted maximum peak flow value")
-                        .font(.system(size: 15, weight: .bold)).foregroundStyle(Color(UIColor.systemGray5))
-                        .padding()
-                    Text("You may be at moderate risk of an asthma attack")
-                        .font(.system(size: 15, weight: .bold)).foregroundStyle(.yellow)
-                        .multilineTextAlignment(.center)
-                }
-                else if user?.value ?? 0 >= 0.70 && user?.value ?? 0 < 0.80{
-                    Text("Peak Flow")
-                        .font(.system(size: 55, weight: .bold, design: .rounded))
-                        .multilineTextAlignment(.center).foregroundStyle(Color(UIColor.systemGray5))
-                    Image("lightgreent").resizable().frame(width: 300, height: 300)
-                    Text(String(format: "%.0f%%",(user?.value ?? 0)*100))
-                        .font(.system(size: 55, weight: .bold)).foregroundStyle(Color(UIColor.systemGray5))
-                    Text("of predicted maximum peak flow value")
-                        .font(.system(size: 15, weight: .bold)).foregroundStyle(Color(UIColor.systemGray5))
-                        .padding()
-                    Text("You may be at slight risk of an asthma attack")
-                        .font(.system(size: 15, weight: .bold)).foregroundStyle(Color(UIColor.systemGreen))
-                        .multilineTextAlignment(.center)
-                }else if user?.value ?? 0 >= 0.80 {
-                    Text("Peak Flow")
+                if ACTScore > 19 && ACTScore <= 25{
+                    Text("ACT Score")
                         .font(.system(size: 55, weight: .bold, design: .rounded))
                         .multilineTextAlignment(.center).foregroundStyle(Color(UIColor.systemGray5))
                     Image("greent").resizable().frame(width: 300, height: 300)
-                    Text(String(format: "%.0f%%",(user?.value ?? 0)*100))
+                    Text(String(format: "%.0f",ACTScore))
                         .font(.system(size: 55, weight: .bold)).foregroundStyle(Color(UIColor.systemGray5))
-                    Text("of predicted maximum peak flow value")
+                    Text("predicted asthma control test score")
                         .font(.system(size: 15, weight: .bold)).foregroundStyle(Color(UIColor.systemGray5))
                         .padding()
                     Text("You can breathe easy!")
                         .font(.system(size: 15, weight: .bold)).foregroundStyle(.green)
                         .multilineTextAlignment(.center)
                 }
+                else if ACTScore > 14 && ACTScore <= 19{
+                    Text("ACT Score")
+                        .font(.system(size: 55, weight: .bold, design: .rounded)).multilineTextAlignment(.center).foregroundStyle(Color(UIColor.systemGray5))
+                    Image("yellowt").resizable().frame(width: 300, height: 300)
+                    Text(String(format: "%.0f",ACTScore))
+                        .font(.system(size: 55, weight: .bold)).foregroundStyle(Color(UIColor.systemGray5))
+                    Text("predicted asthma control test score")
+                        .font(.system(size: 15, weight: .bold)).foregroundStyle(Color(UIColor.systemGray5))
+                        .padding()
+                    Text("Your asthma may not be under control")
+                        .font(.system(size: 15, weight: .bold)).foregroundStyle(.yellow)
+                        .multilineTextAlignment(.center)
+                }
+                else{
+                    Text("ACT Score")
+                        .font(.system(size: 55, weight: .bold, design: .rounded)).multilineTextAlignment(.center).foregroundStyle(Color(UIColor.systemGray5))
+                    Image("oranget").resizable().frame(width: 300, height: 300)
+                    Text(String(format: "%.0f",ACTScore))
+                        .font(.system(size: 55, weight: .bold)).foregroundStyle(Color(UIColor.systemGray5))
+                    Text("predicted asthma control test score")
+                        .font(.system(size: 15, weight: .bold)).foregroundStyle(Color(UIColor.systemGray5))
+                        .padding()
+                    Text("Your asthma control level is at risk")
+                        .font(.system(size: 15, weight: .bold)).foregroundStyle(.orange)
+                        .multilineTextAlignment(.center)
+                }
+            }
+        }
+        .onAppear {
+            observeCoordinateUpdates()
+            observeDeniedLocationAccess()
+            deviceLocationService.requestLocationUpdates()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
+            deviceLocationService.startMonitoringSignificantLocationChanges()
+        }
+        .onChange(of: scenePhase) { newScenePhase, _ in
+            switch newScenePhase {
+            case .active:
+                deviceLocationService.requestLocationUpdates()
+            case .background:
+                deviceLocationService.startMonitoringSignificantLocationChanges()
+            default:
+                break
             }
         }
         
-        .task{
-            do{
-                user = try await getPf(url: "https://paktion.pythonanywhere.com/22.0/15.0/15.0/9.0/1040.0/98.0/1.51/0.0/2.0/292.72/20.39/11.54/2.27/11.64/16.40/0.39/83.0")
-                try await Task.sleep(nanoseconds: 3_000_000_000)
-            } catch GHError.invalidURL{
-                print("invalid URL")
-            }catch GHError.invalidResponse{
-                print("invalid response")
-            }catch GHError.invalidData{
-                print("invalid data")
-            }catch{
-                print("Error")
+//        .task{
+//            do{
+//                user = try await getPf(url: "https://paktion.pythonanywhere.com/22.0/15.0/15.0/9.0/1040.0/98.0/1.51/0.0/2.0/292.72/20.39/11.54/2.27/11.64/16.40/0.39/83.0")
+//                try await Task.sleep(nanoseconds: 3_000_000_000)
+//            } catch GHError.invalidURL{
+//                print("invalid URL")
+//            }catch GHError.invalidResponse{
+//                print("invalid response")
+//            }catch GHError.invalidData{
+//                print("invalid data")
+//            }catch{
+//                print("Error")
+//            }
+//            
+//            do{
+//                user = try await getPf(url: "https://paktion.pythonanywhere.com/22.0/15.0/15.0/12.0/1040.0/98.0/2.51/0.0/2.0/283.72/20.39/21.99/2.27/11.64/16.40/0.39/83.0")
+//                try await Task.sleep(nanoseconds: 2_500_000_000)
+//            } catch GHError.invalidURL{
+//                print("invalid URL")
+//            }catch GHError.invalidResponse{
+//                print("invalid response")
+//            }catch GHError.invalidData{
+//                print("invalid data")
+//            }catch{
+//                print("Error")
+//            }
+//            
+//            do{
+//                user = try await getPf(url: "https://paktion.pythonanywhere.com/22.0/15.0/15.0/14.0/1040.0/98.0/2.51/0.0/2.0/283.72/20.39/21.99/2.27/11.64/16.40/0.39/83.0")
+//                try await Task.sleep(nanoseconds: 2_500_000_000)
+//            } catch GHError.invalidURL{
+//                print("invalid URL")
+//            }catch GHError.invalidResponse{
+//                print("invalid response")
+//            }catch GHError.invalidData{
+//                print("invalid data")
+//            }catch{
+//                print("Error")
+//            }
+//            
+//            
+//            do{
+//                user = try await getPf(url: "https://paktion.pythonanywhere.com/22.0/15.0/15.0/11.0/1040.0/98.0/2.51/0.0/2.0/283.72/20.39/21.99/2.27/11.64/16.40/0.39/83.0")
+//                try await Task.sleep(nanoseconds: 2_500_000_000)
+//            } catch GHError.invalidURL{
+//                print("invalid URL")
+//            }catch GHError.invalidResponse{
+//                print("invalid response")
+//            }catch GHError.invalidData{
+//                print("invalid data")
+//            }catch{
+//                print("Error")
+//            }
+//            
+//            do{
+//                user = try await getPf(url: "https://paktion.pythonanywhere.com/22.0/15.0/15.0/15.0/1040.0/98.0/2.51/0.0/2.0/283.72/20.39/21.99/2.27/11.64/16.40/0.39/83.0")
+//                try await Task.sleep(nanoseconds: 2_500_000_000)
+//            } catch GHError.invalidURL{
+//                print("invalid URL")
+//            }catch GHError.invalidResponse{
+//                print("invalid response")
+//            }catch GHError.invalidData{
+//                print("invalid data")
+//            }catch{
+//                print("Error")
+//            }
+//            
+//            do{
+//                user = try await getPf(url: "https://paktion.pythonanywhere.com/22.0/15.0/15.0/17.0/1040.0/98.0/2.51/0.0/2.0/283.72/20.39/21.99/2.27/11.64/16.40/0.39/83.0")
+//                try await Task.sleep(nanoseconds: 2_500_000_000)
+//            } catch GHError.invalidURL{
+//                print("invalid URL")
+//            }catch GHError.invalidResponse{
+//                print("invalid response")
+//            }catch GHError.invalidData{
+//                print("invalid data")
+//            }catch{
+//                print("Error")
+//            }
+//            
+//            do{
+//                user = try await getPf(url: "https://paktion.pythonanywhere.com/22.0/15.0/15.0/22.0/1040.0/98.0/2.51/0.0/2.0/283.72/20.39/21.99/2.27/11.64/16.40/0.39/83.0")
+//                try await Task.sleep(nanoseconds: 2_500_000_000)
+//            } catch GHError.invalidURL{
+//                print("invalid URL")
+//            }catch GHError.invalidResponse{
+//                print("invalid response")
+//            }catch GHError.invalidData{
+//                print("invalid data")
+//            }catch{
+//                print("Error")
+//            }
+//            
+//        }
+        
+    }
+    
+    func observeCoordinateUpdates() {
+        deviceLocationService.coordinatesPublisher
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                print("Handle \(completion) for error and finished subscription.")
+            } receiveValue: { coordinates in
+                self.coordinates = (coordinates.latitude, coordinates.longitude)
+                fetchCurrentWeather(latitude: coordinates.latitude, longitude: coordinates.longitude)
+                fetchUVIndex(latitude: coordinates.latitude, longitude: coordinates.longitude)
+                parseACTScore()
             }
-            
-            do{
-                user = try await getPf(url: "https://paktion.pythonanywhere.com/22.0/15.0/15.0/12.0/1040.0/98.0/2.51/0.0/2.0/283.72/20.39/21.99/2.27/11.64/16.40/0.39/83.0")
-                try await Task.sleep(nanoseconds: 2_500_000_000)
-            } catch GHError.invalidURL{
-                print("invalid URL")
-            }catch GHError.invalidResponse{
-                print("invalid response")
-            }catch GHError.invalidData{
-                print("invalid data")
-            }catch{
-                print("Error")
+            .store(in: &tokens)
+    }
+    
+    func observeDeniedLocationAccess() {
+        deviceLocationService.deniedLocationAccessPublisher
+            .receive(on: DispatchQueue.main)
+            .sink {
+                print("Handle access denied event, possibly with an alert.")
             }
-            
-            do{
-                user = try await getPf(url: "https://paktion.pythonanywhere.com/22.0/15.0/15.0/14.0/1040.0/98.0/2.51/0.0/2.0/283.72/20.39/21.99/2.27/11.64/16.40/0.39/83.0")
-                try await Task.sleep(nanoseconds: 2_500_000_000)
-            } catch GHError.invalidURL{
-                print("invalid URL")
-            }catch GHError.invalidResponse{
-                print("invalid response")
-            }catch GHError.invalidData{
-                print("invalid data")
-            }catch{
-                print("Error")
+            .store(in: &tokens)
+    }
+    
+    // Function to fetch current weather data
+    func fetchCurrentWeather(latitude: Double, longitude: Double) {
+        let weatherURLString = "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(apiKey)&units=metric"
+        
+        fetchWeatherData(from: weatherURLString) { jsonResult in
+            DispatchQueue.main.async {
+                if let currentWeather = jsonResult as? [String: Any],
+                   let main = currentWeather["main"] as? [String: Any],
+                   let wind = currentWeather["wind"] as? [String: Any] {
+                    
+                    self.humidity = main["humidity"] as? Int ?? 0
+                    self.pressure = main["pressure"] as? Int ?? 0
+                    self.temperature = main["temp"] as? Double ?? 0.0
+                    self.windSpeed = wind["speed"] as? Double ?? 0.0
+                }
             }
-            
-            
-            do{
-                user = try await getPf(url: "https://paktion.pythonanywhere.com/22.0/15.0/15.0/11.0/1040.0/98.0/2.51/0.0/2.0/283.72/20.39/21.99/2.27/11.64/16.40/0.39/83.0")
-                try await Task.sleep(nanoseconds: 2_500_000_000)
-            } catch GHError.invalidURL{
-                print("invalid URL")
-            }catch GHError.invalidResponse{
-                print("invalid response")
-            }catch GHError.invalidData{
-                print("invalid data")
-            }catch{
-                print("Error")
+        }
+    }
+    
+    // Function to fetch UV index
+    func fetchUVIndex(latitude: Double, longitude: Double) {
+        let uvURLString = "https://api.openweathermap.org/data/2.5/uvi?lat=\(latitude)&lon=\(longitude)&appid=\(apiKey)"
+        
+        fetchWeatherData(from: uvURLString) { jsonResult in
+            DispatchQueue.main.async {
+                if let uvData = jsonResult as? [String: Any] {
+                    self.uvi = uvData["value"] as? Double ?? 0.0
+                }
             }
-            
-            do{
-                user = try await getPf(url: "https://paktion.pythonanywhere.com/22.0/15.0/15.0/15.0/1040.0/98.0/2.51/0.0/2.0/283.72/20.39/21.99/2.27/11.64/16.40/0.39/83.0")
-                try await Task.sleep(nanoseconds: 2_500_000_000)
-            } catch GHError.invalidURL{
-                print("invalid URL")
-            }catch GHError.invalidResponse{
-                print("invalid response")
-            }catch GHError.invalidData{
-                print("invalid data")
-            }catch{
-                print("Error")
-            }
-            
-            do{
-                user = try await getPf(url: "https://paktion.pythonanywhere.com/22.0/15.0/15.0/17.0/1040.0/98.0/2.51/0.0/2.0/283.72/20.39/21.99/2.27/11.64/16.40/0.39/83.0")
-                try await Task.sleep(nanoseconds: 2_500_000_000)
-            } catch GHError.invalidURL{
-                print("invalid URL")
-            }catch GHError.invalidResponse{
-                print("invalid response")
-            }catch GHError.invalidData{
-                print("invalid data")
-            }catch{
-                print("Error")
-            }
-            
-            do{
-                user = try await getPf(url: "https://paktion.pythonanywhere.com/22.0/15.0/15.0/22.0/1040.0/98.0/2.51/0.0/2.0/283.72/20.39/21.99/2.27/11.64/16.40/0.39/83.0")
-                try await Task.sleep(nanoseconds: 2_500_000_000)
-            } catch GHError.invalidURL{
-                print("invalid URL")
-            }catch GHError.invalidResponse{
-                print("invalid response")
-            }catch GHError.invalidData{
-                print("invalid data")
-            }catch{
-                print("Error")
-            }
-            
+        }
+    }
+    
+    // set model parameters that need to be modified
+    func setModelValues(){
+        
+        // set age (4 possible values)
+        if(sliderValue > 50){
+            sliderValueModified = 3
+        } else if (sliderValue <= 50 && sliderValue >= 41){
+            sliderValueModified = 2
+        } else if (sliderValue <= 40 && sliderValue >= 31){
+            sliderValueModified = 1
+        } else if (sliderValue <= 30){
+            sliderValueModified = 0
         }
         
+        // set gender (male=1, female=0)
+        if(sex == "Male"){
+            sexNum = 1
+        } else{
+            sexNum = 0
+        }
+        
+        // set work (3 possible values)
+        if (work == "Occasionally"){
+            workNum = 1
+        } else if (work == "Frequently"){
+            workNum = 0
+        } else{
+            workNum = 2
+        }
+        
+        // set activity (3 possible values)
+        if (activity == "Occasionally"){
+            activityNum = 1
+        } else if (activity == "Frequently"){
+            activityNum = 0
+        } else{
+            activityNum = 2
+        }
+        
+        // set uvi
+        if (uvi <= 5){
+            uviModified = 1
+        } else{
+            uviModified = 0
+        }
+    }
+    
+    func parseACTScore(){
+        
+        setModelValues()
+        
+        let ACTURLString = "https://nkumar04.pythonanywhere.com/predict?param1=3&param2=\(sliderValueModified)&param3=\(sexNum)&param4=\(workNum)&param5=\(activityNum)&param6=\(humidity)&param7=\(pressure)&param8=\(temperature)&param9=\(uviModified)&param10=\(windSpeed)"
+        fetchACTScore(from: ACTURLString) { jsonResult in
+            DispatchQueue.main.async {
+                if let ACTData = jsonResult as? [String: Any] {
+                    let pred = ACTData["prediction"] as? Double ?? 0.0
+                    self.ACTScore = pred > 25.0 ? 25 : pred.rounded()
+//                    self.ACTScore = ACTData["prediction"] as? Double ?? 0.0
+                }
+            }
+        }
+    }
+    
+    // Generic function to fetch weather data
+    func fetchWeatherData(from urlString: String, completion: @escaping (Any?) -> Void) {
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL")
+            completion(nil)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Error fetching data: \(error)")
+                completion(nil)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data returned")
+                completion(nil)
+                return
+            }
+            
+            do {
+                let jsonResult = try JSONSerialization.jsonObject(with: data)
+                completion(jsonResult)
+            } catch {
+                print("Error parsing JSON: \(error)")
+                completion(nil)
+            }
+        }.resume()
+    }
+    
+    // fetch model value
+    func fetchACTScore(from urlString: String, completion: @escaping (Any?) -> Void) {
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL")
+            completion(nil)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Error fetching data: \(error)")
+                completion(nil)
+                return
+            }
+            
+            guard let data = data else {
+                print("No data returned")
+                completion(nil)
+                return
+            }
+            
+            do {
+                let jsonResult = try JSONSerialization.jsonObject(with: data)
+                completion(jsonResult)
+            } catch {
+                print("Error parsing JSON: \(error)")
+                completion(nil)
+            }
+        }.resume()
     }
 }
 
@@ -836,14 +1040,6 @@ struct ProfileView: View{
                             Divider().background(Color(UIColor.systemGray5))
                         }
                     }
-                    Spacer()
-                    Image("BreatheEasy")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 300, height: 300)
-                        .cornerRadius(14)
-                    Spacer()
-                    Spacer()
                 }
                 //                .navigationBarTitle(Text(name))
             }
@@ -1186,8 +1382,8 @@ struct ContentView: View {
                 //        Image(systemName: "person.fill")
                 //        Text("Profile")
                 //     }.toolbarBackground(Color.white, for: .tabBar)
-//                MainView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
+                MainView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+//                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
             }
             if(page == 4){
                 DeleteAccountView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
