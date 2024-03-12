@@ -17,7 +17,7 @@ struct ProgressView: View{
         } else if (progressPage == 3){
             WorkOutdoorsView()
         } else{
-           OutdoorActivitesView()
+            OutdoorActivitesView()
         }
     }
 }
