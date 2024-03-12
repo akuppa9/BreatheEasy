@@ -1370,7 +1370,7 @@ struct ContentView: View {
     var body: some View{
         ZStack{
             if (page == 1){
-                LoginPage().transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
+                LoginView().transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
             }
             if(page == 2){
                 StartTracking().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))

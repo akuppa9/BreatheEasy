@@ -16,6 +16,9 @@
 		38BDC3A12B10349600D212BF /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 38BDC3A02B10349600D212BF /* FirebaseAuth */; };
 		38BDC3A32B10349600D212BF /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 38BDC3A22B10349600D212BF /* FirebaseFirestore */; };
 		38BDC3A62B1034E800D212BF /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 38BDC3A52B1034E800D212BF /* GoogleSignIn */; };
+		38C759292B9FC78E00C1CDCF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C759282B9FC78E00C1CDCF /* LoginView.swift */; };
+		38C7592E2B9FC88B00C1CDCF /* LufgaRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38C7592D2B9FC88B00C1CDCF /* LufgaRegular.ttf */; };
+		38C759302B9FC89900C1CDCF /* LufgaMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38C7592F2B9FC89900C1CDCF /* LufgaMedium.ttf */; };
 		AC4A5CA02AED652A0001CB8A /* Breathe_EasyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A5C9F2AED652A0001CB8A /* Breathe_EasyApp.swift */; };
 		AC4A5CA22AED652A0001CB8A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A5CA12AED652A0001CB8A /* ContentView.swift */; };
 		AC4A5CA42AED652C0001CB8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC4A5CA32AED652C0001CB8A /* Assets.xcassets */; };
@@ -81,6 +84,10 @@
 		38BDC3982B10164100D212BF /* LoginPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPage.swift; sourceTree = "<group>"; };
 		38BDC39C2B1029E500D212BF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		38BDC39E2B102A4600D212BF /* Breathe-Easy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Breathe-Easy-Info.plist"; sourceTree = SOURCE_ROOT; };
+		38C759282B9FC78E00C1CDCF /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = ../../../../BreatheEasyFigma/BreatheEasyFigma/BreatheEasyFigma/LoginView.swift; sourceTree = "<group>"; };
+		38C7592C2B9FC87100C1CDCF /* HelveticaNeueMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HelveticaNeueMedium.otf; sourceTree = "<group>"; };
+		38C7592D2B9FC88B00C1CDCF /* LufgaRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = LufgaRegular.ttf; path = ../../../../../Downloads/lufga/LufgaRegular.ttf; sourceTree = "<group>"; };
+		38C7592F2B9FC89900C1CDCF /* LufgaMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = LufgaMedium.ttf; path = ../../../../../Downloads/lufga/LufgaMedium.ttf; sourceTree = "<group>"; };
 		AC4A5C9C2AED652A0001CB8A /* Breathe Easy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Breathe Easy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC4A5C9F2AED652A0001CB8A /* Breathe_EasyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breathe_EasyApp.swift; sourceTree = "<group>"; };
 		AC4A5CA12AED652A0001CB8A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -152,11 +159,23 @@
 		38BDC3972B10161600D212BF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				38C759282B9FC78E00C1CDCF /* LoginView.swift */,
 				AC6C60552B44CC2900FC8B67 /* DeleteAccountView.swift */,
 				38BDC3982B10164100D212BF /* LoginPage.swift */,
 				387DD06E2B461743002C4BE7 /* NameView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		38C7592A2B9FC83500C1CDCF /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				38C7592F2B9FC89900C1CDCF /* LufgaMedium.ttf */,
+				38C7592D2B9FC88B00C1CDCF /* LufgaRegular.ttf */,
+				38C7592C2B9FC87100C1CDCF /* HelveticaNeueMedium.otf */,
+			);
+			name = Fonts;
+			path = ../../../BreatheEasyFigma/BreatheEasyFigma/BreatheEasyFigma/Fonts;
 			sourceTree = "<group>";
 		};
 		AC4A5C932AED652A0001CB8A = {
@@ -185,6 +204,7 @@
 		AC4A5C9E2AED652A0001CB8A /* Breathe Easy */ = {
 			isa = PBXGroup;
 			children = (
+				38C7592A2B9FC83500C1CDCF /* Fonts */,
 				383C2A242B12C53A00B36651 /* Breathe Easy.entitlements */,
 				38BDC39E2B102A4600D212BF /* Breathe-Easy-Info.plist */,
 				38BDC39C2B1029E500D212BF /* GoogleService-Info.plist */,
@@ -383,8 +403,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC4A5CA72AED652C0001CB8A /* Preview Assets.xcassets in Resources */,
+				38C7592E2B9FC88B00C1CDCF /* LufgaRegular.ttf in Resources */,
 				38BDC39D2B1029E500D212BF /* GoogleService-Info.plist in Resources */,
 				AC4A5CA42AED652C0001CB8A /* Assets.xcassets in Resources */,
+				38C759302B9FC89900C1CDCF /* LufgaMedium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +442,7 @@
 				383C2A272B12CCD100B36651 /* LoginViewModel.swift in Sources */,
 				AC4A5CA22AED652A0001CB8A /* ContentView.swift in Sources */,
 				38A1BBA12B40BB70006D04CF /* LocationManager.swift in Sources */,
+				38C759292B9FC78E00C1CDCF /* LoginView.swift in Sources */,
 				38BDC3992B10164100D212BF /* LoginPage.swift in Sources */,
 				38954F1C2B460AE7007094E0 /* DeviceLocationService.swift in Sources */,
 				387DD06F2B461743002C4BE7 /* NameView.swift in Sources */,

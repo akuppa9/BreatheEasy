@@ -31,7 +31,7 @@ struct LoginPage: View {
                 Spacer()
                 Spacer()
                 Spacer()
-                Text("Welcome to").foregroundStyle(Color(UIColor.systemGray5))
+                Text("Welcome to").foregroundStyle(Color(UIColor.systemGray4))
                     .font(.system(size: UIScreen.main.bounds.height / 15, design: .rounded))
                     .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
                     
@@ -144,6 +144,7 @@ struct LoginPage: View {
 
             
         }
+//        .background(Color(red: 0, green: 0, blue: 0.1))
         .background(Color(UIColor.darkGray))
     }
     
@@ -309,9 +310,9 @@ struct LoginPage: View {
     
 }
 
-//#Preview {
-//    LoginPage(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity)
-//}
+#Preview {
+    LoginPage()
+}
 
 // extending view to get screen bounds
 extension View{

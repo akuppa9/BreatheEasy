@@ -10,7 +10,7 @@ import CryptoKit
 import AuthenticationServices
 import Firebase
 
-class LoginViewModel: ObservableObject{
+class LoginViewModel: NSObject, ObservableObject, ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding{
     
     @Published var nonce = ""
     @AppStorage("log_Status2") var log_Status2 = false
@@ -19,6 +19,46 @@ class LoginViewModel: ObservableObject{
     @AppStorage("page") var page = 1
     @AppStorage("name") var name = ""
     @AppStorage("fullname") var fullname = ""
+    
+    // Add this function to initiate Apple Sign In
+    func signInWithApple() {
+        let nonce = randomNonceString()
+        self.nonce = nonce
+
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.email, .fullName]
+        request.nonce = sha256(nonce)
+
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+    
+    // ASAuthorizationControllerDelegate method to handle authorization completion
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            authenticate(credential: appleIDCredential) // Here we're using your existing authenticate method
+        default:
+            break
+        }
+    }
+
+    // ASAuthorizationControllerDelegate method to handle authorization error
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // Handle error
+        print(error.localizedDescription)
+    }
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        // Assuming you're targeting iOS 13 or later and using SwiftUI.
+        // This needs to return a window that the ASAuthorizationController can use for its UI.
+        // The method below is a commonly used approach prior to iOS 15.
+        return UIApplication.shared.windows.first { $0.isKeyWindow }!
+    }
+
     
     func authenticate(credential: ASAuthorizationAppleIDCredential){
         
