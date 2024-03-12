@@ -19,6 +19,13 @@
 		38C759292B9FC78E00C1CDCF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C759282B9FC78E00C1CDCF /* LoginView.swift */; };
 		38C7592E2B9FC88B00C1CDCF /* LufgaRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38C7592D2B9FC88B00C1CDCF /* LufgaRegular.ttf */; };
 		38C759302B9FC89900C1CDCF /* LufgaMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 38C7592F2B9FC89900C1CDCF /* LufgaMedium.ttf */; };
+		38C759322B9FDAF000C1CDCF /* AgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C759312B9FDAF000C1CDCF /* AgeView.swift */; };
+		38C759342BA0B6EE00C1CDCF /* GenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C759332BA0B6EE00C1CDCF /* GenderView.swift */; };
+		38C759362BA0B99C00C1CDCF /* WorkOutdoorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C759352BA0B99C00C1CDCF /* WorkOutdoorsView.swift */; };
+		38C759382BA0B9AD00C1CDCF /* OutdoorActivitesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C759372BA0B9AD00C1CDCF /* OutdoorActivitesView.swift */; };
+		38C7593A2BA0C2B500C1CDCF /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C759392BA0C2B500C1CDCF /* ProgressView.swift */; };
+		38C7593C2BA1051700C1CDCF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C7593B2BA1051700C1CDCF /* HomeView.swift */; };
+		38C7593E2BA10A0500C1CDCF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C7593D2BA10A0500C1CDCF /* SettingsView.swift */; };
 		AC4A5CA02AED652A0001CB8A /* Breathe_EasyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A5C9F2AED652A0001CB8A /* Breathe_EasyApp.swift */; };
 		AC4A5CA22AED652A0001CB8A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A5CA12AED652A0001CB8A /* ContentView.swift */; };
 		AC4A5CA42AED652C0001CB8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC4A5CA32AED652C0001CB8A /* Assets.xcassets */; };
@@ -88,6 +95,13 @@
 		38C7592C2B9FC87100C1CDCF /* HelveticaNeueMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HelveticaNeueMedium.otf; sourceTree = "<group>"; };
 		38C7592D2B9FC88B00C1CDCF /* LufgaRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = LufgaRegular.ttf; path = ../../../../../Downloads/lufga/LufgaRegular.ttf; sourceTree = "<group>"; };
 		38C7592F2B9FC89900C1CDCF /* LufgaMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = LufgaMedium.ttf; path = ../../../../../Downloads/lufga/LufgaMedium.ttf; sourceTree = "<group>"; };
+		38C759312B9FDAF000C1CDCF /* AgeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AgeView.swift; path = ../../../../BreatheEasyFigma/BreatheEasyFigma/BreatheEasyFigma/AgeView.swift; sourceTree = "<group>"; };
+		38C759332BA0B6EE00C1CDCF /* GenderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenderView.swift; path = ../../../../BreatheEasyFigma/BreatheEasyFigma/BreatheEasyFigma/GenderView.swift; sourceTree = "<group>"; };
+		38C759352BA0B99C00C1CDCF /* WorkOutdoorsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WorkOutdoorsView.swift; path = ../../../../BreatheEasyFigma/BreatheEasyFigma/BreatheEasyFigma/WorkOutdoorsView.swift; sourceTree = "<group>"; };
+		38C759372BA0B9AD00C1CDCF /* OutdoorActivitesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OutdoorActivitesView.swift; path = ../../../../BreatheEasyFigma/BreatheEasyFigma/BreatheEasyFigma/OutdoorActivitesView.swift; sourceTree = "<group>"; };
+		38C759392BA0C2B500C1CDCF /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		38C7593B2BA1051700C1CDCF /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeView.swift; path = ../../../../BreatheEasyFigma/BreatheEasyFigma/BreatheEasyFigma/HomeView.swift; sourceTree = "<group>"; };
+		38C7593D2BA10A0500C1CDCF /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = ../../../../BreatheEasyFigma/BreatheEasyFigma/BreatheEasyFigma/SettingsView.swift; sourceTree = "<group>"; };
 		AC4A5C9C2AED652A0001CB8A /* Breathe Easy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Breathe Easy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC4A5C9F2AED652A0001CB8A /* Breathe_EasyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breathe_EasyApp.swift; sourceTree = "<group>"; };
 		AC4A5CA12AED652A0001CB8A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -159,10 +173,17 @@
 		38BDC3972B10161600D212BF /* View */ = {
 			isa = PBXGroup;
 			children = (
+				38C7593D2BA10A0500C1CDCF /* SettingsView.swift */,
+				38C7593B2BA1051700C1CDCF /* HomeView.swift */,
+				38C759372BA0B9AD00C1CDCF /* OutdoorActivitesView.swift */,
+				38C759352BA0B99C00C1CDCF /* WorkOutdoorsView.swift */,
+				38C759332BA0B6EE00C1CDCF /* GenderView.swift */,
+				38C759312B9FDAF000C1CDCF /* AgeView.swift */,
 				38C759282B9FC78E00C1CDCF /* LoginView.swift */,
 				AC6C60552B44CC2900FC8B67 /* DeleteAccountView.swift */,
 				38BDC3982B10164100D212BF /* LoginPage.swift */,
 				387DD06E2B461743002C4BE7 /* NameView.swift */,
+				38C759392BA0C2B500C1CDCF /* ProgressView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -441,13 +462,20 @@
 			files = (
 				383C2A272B12CCD100B36651 /* LoginViewModel.swift in Sources */,
 				AC4A5CA22AED652A0001CB8A /* ContentView.swift in Sources */,
+				38C759362BA0B99C00C1CDCF /* WorkOutdoorsView.swift in Sources */,
+				38C7593C2BA1051700C1CDCF /* HomeView.swift in Sources */,
 				38A1BBA12B40BB70006D04CF /* LocationManager.swift in Sources */,
 				38C759292B9FC78E00C1CDCF /* LoginView.swift in Sources */,
 				38BDC3992B10164100D212BF /* LoginPage.swift in Sources */,
+				38C759342BA0B6EE00C1CDCF /* GenderView.swift in Sources */,
 				38954F1C2B460AE7007094E0 /* DeviceLocationService.swift in Sources */,
+				38C7593E2BA10A0500C1CDCF /* SettingsView.swift in Sources */,
+				38C759322B9FDAF000C1CDCF /* AgeView.swift in Sources */,
 				387DD06F2B461743002C4BE7 /* NameView.swift in Sources */,
 				AC4A5CA02AED652A0001CB8A /* Breathe_EasyApp.swift in Sources */,
+				38C7593A2BA0C2B500C1CDCF /* ProgressView.swift in Sources */,
 				AC6C60562B44CC2900FC8B67 /* DeleteAccountView.swift in Sources */,
+				38C759382BA0B9AD00C1CDCF /* OutdoorActivitesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

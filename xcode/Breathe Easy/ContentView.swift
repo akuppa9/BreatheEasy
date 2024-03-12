@@ -842,6 +842,7 @@ Breathe Easy is here to provide you with the tools you need to manage your asthm
 
 struct ProfileView: View{
     @AppStorage("page") var page = 1
+    @AppStorage("progressPage") var progressPage = 1
     @AppStorage("uid") var uid = ""
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false
@@ -1012,6 +1013,7 @@ struct ProfileView: View{
                                 log_Status = false
                                 page = 1
                                 fullname = ""
+                                progressPage = 1
                             }
                             else if log_Status2{
                                 DispatchQueue.global(qos: .background).async {
@@ -1022,6 +1024,7 @@ struct ProfileView: View{
                                 log_Status2 = false
                                 page = 1
                                 fullname = ""
+                                progressPage = 1
                             }
                         }
                     })
@@ -1275,7 +1278,7 @@ struct TestView: View{
         
         setModelValues()
         
-        let ACTURLString = "https://nkumar04.pythonanywhere.com/predict?param1=3&param2=\(sliderValueModified)&param3=\(sexNum)&param4=\(workNum)&param5=\(activityNum)&param6=\(humidity)&param7=\(pressure)&param8=\(temperature)&param9=\(uviModified)&param10=\(windSpeed)"
+        let ACTURLString = "https://nkumar04.pythonanywhere.com/predict?param1=1&param2=\(sliderValueModified)&param3=\(sexNum)&param4=\(workNum)&param5=\(activityNum)&param6=\(humidity)&param7=\(pressure)&param8=\(temperature)&param9=\(uviModified)&param10=\(windSpeed)"
         fetchACTScore(from: ACTURLString) { jsonResult in
             DispatchQueue.main.async {
                 if let ACTData = jsonResult as? [String: Any] {
@@ -1373,7 +1376,9 @@ struct ContentView: View {
                 LoginView().transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
             }
             if(page == 2){
-                StartTracking().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+//                StartTracking().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                ProgressView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                
                 
             }
             if(page == 3){
@@ -1382,8 +1387,9 @@ struct ContentView: View {
                 //        Image(systemName: "person.fill")
                 //        Text("Profile")
                 //     }.toolbarBackground(Color.white, for: .tabBar)
-                MainView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+//                MainView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
 //                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
+                MainViewNew().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
             }
             if(page == 4){
                 DeleteAccountView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
