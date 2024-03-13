@@ -1395,6 +1395,7 @@ struct ContentView: View {
                 DeleteAccountView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
             }
             if(page == 5){
+                // remove this at some point
                 NameView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
             }
         }
