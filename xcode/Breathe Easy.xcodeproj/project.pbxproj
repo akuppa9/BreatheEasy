@@ -26,6 +26,7 @@
 		38C7593A2BA0C2B500C1CDCF /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C759392BA0C2B500C1CDCF /* ProgressView.swift */; };
 		38C7593C2BA1051700C1CDCF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C7593B2BA1051700C1CDCF /* HomeView.swift */; };
 		38C7593E2BA10A0500C1CDCF /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C7593D2BA10A0500C1CDCF /* SettingsView.swift */; };
+		38FDAC512BA3877F0094532C /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FDAC502BA3877F0094532C /* LaunchScreenView.swift */; };
 		AC4A5CA02AED652A0001CB8A /* Breathe_EasyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A5C9F2AED652A0001CB8A /* Breathe_EasyApp.swift */; };
 		AC4A5CA22AED652A0001CB8A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A5CA12AED652A0001CB8A /* ContentView.swift */; };
 		AC4A5CA42AED652C0001CB8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC4A5CA32AED652C0001CB8A /* Assets.xcassets */; };
@@ -102,6 +103,7 @@
 		38C759392BA0C2B500C1CDCF /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		38C7593B2BA1051700C1CDCF /* HomeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomeView.swift; path = ../../../../BreatheEasyFigma/BreatheEasyFigma/BreatheEasyFigma/HomeView.swift; sourceTree = "<group>"; };
 		38C7593D2BA10A0500C1CDCF /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = ../../../../BreatheEasyFigma/BreatheEasyFigma/BreatheEasyFigma/SettingsView.swift; sourceTree = "<group>"; };
+		38FDAC502BA3877F0094532C /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		AC4A5C9C2AED652A0001CB8A /* Breathe Easy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Breathe Easy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC4A5C9F2AED652A0001CB8A /* Breathe_EasyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breathe_EasyApp.swift; sourceTree = "<group>"; };
 		AC4A5CA12AED652A0001CB8A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				38BDC3982B10164100D212BF /* LoginPage.swift */,
 				387DD06E2B461743002C4BE7 /* NameView.swift */,
 				38C759392BA0C2B500C1CDCF /* ProgressView.swift */,
+				38FDAC502BA3877F0094532C /* LaunchScreenView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 				AC4A5CA22AED652A0001CB8A /* ContentView.swift in Sources */,
 				38C759362BA0B99C00C1CDCF /* WorkOutdoorsView.swift in Sources */,
 				38C7593C2BA1051700C1CDCF /* HomeView.swift in Sources */,
+				38FDAC512BA3877F0094532C /* LaunchScreenView.swift in Sources */,
 				38A1BBA12B40BB70006D04CF /* LocationManager.swift in Sources */,
 				38C759292B9FC78E00C1CDCF /* LoginView.swift in Sources */,
 				38BDC3992B10164100D212BF /* LoginPage.swift in Sources */,
@@ -664,7 +668,7 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow Breathe Easy to use your location to enhance your experience";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -697,7 +701,7 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Allow Breathe Easy to use your location to enhance your experience";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
