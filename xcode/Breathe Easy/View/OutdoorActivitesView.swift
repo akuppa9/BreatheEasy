@@ -16,6 +16,7 @@ struct OutdoorActivitesView: View {
     @AppStorage("work") var work: String = ""
     @AppStorage("activity") var activity: String = ""
     @AppStorage("tracked") var tracked = false
+    @State private var showAlertActivityOutdoor = false
     @AppStorage("uid") var uid = ""
     @AppStorage("frequencySelectedActivity") var frequencySelectedActivity = 0
     var body: some View {
@@ -71,6 +72,15 @@ struct OutdoorActivitesView: View {
             }
             .frame(width: 320, height: 50)
             .offset(x: 0.50, y: 327)
+            .alert(isPresented: $showAlertActivityOutdoor) {
+                Alert(
+                    title: Text("Incomplete Information"),
+                    message: Text("Please fill out this field"),
+                    dismissButton: .default(Text("OK")) {
+                        showAlertActivityOutdoor = false
+                    }
+                )
+            }
             
             ZStack() {
                 
@@ -413,6 +423,7 @@ struct OutdoorActivitesView: View {
                     .frame(width: 320, height: 50)
                     .offset(x: 0, y: 66)
                     
+                    
                 }
             }
             .frame(width: 320, height: 182)
@@ -423,32 +434,35 @@ struct OutdoorActivitesView: View {
     }
     
     func startTracking(){
-        
-        let db = Firestore.firestore()
-        
-        let docRef = db.document("users/\(uid)")
-        
-        let docData: [String: Any] = [
-            "age": sliderValue,
-            "sex": sex,
-            "work": work,
-            "activity": activity
-        ]
-        
-        docRef.setData(docData)
-        sex = "";
-        work = "";
-        activity = "";
-        sliderValue = 50;
-        
-        tracked = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            page = 3
-        }
-        
-        // Schedule the update to happen after a 2-second delay so transition doesn't get messed up
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            frequencySelectedActivity = 0
+        if frequencySelectedActivity == 0{
+            showAlertActivityOutdoor = true
+        } else{
+            let db = Firestore.firestore()
+            
+            let docRef = db.document("users/\(uid)")
+            
+            let docData: [String: Any] = [
+                "age": sliderValue,
+                "sex": sex,
+                "work": work,
+                "activity": activity
+            ]
+            
+            docRef.setData(docData)
+            sex = "";
+            work = "";
+            activity = "";
+            sliderValue = 50;
+            
+            tracked = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                page = 3
+            }
+            
+            // Schedule the update to happen after a 2-second delay so transition doesn't get messed up
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                frequencySelectedActivity = 0
+            }
         }
     }
     

@@ -138,11 +138,11 @@ struct AgeView: View {
     @AppStorage("page") var page = 1
     @AppStorage("age") var sliderValue: Int = 50
     @AppStorage("progressPage") var progressPage = 1
-    
+    @State private var showAlertAge = false
+    @State private var showAlertAge1 = false
     @State private var numberInput: String = ""
     var body: some View {
         ZStack() {
-            
             ZStack() {
                 Rectangle()
                     .foregroundColor(.clear)
@@ -196,6 +196,25 @@ struct AgeView: View {
             }
             .frame(width: 320, height: 50)
             .offset(x: 0.50, y: 327)
+            .alert(isPresented: $showAlertAge) {
+                Alert(
+                    title: Text("Incomplete Information"),
+                    message: Text("Please fill out this field with an age of atleast 12"),
+                    dismissButton: .default(Text("OK")) {
+                        showAlertAge = false
+                    }
+                )
+            }
+            .alert(isPresented: $showAlertAge1) {
+                Alert(
+                    title: Text("Invalid Information"),
+                    message: Text("Must be atleast 12 years old to continue"),
+                    dismissButton: .default(Text("OK")) {
+                        showAlertAge1 = false
+                    }
+                )
+            }
+           
             
             // Type age here
             CustomTextField(placeholder: "Type here", text: $numberInput, fontSize: 30)
@@ -214,73 +233,81 @@ struct AgeView: View {
     
     func cont(){
         sliderValue = Int(numberInput) ?? 0
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            progressPage = 2
+        if sliderValue == 0{
+            showAlertAge = true
         }
-    }
-}
-
-// Custom text field for typing age with a done button above the numpad
-struct CustomTextField: UIViewRepresentable {
-    var placeholder: String
-    @Binding var text: String
-    var fontSize: CGFloat // Add fontSize parameter
-
-    func makeUIView(context: Context) -> UITextField {
-        let textField = UITextField()
-        textField.delegate = context.coordinator
-        textField.placeholder = placeholder
-        textField.keyboardType = .numberPad
-        textField.font = UIFont.systemFont(ofSize: fontSize) // Set the font size here
-        textField.textAlignment = .center
-        
-        // Set the font using UIFont
-        textField.font = UIFont(name: "Lufga", size: 30)
-        
-        // Set the text color
-        textField.textColor = UIColor(Color(red: 0, green: 0.27, blue: 0.23).opacity(0.25))
-        
-        // Add a "Done" button to the keyboard
-        let toolbar = UIToolbar()
-        toolbar.items = [
-            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
-            UIBarButtonItem(title: "Done", style: .done, target: context.coordinator, action: #selector(context.coordinator.doneButtonTapped))
-        ]
-        toolbar.sizeToFit()
-        textField.inputAccessoryView = toolbar
-        
-        return textField
-    }
-    
-    func updateUIView(_ uiView: UITextField, context: Context) {
-        uiView.text = text
-    }
-    
-    func makeCoordinator() -> Coordinator {
-        Coordinator(self)
-    }
-    
-    class Coordinator: NSObject, UITextFieldDelegate {
-        var parent: CustomTextField
-        
-        init(_ parent: CustomTextField) {
-            self.parent = parent
+        else if sliderValue < 12 && sliderValue != 0{
+            showAlertAge1 = true
         }
-        
-        @objc func doneButtonTapped() {
-            UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-        }
-        
-        func textFieldDidChangeSelection(_ textField: UITextField) {
-            // Update the SwiftUI state with the text field's current text
-            DispatchQueue.main.async {
-                self.parent.text = textField.text ?? ""
+            else{
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                    progressPage = 2
+                }
             }
         }
     }
-}
-
-#Preview {
-//    ProgressTabView()
-    AgeView()
-}
+    
+    // Custom text field for typing age with a done button above the numpad
+    struct CustomTextField: UIViewRepresentable {
+        var placeholder: String
+        @Binding var text: String
+        var fontSize: CGFloat // Add fontSize parameter
+        
+        func makeUIView(context: Context) -> UITextField {
+            let textField = UITextField()
+            textField.delegate = context.coordinator
+            textField.placeholder = placeholder
+            textField.keyboardType = .numberPad
+            textField.font = UIFont.systemFont(ofSize: fontSize) // Set the font size here
+            textField.textAlignment = .center
+            
+            // Set the font using UIFont
+            textField.font = UIFont(name: "Lufga", size: 30)
+            
+            // Set the text color
+            textField.textColor = UIColor(Color(red: 0, green: 0.27, blue: 0.23).opacity(0.25))
+            
+            // Add a "Done" button to the keyboard
+            let toolbar = UIToolbar()
+            toolbar.items = [
+                UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+                UIBarButtonItem(title: "Done", style: .done, target: context.coordinator, action: #selector(context.coordinator.doneButtonTapped))
+            ]
+            toolbar.sizeToFit()
+            textField.inputAccessoryView = toolbar
+            
+            return textField
+        }
+        
+        func updateUIView(_ uiView: UITextField, context: Context) {
+            uiView.text = text
+        }
+        
+        func makeCoordinator() -> Coordinator {
+            Coordinator(self)
+        }
+        
+        class Coordinator: NSObject, UITextFieldDelegate {
+            var parent: CustomTextField
+            
+            init(_ parent: CustomTextField) {
+                self.parent = parent
+            }
+            
+            @objc func doneButtonTapped() {
+                UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+            }
+            
+            func textFieldDidChangeSelection(_ textField: UITextField) {
+                // Update the SwiftUI state with the text field's current text
+                DispatchQueue.main.async {
+                    self.parent.text = textField.text ?? ""
+                }
+            }
+        }
+    }
+    
+    #Preview {
+        //    ProgressTabView()
+        AgeView()
+    }

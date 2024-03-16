@@ -11,6 +11,7 @@ struct WorkOutdoorsView: View {
     @AppStorage("progressPage") var progressPage = 1
     @AppStorage("work") var work: String = ""
     @AppStorage("frequencySelected") var frequencySelected = 0
+    @State private var showAlertWorkOutdoor = false
     var body: some View {
         ZStack() {
             Text("How often do you\nwork outdoors?")
@@ -410,17 +411,30 @@ struct WorkOutdoorsView: View {
             }
             .frame(width: 320, height: 50)
             .offset(x: 0.50, y: 327)
+            .alert(isPresented: $showAlertWorkOutdoor) {
+                Alert(
+                    title: Text("Incomplete Information"),
+                    message: Text("Please fill out this field"),
+                    dismissButton: .default(Text("OK")) {
+                        showAlertWorkOutdoor = false
+                    }
+                )
+            }
         }
         .frame(width: 1000, height: 1500)
         .background(Color(red: 0.97, green: 0.97, blue: 0.97));
     }
     
     func cont(){
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            progressPage = 4
+        if frequencySelected == 0{
+            showAlertWorkOutdoor = true
+        } else{
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                progressPage = 4
+            }
+            
+            frequencySelected = 0
         }
-        
-        frequencySelected = 0
     }
     
     func freqPress(){

@@ -1143,7 +1143,7 @@ struct TestView: View{
             Text("Longitude: \(coordinates.lon)")
                 .font(.largeTitle)
             
-            // Display weather data
+            // Display weatxher data
             Text("Humidity: \(humidity)%")
             Text("Pressure: \(pressure) hPa")
             Text("Temperature: \(temperature)°C")
