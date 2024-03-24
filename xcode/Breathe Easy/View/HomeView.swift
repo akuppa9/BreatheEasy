@@ -345,8 +345,6 @@ struct HomeView3: View {
                                 .foregroundColor(Color(red: 0.98, green: 0.57, blue: 0.20))
                                 .offset(x: 0, y: -8.50)
                                 .opacity(0.80)
-                        }else{
-                            
                         }
                         Text("Predicted Asthma Control Test Score")
                             .font(Font.custom("Aeonik TRIAL", size: 14))
@@ -418,7 +416,9 @@ struct HomeView3: View {
                 self.coordinates = (coordinates.latitude, coordinates.longitude)
                 fetchCurrentWeather(latitude: coordinates.latitude, longitude: coordinates.longitude)
                 fetchUVIndex(latitude: coordinates.latitude, longitude: coordinates.longitude)
-                parseACTScore()
+                Task {
+                    await self.parseACTScore()
+                }
             }
             .store(in: &tokens)
     }
@@ -511,11 +511,14 @@ struct HomeView3: View {
         }
     }
     
-    func parseACTScore(){
+    func parseACTScore() async {
         
         setModelValues()
         
-        let ACTURLString = "https://nkumar04.pythonanywhere.com/predict?param1=3&param2=\(sliderValueModified)&param3=\(sexNum)&param4=\(workNum)&param5=\(activityNum)&param6=\(humidity)&param7=\(pressure)&param8=\(temperature)&param9=\(uviModified)&param10=\(windSpeed)"
+        let ACTURLString = "https://nkumar04.pythonanywhere.com/predict?param1=2&param2=\(sliderValueModified)&param3=\(sexNum)&param4=\(workNum)&param5=\(activityNum)&param6=\(humidity)&param7=\(pressure)&param8=\(temperature)&param9=\(uviModified)&param10=\(windSpeed)"
+        
+        try? await Task.sleep(nanoseconds: 5_000_000_000)
+        
         fetchACTScore(from: ACTURLString) { jsonResult in
             DispatchQueue.main.async {
                 if let ACTData = jsonResult as? [String: Any] {

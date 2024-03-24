@@ -434,9 +434,9 @@ struct OutdoorActivitesView: View {
     }
     
     func startTracking(){
-        if frequencySelectedActivity == 0{
-            showAlertActivityOutdoor = true
-        } else{
+//        if frequencySelectedActivity == 0{
+//            showAlertActivityOutdoor = true
+//        } else{
             let db = Firestore.firestore()
             
             let docRef = db.document("users/\(uid)")
@@ -449,10 +449,10 @@ struct OutdoorActivitesView: View {
             ]
             
             docRef.setData(docData)
-            sex = "";
-            work = "";
-            activity = "";
-            sliderValue = 50;
+//            sex = "";
+//            work = "";
+//            activity = "";
+//            sliderValue = 50;
             
             tracked = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -463,7 +463,7 @@ struct OutdoorActivitesView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 frequencySelectedActivity = 0
             }
-        }
+//        }
     }
     
     func freqPress(){
