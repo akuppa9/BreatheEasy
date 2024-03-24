@@ -17,6 +17,7 @@ struct SettingsView: View {
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false
     @AppStorage("fullname") var fullname = ""
+    @State private var showLogoutAlert = false
     var body: some View {
         ZStack() {
             Group {
@@ -29,20 +30,20 @@ struct SettingsView: View {
                     .font(Font.custom("Lufga", size: 30))
                     .foregroundColor(Color(red: 0, green: 0.27, blue: 0.23))
                     .offset(x: 0.50, y: -339.50)
-//                Text("PERSONALIZATION")
-//                    .font(Font.custom("Aeonik TRIAL", size: 14))
-//                    .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
-//                    .offset(x: -102.50, y: -248)
+                //                Text("PERSONALIZATION")
+                //                    .font(Font.custom("Aeonik TRIAL", size: 14))
+                //                    .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
+                //                    .offset(x: -102.50, y: -248)
                 Text("ACCOUNT")
                     .font(Font.custom("Aeonik TRIAL", size: 14))
                     .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
                     .offset(x: -129.50, y: -248)
-//                Rectangle()
-//                    .foregroundColor(.clear)
-//                    .frame(width: 325, height: 56)
-//                    .background(.white)
-//                    .cornerRadius(15)
-//                    .offset(x: 0, y: -198)
+                //                Rectangle()
+                //                    .foregroundColor(.clear)
+                //                    .frame(width: 325, height: 56)
+                //                    .background(.white)
+                //                    .cornerRadius(15)
+                //                    .offset(x: 0, y: -198)
                 ZStack() {
                     Rectangle()
                         .foregroundColor(.clear)
@@ -73,7 +74,9 @@ struct SettingsView: View {
                         .frame(width: 294, height: 28)
                         .offset(x: -3, y: -52)
                         
-                        Button(action: logOut){
+                        Button(action: {
+                            showLogoutAlert = true
+                        }) {
                             ZStack() {
                                 Rectangle()
                                     .foregroundColor(.clear)
@@ -91,6 +94,15 @@ struct SettingsView: View {
                             .frame(width: 294, height: 28)
                         }
                         .offset(x: -3, y: 1)
+                        .alert(isPresented: $showLogoutAlert) {
+                            Alert(title: Text("Confirmation"),
+                                  message: Text("Are you sure you want to sign out?"),
+                                  primaryButton: .destructive(Text("Yes"), action: {
+                                logOut()
+                            }),
+                                  secondaryButton: .cancel(Text("No")))
+                        }
+                        
                         
                         Button(action: deleteAccount){
                             ZStack() {
@@ -197,11 +209,12 @@ struct Settings: View {
     @AppStorage("page") var page = 1
     @AppStorage("progressPage") var progressPage = 1
     @AppStorage("mainViewNum") var mainViewNum = 0
-//    @AppStorage("settingsTransition") var settingsTransition = ""
+    //    @AppStorage("settingsTransition") var settingsTransition = ""
     @AppStorage("uid") var uid = ""
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false
     @AppStorage("fullname") var fullname = ""
+    @State private var showLogoutAlert = false
     var body: some View {
         ZStack() {
             Button(action: goToHome){
@@ -257,7 +270,9 @@ struct Settings: View {
                 }
                 .frame(width: 325, height: 109)
                 .offset(x: 0.50, y: -126)
-                Button(action:logOut){
+                Button(action: {
+                    showLogoutAlert = true
+                }) {
                     ZStack() {
                         Rectangle()
                             .foregroundColor(.clear)
@@ -277,6 +292,15 @@ struct Settings: View {
                 }
                 .frame(width: 325, height: 56)
                 .offset(x: 0.50, y: 109.50)
+                .alert(isPresented: $showLogoutAlert) {
+                    Alert(title: Text("Confirmation"),
+                          message: Text("Are you sure you want to sign out?"),
+                          primaryButton: .destructive(Text("Yes"), action: {
+                        logOut()
+                    }),
+                          secondaryButton: .cancel(Text("No")))
+                }
+                
                 
                 ZStack() {
                     Text("INFORMATION")
@@ -332,14 +356,14 @@ struct Settings: View {
     
     func goToHome(){
         withAnimation{
-//            settingsTransition = "fromHome"
+            //            settingsTransition = "fromHome"
             mainViewNum = 0
         }
     }
     
     func goToAbout(){
         withAnimation{
-//            settingsTransition = "fromAbout"
+            //            settingsTransition = "fromAbout"
             mainViewNum = 2
         }
     }
@@ -404,6 +428,6 @@ struct Settings: View {
 }
 
 #Preview {
-//    SettingsView()
+    //    SettingsView()
     Settings()
 }
