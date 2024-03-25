@@ -517,7 +517,8 @@ struct HomeView3: View {
         
         let ACTURLString = "https://nkumar04.pythonanywhere.com/predict?param1=2&param2=\(sliderValueModified)&param3=\(sexNum)&param4=\(workNum)&param5=\(activityNum)&param6=\(humidity)&param7=\(pressure)&param8=\(temperature)&param9=\(uviModified)&param10=\(windSpeed)"
         
-        try? await Task.sleep(nanoseconds: 5_000_000_000)
+        // wait 5 seconds
+//        try? await Task.sleep(nanoseconds: 5_000_000_000)
         
         fetchACTScore(from: ACTURLString) { jsonResult in
             DispatchQueue.main.async {

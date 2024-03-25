@@ -215,6 +215,13 @@ struct Settings: View {
     @AppStorage("log_Status2") var log_Status2 = false
     @AppStorage("fullname") var fullname = ""
     @State private var showLogoutAlert = false
+    @AppStorage("age") var sliderValue: Int = 50
+    @AppStorage("sex") var sex: String = ""
+    @AppStorage("work") var work: String = ""
+    @AppStorage("activity") var activity: String = ""
+    @AppStorage("tracked") var tracked = false
+    @State private var showAlertActivityOutdoor = false
+    @AppStorage("frequencySelectedActivity") var frequencySelectedActivity = 0
     var body: some View {
         ZStack() {
             Button(action: goToHome){
@@ -397,6 +404,10 @@ struct Settings: View {
         }
         
         fullname = ""
+        sex = ""
+        work = ""
+        activity = ""
+        sliderValue = 50
         progressPage = 1
         mainViewNum = 0
     }
@@ -408,7 +419,6 @@ struct Settings: View {
             try? Auth.auth().signOut()
             log_Status = false
             page = 1
-            fullname = ""
             progressPage = 1
             mainViewNum = 0
             
@@ -420,10 +430,15 @@ struct Settings: View {
             
             log_Status2 = false
             page = 1
-            fullname = ""
             progressPage = 1
             mainViewNum = 0
         }
+        
+        fullname = ""
+        sex = ""
+        work = ""
+        activity = ""
+        sliderValue = 50
     }
 }
 

@@ -19,6 +19,10 @@ class LoginViewModel: NSObject, ObservableObject, ASAuthorizationControllerDeleg
     @AppStorage("page") var page = 1
     @AppStorage("name") var name = ""
     @AppStorage("fullname") var fullname = ""
+    @AppStorage("age") var sliderValue: Int = 50
+    @AppStorage("sex") var sex: String = ""
+    @AppStorage("work") var work: String = ""
+    @AppStorage("activity") var activity: String = ""
     
     // Add this function to initiate Apple Sign In
     func signInWithApple() {
@@ -123,6 +127,10 @@ class LoginViewModel: NSObject, ObservableObject, ASAuthorizationControllerDeleg
                         if document.documentID == self.uid{
                             count = count + 1
                             //                                    tracked = true
+                            self.sliderValue = fetchAge()
+                            self.sex = fetchSex()
+                            self.work = fetchWork()
+                            self.activity = fetchActivity()
                         }
                         //                        print("\(document.documentID) => \(document.data())")
                     }
@@ -171,6 +179,94 @@ class LoginViewModel: NSObject, ObservableObject, ASAuthorizationControllerDeleg
   }
 
   return String(nonce)
+}
+
+func fetchAge()->Int{
+    @AppStorage("age") var sliderValue: Int = 50
+    @AppStorage("sex") var sex: String = ""
+    @AppStorage("work") var work: String = ""
+    @AppStorage("activity") var activity: String = ""
+    @AppStorage("uid") var uid = ""
+    let db = Firestore.firestore()
+    let docRef = db.collection("users").document("\(uid)")
+    
+    docRef.getDocument { (document, error) in
+        if let document = document, document.exists {
+            let data = document.data()
+            if let name = data?["age"] as? Int {
+                sliderValue = name
+            }
+        } else {
+            print("Document does not exist")
+        }
+    }
+    return sliderValue;
+}
+
+func fetchSex()->String{
+    @AppStorage("age") var sliderValue: Int = 50
+    @AppStorage("sex") var sex: String = ""
+    @AppStorage("work") var work: String = ""
+    @AppStorage("activity") var activity: String = ""
+    @AppStorage("uid") var uid = ""
+    let db = Firestore.firestore()
+    let docRef = db.collection("users").document("\(uid)")
+    
+    docRef.getDocument { (document, error) in
+        if let document = document, document.exists {
+            let data = document.data()
+            if let name = data?["sex"] as? String {
+                sex = name
+            }
+        } else {
+            print("Document does not exist")
+        }
+    }
+    return sex;
+}
+
+func fetchWork()->String{
+    @AppStorage("age") var sliderValue: Int = 50
+    @AppStorage("sex") var sex: String = ""
+    @AppStorage("work") var work: String = ""
+    @AppStorage("activity") var activity: String = ""
+    @AppStorage("uid") var uid = ""
+    let db = Firestore.firestore()
+    let docRef = db.collection("users").document("\(uid)")
+    
+    docRef.getDocument { (document, error) in
+        if let document = document, document.exists {
+            let data = document.data()
+            if let name = data?["work"] as? String {
+                work = name
+            }
+        } else {
+            print("Document does not exist")
+        }
+    }
+    return work;
+}
+
+func fetchActivity()->String{
+    @AppStorage("age") var sliderValue: Int = 50
+    @AppStorage("sex") var sex: String = ""
+    @AppStorage("work") var work: String = ""
+    @AppStorage("activity") var activity: String = ""
+    @AppStorage("uid") var uid = ""
+    let db = Firestore.firestore()
+    let docRef = db.collection("users").document("\(uid)")
+    
+    docRef.getDocument { (document, error) in
+        if let document = document, document.exists {
+            let data = document.data()
+            if let name = data?["activity"] as? String {
+                activity = name
+            }
+        } else {
+            print("Document does not exist")
+        }
+    }
+    return activity;
 }
 
     
