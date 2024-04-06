@@ -13,6 +13,10 @@ import GoogleSignIn
 import Combine
 import UserNotifications
 
+enum NavigationDirection {
+    case forward, backward
+}
+
 struct HomeView2: View {
     @AppStorage("mainViewNum") var mainViewNum = 0
     var body: some View {
@@ -208,17 +212,16 @@ struct HomeView: View {
 
 struct MainViewNew: View{
     @AppStorage("mainViewNum") var mainViewNum = 0
-    @AppStorage("fromMainViewPage") var settingsTransition = ""
+    @AppStorage("fromAbout") var fromAbout = 0
+
+    @State var navigationDirection: NavigationDirection = .forward
+    
     var body: some View{
         ZStack{
             if (mainViewNum == 0){
-                HomeView3().transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
+                HomeView3(navigationDirection: $navigationDirection).transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
             }else if (mainViewNum == 1){
-//                if(settingsTransition == "fromHome"){
-                    Settings().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
-//                }else if(settingsTransition == "fromAbout"){
-//                    Settings().transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
-//                }
+                Settings(navigationDirection: $navigationDirection).transition(navigationDirection == .forward ? .asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)) : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
             }else if (mainViewNum == 2){
                 AboutUsView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
             }
@@ -229,7 +232,6 @@ struct MainViewNew: View{
 
 struct HomeView3: View {
     @AppStorage("mainViewNum") var mainViewNum = 0
-//    @AppStorage("settingsTransition") var settingsTransition = ""
     @StateObject var deviceLocationService = DeviceLocationService.shared
     
     @State var tokens: Set<AnyCancellable> = []
@@ -261,6 +263,8 @@ struct HomeView3: View {
     // will be used to store the modified values for the model
     @AppStorage("sliderValueModified") var sliderValueModified: Int = 1
     @AppStorage("uviModified") var uviModified: Int = 1
+    
+    @Binding var navigationDirection: NavigationDirection
     
     func getPf(url: String) async throws -> Pf{
         let endpoint = url
@@ -323,7 +327,7 @@ struct HomeView3: View {
                     Rectangle()
                         .foregroundColor(.clear)
                         .frame(width: 325, height: 111)
-                        .background(Color(red: 0, green: 0.32, blue: 0.27))
+                        .background(Color(red: 0.94, green: 0.94, blue: 0.94))
                         .cornerRadius(15)
                         .offset(x: 0, y: 0)
                     ZStack(alignment: .leading) {
@@ -333,31 +337,23 @@ struct HomeView3: View {
                                 .foregroundColor(Color(red: 0.698, green: 0.945, blue: 0))
                                 .offset(x: 0, y: -8.50)
                                 .opacity(0.80)
-                            Text("Predicted Asthma Control Test Score")
-                                .font(Font.custom("Aeonik TRIAL", size: 14))
-                                .foregroundColor(Color(red: 0.698, green: 0.945, blue: 0))
-                                .offset(x: 0, y: 20)
                         } else if(ACTScore > 14 && ACTScore <= 19){
                             Text(String(format: "%.0f",ACTScore))
                                 .font(Font.custom("Lufga", size: 30))
-                                .foregroundColor(Color(red: 1, green: 0.92, blue: 0.20))
+                                .foregroundColor(Color(red: 1, green: 0.92, blue: 0.2))
                                 .offset(x: 0, y: -8.50)
                                 .opacity(0.80)
-                            Text("Predicted Asthma Control Test Score")
-                                .font(Font.custom("Aeonik TRIAL", size: 14))
-                                .foregroundColor(Color(red: 1, green: 0.92, blue: 0.20))
-                                .offset(x: 0, y: 20)
                         }else if(ACTScore > 1 && ACTScore <= 14){
                             Text(String(format: "%.0f",ACTScore))
                                 .font(Font.custom("Lufga", size: 30))
                                 .foregroundColor(Color(red: 0.98, green: 0.57, blue: 0.20))
                                 .offset(x: 0, y: -8.50)
                                 .opacity(0.80)
-                            Text("Predicted Asthma Control Test Score")
-                                .font(Font.custom("Aeonik TRIAL", size: 14))
-                                .foregroundColor(Color(red: 0.98, green: 0.57, blue: 0.20))
-                                .offset(x: 0, y: 20)
                         }
+                        Text("Predicted Asthma Control Test Score")
+                            .font(Font.custom("Aeonik TRIAL", size: 14))
+                            .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
+                            .offset(x: 0, y: 20)
                     }
                     .frame(width: 235, height: 56)
                     .offset(x: -18, y: -2.50)
@@ -410,7 +406,7 @@ struct HomeView3: View {
     
     func goToSettings(){
         withAnimation{
-//            settingsTransition = "fromHome"
+//            navigationDirection = .forward
             mainViewNum = 1
         }
     }

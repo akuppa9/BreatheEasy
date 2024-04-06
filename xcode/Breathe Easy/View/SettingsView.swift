@@ -209,7 +209,6 @@ struct Settings: View {
     @AppStorage("page") var page = 1
     @AppStorage("progressPage") var progressPage = 1
     @AppStorage("mainViewNum") var mainViewNum = 0
-    //    @AppStorage("settingsTransition") var settingsTransition = ""
     @AppStorage("uid") var uid = ""
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false
@@ -222,6 +221,8 @@ struct Settings: View {
     @AppStorage("tracked") var tracked = false
     @State private var showAlertActivityOutdoor = false
     @AppStorage("frequencySelectedActivity") var frequencySelectedActivity = 0
+    @AppStorage("fromAbout") var fromAbout = 0
+    @Binding var navigationDirection: NavigationDirection
     var body: some View {
         ZStack() {
             Button(action: goToHome){
@@ -314,21 +315,24 @@ struct Settings: View {
                         .font(Font.custom("Aeonik TRIAL", size: 14))
                         .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
                         .offset(x: -117.50, y: -35)
-                    ZStack() {
-                        Rectangle()
-                            .foregroundColor(.clear)
-                            .frame(width: 325, height: 56)
-                            .background(.white)
-                            .cornerRadius(15)
-                            .offset(x: 0, y: 0)
+                    
+                    Button(action:goToAbout){
                         ZStack() {
-                            Text("About Us")
-                                .font(Font.custom("Lufga", size: 18))
-                                .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                                .offset(x: -102.50, y: 0)
+                            Rectangle()
+                                .foregroundColor(.clear)
+                                .frame(width: 325, height: 56)
+                                .background(.white)
+                                .cornerRadius(15)
+                                .offset(x: 0, y: 0)
+                            ZStack() {
+                                Text("About Us")
+                                    .font(Font.custom("Lufga", size: 18))
+                                    .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
+                                    .offset(x: -102.50, y: 0)
+                            }
+                            .frame(width: 285, height: 23)
+                            .offset(x: 0, y: 0.50)
                         }
-                        .frame(width: 285, height: 23)
-                        .offset(x: 0, y: 0.50)
                     }
                     .frame(width: 325, height: 56)
                     .offset(x: 0, y: 15)
@@ -363,14 +367,14 @@ struct Settings: View {
     
     func goToHome(){
         withAnimation{
-            //            settingsTransition = "fromHome"
+            navigationDirection = .backward
             mainViewNum = 0
         }
     }
     
     func goToAbout(){
         withAnimation{
-            //            settingsTransition = "fromAbout"
+            navigationDirection = .forward
             mainViewNum = 2
         }
     }
@@ -442,7 +446,7 @@ struct Settings: View {
     }
 }
 
-#Preview {
+//#Preview {
     //    SettingsView()
-    Settings()
-}
+//    Settings(navigationDirection: $navigationDirection)
+//}
