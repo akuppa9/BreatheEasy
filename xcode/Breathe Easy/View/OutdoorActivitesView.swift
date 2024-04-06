@@ -13,13 +13,13 @@ class NotificationManager {
     
     // MARK: - Notification Content
     
-    private static let morningTitle = "Good morning! Your ACT score awaits."
-    private static let morningBody = "Don't forget to check your ACT score today!"
+    private static let morningTitle = "Breathe Easy"
+    private static let morningBody = "Good morning! Check out your ACT score to understand today's conditions."
 
-    private static let afternoonTitle = "Hey there! Check your updated ACT score now."
-    private static let afternoonBody = "Take a moment to view your score and plan your next steps."
+    private static let afternoonTitle = "Breathe Easy"
+    private static let afternoonBody = "Take a moment to view your updated score and plan your next steps."
 
-    private static let nightTitle = "The day is almost done. View your updated ACT score."
+    private static let nightTitle = "Breathe Easy"
     private static let nightBody = "Before you call it a day, review your score and plan ahead."
 
     
