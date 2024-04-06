@@ -9,105 +9,46 @@ import SwiftUI
 import Firebase
 import UserNotifications
 
-class NotificationManager {
+func requestNotificationAuthorization() {
+    let center = UNUserNotificationCenter.current()
     
-    // MARK: - Notification Content
-    
-    private static let morningTitle = "Good morning! Your ACT score is waiting for you."
-    private static let morningBody = "Don't forget to check your ACT score today!"
-    
-    private static let afternoonTitle = "Good afternoon! Check your updated ACT score now."
-    private static let afternoonBody = "Take a moment to view your ACT score and plan your next steps."
-    
-    private static let nightTitle = "Good evening! Have you checked your ACT score yet?"
-    private static let nightBody = "Before you end your day, take a moment to review your ACT score and plan ahead."
-    
-    // MARK: - Permission Handling
-    
-    static func checkForPermission() {
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.getNotificationSettings { settings in
-            switch settings.authorizationStatus {
-            case .authorized:
-                scheduleNotifications()
-            case .denied:
-                print("Notification permission denied")
-            case .notDetermined:
-                notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
-                    if didAllow {
-                        scheduleNotifications()
-                    } else {
-                        print("Notification permission not granted")
-                    }
-                }
-            default:
-                print("Notification permission status unknown")
-            }
+    center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, error in
+        if granted {
+            print("Notification access granted.")
+        } else {
+            print("Notification access denied.")
         }
     }
+}
+
+func scheduleNotifications() {
+    requestNotificationAuthorization()
     
-    // MARK: - Dispatching Notifications
+    let times = [8, 15, 20] // 8 AM, 3 PM, 8 PM
+    let content = UNMutableNotificationContent()
+    content.title = "Daily Reminder"
+    content.body = "This is your daily reminder."
+    content.sound = UNNotificationSound.default
     
-    private static func scheduleNotifications() {
-        dispatchMorningNotification()
-        dispatchAfternoonNotification()
-        dispatchNightNotification()
-    }
-    
-    private static func dispatchMorningNotification() {
-        let identifier = "morning"
-        let content = UNMutableNotificationContent()
-        content.title = morningTitle
-        content.body = morningBody
-        content.sound = .default
-        
+    for hour in times {
         var dateComponents = DateComponents()
-        dateComponents.hour = 8
+        dateComponents.hour = hour
+        dateComponents.minute = 0
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        scheduleNotification(identifier: identifier, content: content, trigger: trigger)
-    }
-    
-    private static func dispatchAfternoonNotification() {
-        let identifier = "afternoon"
-        let content = UNMutableNotificationContent()
-        content.title = afternoonTitle
-        content.body = afternoonBody
-        content.sound = .default
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         
-        var dateComponents = DateComponents()
-        dateComponents.hour = 15
-        dateComponents.minute = 30
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        scheduleNotification(identifier: identifier, content: content, trigger: trigger)
-    }
-    
-    private static func dispatchNightNotification() {
-        let identifier = "night"
-        let content = UNMutableNotificationContent()
-        content.title = nightTitle
-        content.body = nightBody
-        content.sound = .default
-        
-        var dateComponents = DateComponents()
-        dateComponents.hour = 20
-        
-        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-        scheduleNotification(identifier: identifier, content: content, trigger: trigger)
-    }
-    
-    private static func scheduleNotification(identifier: String, content: UNMutableNotificationContent, trigger: UNNotificationTrigger) {
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
-        notificationCenter.add(request) { error in
+        UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
-                print("Error scheduling notification: \(error.localizedDescription)")
+                print("Error scheduling notification: \(error)")
+            } else {
+                print("Notification scheduled successfully.")
             }
         }
     }
 }
+
+
 
 
 struct OutdoorActivitesView: View {
@@ -539,7 +480,7 @@ struct OutdoorActivitesView: View {
         //        if frequencySelectedActivity == 0{
         //            showAlertActivityOutdoor = true
         //        } else{
-        NotificationManager.checkForPermission()
+       scheduleNotifications()
         let db = Firestore.firestore()
         
         let docRef = db.document("users/\(uid)")
