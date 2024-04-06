@@ -7,6 +7,108 @@
 
 import SwiftUI
 import Firebase
+import UserNotifications
+
+class NotificationManager {
+    
+    // MARK: - Notification Content
+    
+    private static let morningTitle = "Good morning! Your ACT score is waiting for you."
+    private static let morningBody = "Don't forget to check your ACT score today!"
+    
+    private static let afternoonTitle = "Good afternoon! Check your updated ACT score now."
+    private static let afternoonBody = "Take a moment to view your ACT score and plan your next steps."
+    
+    private static let nightTitle = "Good evening! Have you checked your ACT score yet?"
+    private static let nightBody = "Before you end your day, take a moment to review your ACT score and plan ahead."
+    
+    // MARK: - Permission Handling
+    
+    static func checkForPermission() {
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.getNotificationSettings { settings in
+            switch settings.authorizationStatus {
+            case .authorized:
+                scheduleNotifications()
+            case .denied:
+                print("Notification permission denied")
+            case .notDetermined:
+                notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
+                    if didAllow {
+                        scheduleNotifications()
+                    } else {
+                        print("Notification permission not granted")
+                    }
+                }
+            default:
+                print("Notification permission status unknown")
+            }
+        }
+    }
+    
+    // MARK: - Dispatching Notifications
+    
+    private static func scheduleNotifications() {
+        dispatchMorningNotification()
+        dispatchAfternoonNotification()
+        dispatchNightNotification()
+    }
+    
+    private static func dispatchMorningNotification() {
+        let identifier = "morning"
+        let content = UNMutableNotificationContent()
+        content.title = morningTitle
+        content.body = morningBody
+        content.sound = .default
+        
+        var dateComponents = DateComponents()
+        dateComponents.hour = 8
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        scheduleNotification(identifier: identifier, content: content, trigger: trigger)
+    }
+    
+    private static func dispatchAfternoonNotification() {
+        let identifier = "afternoon"
+        let content = UNMutableNotificationContent()
+        content.title = afternoonTitle
+        content.body = afternoonBody
+        content.sound = .default
+        
+        var dateComponents = DateComponents()
+        dateComponents.hour = 15
+        dateComponents.minute = 30
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        scheduleNotification(identifier: identifier, content: content, trigger: trigger)
+    }
+    
+    private static func dispatchNightNotification() {
+        let identifier = "night"
+        let content = UNMutableNotificationContent()
+        content.title = nightTitle
+        content.body = nightBody
+        content.sound = .default
+        
+        var dateComponents = DateComponents()
+        dateComponents.hour = 20
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+        scheduleNotification(identifier: identifier, content: content, trigger: trigger)
+    }
+    
+    private static func scheduleNotification(identifier: String, content: UNMutableNotificationContent, trigger: UNNotificationTrigger) {
+        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: trigger)
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.removePendingNotificationRequests(withIdentifiers: [identifier])
+        notificationCenter.add(request) { error in
+            if let error = error {
+                print("Error scheduling notification: \(error.localizedDescription)")
+            }
+        }
+    }
+}
+
 
 struct OutdoorActivitesView: View {
     @AppStorage("page") var page = 1
@@ -434,36 +536,37 @@ struct OutdoorActivitesView: View {
     }
     
     func startTracking(){
-//        if frequencySelectedActivity == 0{
-//            showAlertActivityOutdoor = true
-//        } else{
-            let db = Firestore.firestore()
-            
-            let docRef = db.document("users/\(uid)")
-            
-            let docData: [String: Any] = [
-                "age": sliderValue,
-                "sex": sex,
-                "work": work,
-                "activity": activity
-            ]
-            
-            docRef.setData(docData)
-//            sex = "";
-//            work = "";
-//            activity = "";
-//            sliderValue = 50;
-            
-            tracked = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                page = 3
-            }
-            
-            // Schedule the update to happen after a 2-second delay so transition doesn't get messed up
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                frequencySelectedActivity = 0
-            }
-//        }
+        //        if frequencySelectedActivity == 0{
+        //            showAlertActivityOutdoor = true
+        //        } else{
+        NotificationManager.checkForPermission()
+        let db = Firestore.firestore()
+        
+        let docRef = db.document("users/\(uid)")
+        
+        let docData: [String: Any] = [
+            "age": sliderValue,
+            "sex": sex,
+            "work": work,
+            "activity": activity
+        ]
+        
+        docRef.setData(docData)
+        //            sex = "";
+        //            work = "";
+        //            activity = "";
+        //            sliderValue = 50;
+        
+        tracked = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            page = 3
+        }
+        
+        // Schedule the update to happen after a 2-second delay so transition doesn't get messed up
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            frequencySelectedActivity = 0
+        }
+        //        }
     }
     
     func freqPress(){

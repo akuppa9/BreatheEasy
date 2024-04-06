@@ -265,7 +265,10 @@ struct AgeView: View {
             textField.font = UIFont(name: "Lufga", size: 30)
             
             // Set the text color
-            textField.textColor = UIColor(Color(red: 0, green: 0.27, blue: 0.23).opacity(0.25))
+            textField.textColor = UIColor(Color(red: 0, green: 0.27, blue: 0.23).opacity(0.45))
+            
+            let placeholderColor = UIColor(Color(red: 0, green: 0.27, blue: 0.23).opacity(0.45)) // Adjust color as needed
+                      textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
             
             // Add a "Done" button to the keyboard
             let toolbar = UIToolbar()
