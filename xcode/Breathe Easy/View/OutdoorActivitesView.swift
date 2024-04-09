@@ -15,13 +15,13 @@ class NotificationManager {
     
     private static let morningTitle = "Breathe Easy"
     private static let morningBody = "Good morning! Check out your ACT score to understand today's conditions."
-
+    
     private static let afternoonTitle = "Breathe Easy"
     private static let afternoonBody = "Take a moment to view your updated score and plan your next steps."
-
+    
     private static let nightTitle = "Breathe Easy"
     private static let nightBody = "Before you call it a day, review your score and plan ahead."
-
+    
     
     // MARK: - Permission Handling
     
@@ -30,13 +30,13 @@ class NotificationManager {
         notificationCenter.getNotificationSettings { settings in
             switch settings.authorizationStatus {
             case .authorized:
-                scheduleNotifications()
+                scheduleNotifications() // Schedule notifications here
             case .denied:
                 print("Notification permission denied")
             case .notDetermined:
                 notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
                     if didAllow {
-                        scheduleNotifications()
+                        scheduleNotifications() // Schedule notifications here
                     } else {
                         print("Notification permission not granted")
                     }
@@ -45,11 +45,12 @@ class NotificationManager {
                 print("Notification permission status unknown")
             }
         }
+        
     }
     
     // MARK: - Dispatching Notifications
     
-     static func scheduleNotifications() {
+    static func scheduleNotifications() {
         dispatchMorningNotification()
         dispatchAfternoonNotification()
         dispatchNightNotification()
@@ -542,7 +543,6 @@ struct OutdoorActivitesView: View {
         //            showAlertActivityOutdoor = true
         //        } else{
         NotificationManager.checkForPermission()
-        NotificationManager.scheduleNotifications()
         let db = Firestore.firestore()
         
         let docRef = db.document("users/\(uid)")

@@ -20,99 +20,99 @@ enum NavigationDirection {
 struct HomeView2: View {
     @AppStorage("mainViewNum") var mainViewNum = 0
     var body: some View {
-            ZStack() {
-                Group {
-                    ZStack() {
-                        Text("Insights")
-                            .font(Font.custom("Lufga", size: 30))
-                            .foregroundColor(Color(red: 0, green: 0.27, blue: 0.23))
-                            .offset(x: -108, y: 0.50)
-                        Rectangle()
-                            .foregroundColor(.clear)
-                            .frame(width: 42, height: 42)
-                            .background(
-                                AsyncImage(url: URL(string: "https://via.placeholder.com/42x42"))
-                            )
-                            .offset(x: 141.50, y: 0)
-                    }
-                    .offset(x: 0, y: -338)
-                    ZStack() { }
-                        .frame(width: 0, height: 0)
-                        .offset(x: -187.50, y: -406)
-                    Text("ACT Score")
+        ZStack() {
+            Group {
+                ZStack() {
+                    Text("Insights")
                         .font(Font.custom("Lufga", size: 30))
-                        .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                        .offset(x: -87.50, y: 19.50)
-                    Text("Predicted Asthma Control Test")
-                        .font(Font.custom("Aeonik TRIAL", size: 14))
-                        .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                        .offset(x: -67, y: 56)
-                };Group {
-                    Text("FAQ")
-                        .font(Font.custom("Lufga", size: 30))
-                        .foregroundColor(.clear)
-                        .offset(x: -133, y: 208.50)
+                        .foregroundColor(Color(red: 0, green: 0.27, blue: 0.23))
+                        .offset(x: -108, y: 0.50)
                     Rectangle()
-                        .foregroundColor(Color(red: 0.97, green: 0.97, blue: 0.97))
-                        .frame(width: 375, height: 60)
-                        .background(Color(red: 1, green: 1, blue: 1).opacity(0.75))
-                        .offset(x: 0, y: 376)
-                    ZStack() {
+                        .foregroundColor(.clear)
+                        .frame(width: 42, height: 42)
+                        .background(
+                            AsyncImage(url: URL(string: "https://via.placeholder.com/42x42"))
+                        )
+                        .offset(x: 141.50, y: 0)
+                }
+                .offset(x: 0, y: -338)
+                ZStack() { }
+                    .frame(width: 0, height: 0)
+                    .offset(x: -187.50, y: -406)
+                Text("ACT Score")
+                    .font(Font.custom("Lufga", size: 30))
+                    .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
+                    .offset(x: -87.50, y: 19.50)
+                Text("Predicted Asthma Control Test")
+                    .font(Font.custom("Aeonik TRIAL", size: 14))
+                    .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
+                    .offset(x: -67, y: 56)
+            };Group {
+                Text("FAQ")
+                    .font(Font.custom("Lufga", size: 30))
+                    .foregroundColor(.clear)
+                    .offset(x: -133, y: 208.50)
+                Rectangle()
+                    .foregroundColor(Color(red: 0.97, green: 0.97, blue: 0.97))
+                    .frame(width: 375, height: 60)
+                    .background(Color(red: 1, green: 1, blue: 1).opacity(0.75))
+                    .offset(x: 0, y: 376)
+                ZStack() {
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .frame(width: 42, height: 42)
+                        .background(
+                            Image("HomeHome").resizable()
+                                .aspectRatio(contentMode: .fit)
+                        )
+                        .offset(x: -100, y: 0)
+                    
+                    Button(action: goToSettings){
                         Rectangle()
                             .foregroundColor(.clear)
                             .frame(width: 42, height: 42)
                             .background(
-                                Image("HomeHome").resizable()
+                                Image("HomeSettings").resizable()
                                     .aspectRatio(contentMode: .fit)
                             )
-                            .offset(x: -100, y: 0)
-                        
-                        Button(action: goToSettings){
-                            Rectangle()
-                                .foregroundColor(.clear)
-                                .frame(width: 42, height: 42)
-                                .background(
-                                    Image("HomeSettings").resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                )
-                        }
-                        .offset(x: 0, y: 0)
-                        
-                        Rectangle()
-                            .foregroundColor(.clear)
-                            .frame(width: 42, height: 42)
-                            .background(
-                                Image("HomeHelp").resizable()
-                                    .aspectRatio(contentMode: .fit)
-                            )
-                            .offset(x: 100, y: 0)
                     }
-                    .frame(height: 42)
-                    .offset(x: 0.50, y: 376)
+                    .offset(x: 0, y: 0)
+                    
+                    Rectangle()
+                        .foregroundColor(.clear)
+                        .frame(width: 42, height: 42)
+                        .background(
+                            Image("HomeHelp").resizable()
+                                .aspectRatio(contentMode: .fit)
+                        )
+                        .offset(x: 100, y: 0)
+                }
+                .frame(height: 42)
+                .offset(x: 0.50, y: 376)
+                ZStack() {
                     ZStack() {
                         ZStack() {
-                            ZStack() {
-                                ZStack() { }
-                                    .frame(width: 287, height: 191)
-                                    .offset(x: 8, y: 39.59)
-                            }
-                            .frame(width: 215, height: 199.82)
-                            .offset(x: 0, y: 0)
+                            ZStack() { }
+                                .frame(width: 287, height: 191)
+                                .offset(x: 8, y: 39.59)
                         }
                         .frame(width: 215, height: 199.82)
                         .offset(x: 0, y: 0)
-                        Image("HomeLung").resizable()
-                        Text("25")
-                            .font(Font.custom("Lufga", size: 30))
-                            .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                            .offset(x: 0.50, y: 120.59)
                     }
                     .frame(width: 215, height: 199.82)
-                    .offset(x: 0, y: -153.09)
+                    .offset(x: 0, y: 0)
+                    Image("HomeLung").resizable()
+                    Text("25")
+                        .font(Font.custom("Lufga", size: 30))
+                        .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
+                        .offset(x: 0.50, y: 120.59)
                 }
+                .frame(width: 215, height: 199.82)
+                .offset(x: 0, y: -153.09)
             }
-            .frame(width: 1000, height: 1500)
-            .background(Color(red: 0.97, green: 0.97, blue: 0.97));
+        }
+        .frame(width: 1000, height: 1500)
+        .background(Color(red: 0.97, green: 0.97, blue: 0.97));
     }
     
     func goToSettings(){
@@ -213,7 +213,7 @@ struct HomeView: View {
 struct MainViewNew: View{
     @AppStorage("mainViewNum") var mainViewNum = 0
     @AppStorage("fromAbout") var fromAbout = 0
-
+    
     @State var navigationDirection: NavigationDirection = .forward
     
     var body: some View{
@@ -291,10 +291,10 @@ struct HomeView3: View {
         ZStack() {
             Group {
                 ZStack() {
-                    Text("ACT Score")
+                    Text("Home")
                         .font(Font.custom("Lufga", size: 24))
                         .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                        .offset(x: -99.50, y: 0.50)
+                        .offset(x: -120.50, y: 0)
                     Button(action: goToSettings){
                         Rectangle()
                             .foregroundColor(.clear)
@@ -324,36 +324,56 @@ struct HomeView3: View {
                     .frame(width: 0, height: 0)
                     .offset(x: -187.50, y: -406)
                 ZStack() {
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(width: 325, height: 111)
-                        .background(Color(red: 0.94, green: 0.94, blue: 0.94))
-                        .cornerRadius(15)
-                        .offset(x: 0, y: 0)
                     ZStack(alignment: .leading) {
                         if (ACTScore > 19 && ACTScore <= 25){
+                            Rectangle()
+                                .foregroundColor(.clear)
+                                .frame(width: 325, height: 111)
+                                .background(Color(red: 0.698, green: 0.945, blue: 0))
+                                .cornerRadius(15)
+                                .offset(x: 10, y: 0)
                             Text(String(format: "%.0f",ACTScore))
                                 .font(Font.custom("Lufga", size: 30))
-                                .foregroundColor(Color(red: 0.698, green: 0.945, blue: 0))
-                                .offset(x: 0, y: -8.50)
+                                .foregroundColor(Color(red: 0.2, green: 0.4588235294117647, blue: 0))
+                                .offset(x: 30, y: -8.50)
                                 .opacity(0.80)
+                            Text("Predicted Asthma Control Test Score")
+                                .font(Font.custom("Aeonik TRIAL", size: 14))
+                                .foregroundColor(Color(red: 0.2, green: 0.4588235294117647, blue: 0))
+                                .offset(x: 30, y: 20)
                         } else if(ACTScore > 14 && ACTScore <= 19){
+                            Rectangle()
+                                .foregroundColor(.clear)
+                                .frame(width: 325, height: 111)
+                                .background(Color(red: 1, green: 0.92, blue: 0.2))
+                                .cornerRadius(15)
+                                .offset(x: 10, y: 0)
                             Text(String(format: "%.0f",ACTScore))
                                 .font(Font.custom("Lufga", size: 30))
-                                .foregroundColor(Color(red: 1, green: 0.92, blue: 0.2))
-                                .offset(x: 0, y: -8.50)
+                                .foregroundColor(Color(red: 0.4666666666666667, green: 0.36470588235294116, blue: 0))
+                                .offset(x: 30, y: -8.50)
                                 .opacity(0.80)
+                            Text("Predicted Asthma Control Test Score")
+                                .font(Font.custom("Aeonik TRIAL", size: 14))
+                                .foregroundColor(Color(red: 0.4666666666666667, green: 0.36470588235294116, blue: 0))
+                                .offset(x: 30, y: 20)
                         }else if(ACTScore > 1 && ACTScore <= 14){
+                            Rectangle()
+                                .foregroundColor(.clear)
+                                .frame(width: 325, height: 111)
+                                .background(Color(red: 0.98, green: 0.57, blue: 0.20))
+                                .cornerRadius(15)
+                                .offset(x: 10, y: 0)
                             Text(String(format: "%.0f",ACTScore))
                                 .font(Font.custom("Lufga", size: 30))
-                                .foregroundColor(Color(red: 0.98, green: 0.57, blue: 0.20))
-                                .offset(x: 0, y: -8.50)
+                                .foregroundColor(Color(red: 0.5647058823529412, green: 0.27058823529411763, blue: 0))
+                                .offset(x: 30, y: -8.50)
                                 .opacity(0.80)
+                            Text("Predicted Asthma Control Test Score")
+                                .font(Font.custom("Aeonik TRIAL", size: 14))
+                                .foregroundColor(Color(red: 0.5647058823529412, green: 0.27058823529411763, blue: 0))
+                                .offset(x: 30, y: 20)
                         }
-                        Text("Predicted Asthma Control Test Score")
-                            .font(Font.custom("Aeonik TRIAL", size: 14))
-                            .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
-                            .offset(x: 0, y: 20)
                     }
                     .frame(width: 235, height: 56)
                     .offset(x: -18, y: -2.50)
@@ -361,12 +381,19 @@ struct HomeView3: View {
                 .frame(width: 325, height: 111)
                 .offset(x: 0, y: 88.50)
                 ZStack() {
+                    Text("ACT Score")
+                        .font(Font.custom("Lufga", size: 24))
+                        .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
+                        .offset(x: 20, y: 0)
+                }
+                .offset(x: -119, y: 5.50)
+                ZStack() {
                     Text("Insights")
                         .font(Font.custom("Lufga", size: 24))
                         .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                        .offset(x: 0, y: 0)
+                        .offset(x: 20, y: 0)
                 }
-                .offset(x: -119, y: 5.50)
+                .offset(x: -133, y: 180)
             };Group {
                 ZStack() {
                     ZStack() {
@@ -387,7 +414,7 @@ struct HomeView3: View {
             observeCoordinateUpdates()
             observeDeniedLocationAccess()
             deviceLocationService.requestLocationUpdates()
-//            settingsTransition = "fromHome"
+            //            settingsTransition = "fromHome"
         }
         .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
             deviceLocationService.startMonitoringSignificantLocationChanges()
@@ -406,7 +433,7 @@ struct HomeView3: View {
     
     func goToSettings(){
         withAnimation{
-//            navigationDirection = .forward
+            //            navigationDirection = .forward
             mainViewNum = 1
         }
     }
@@ -522,14 +549,14 @@ struct HomeView3: View {
         let ACTURLString = "https://nkumar04.pythonanywhere.com/predict?param1=2&param2=\(sliderValueModified)&param3=\(sexNum)&param4=\(workNum)&param5=\(activityNum)&param6=\(humidity)&param7=\(pressure)&param8=\(temperature)&param9=\(uviModified)&param10=\(windSpeed)"
         
         // wait 5 seconds
-//        try? await Task.sleep(nanoseconds: 5_000_000_000)
+        //        try? await Task.sleep(nanoseconds: 5_000_000_000)
         
         fetchACTScore(from: ACTURLString) { jsonResult in
             DispatchQueue.main.async {
                 if let ACTData = jsonResult as? [String: Any] {
                     let pred = ACTData["prediction"] as? Double ?? 0.0
                     self.ACTScore = pred > 25.0 && pred < 100 ? 25 : pred.rounded()
-//                    self.ACTScore = ACTData["prediction"] as? Double ?? 0.0
+                    //                    self.ACTScore = ACTData["prediction"] as? Double ?? 0.0
                 }
             }
         }
@@ -601,5 +628,5 @@ struct HomeView3: View {
 
 #Preview {
     MainViewNew()
-//    HomeView3()
+    //    HomeView3()
 }
