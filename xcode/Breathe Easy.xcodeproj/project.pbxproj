@@ -19,6 +19,7 @@
 		38C7593A2BA0C2B500C1CDCF /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C759392BA0C2B500C1CDCF /* ProgressView.swift */; };
 		38DD890F2BAF8A63004CDE51 /* AboutUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DD890E2BAF8A63004CDE51 /* AboutUsView.swift */; };
 		38DD89132BCB17EC004CDE51 /* QuestionnaireWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DD89122BCB17EC004CDE51 /* QuestionnaireWelcome.swift */; };
+		38DD89152BCB23BD004CDE51 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DD89142BCB23BD004CDE51 /* ProfileView.swift */; };
 		38FDAC512BA3877F0094532C /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FDAC502BA3877F0094532C /* LaunchScreenView.swift */; };
 		38FDAC562BA5EB970094532C /* HelveticaNeueMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 38FDAC542BA5EB970094532C /* HelveticaNeueMedium.otf */; };
 		38FDAC582BA5EBC30094532C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FDAC572BA5EBC30094532C /* SettingsView.swift */; };
@@ -98,6 +99,7 @@
 		38C759392BA0C2B500C1CDCF /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		38DD890E2BAF8A63004CDE51 /* AboutUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsView.swift; sourceTree = "<group>"; };
 		38DD89122BCB17EC004CDE51 /* QuestionnaireWelcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireWelcome.swift; sourceTree = "<group>"; };
+		38DD89142BCB23BD004CDE51 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		38FDAC502BA3877F0094532C /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		38FDAC542BA5EB970094532C /* HelveticaNeueMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HelveticaNeueMedium.otf; sourceTree = "<group>"; };
 		38FDAC572BA5EBC30094532C /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				38FDAC502BA3877F0094532C /* LaunchScreenView.swift */,
 				38DD890E2BAF8A63004CDE51 /* AboutUsView.swift */,
 				38DD89122BCB17EC004CDE51 /* QuestionnaireWelcome.swift */,
+				38DD89142BCB23BD004CDE51 /* ProfileView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 				38FDAC602BA5ECB80094532C /* GenderView.swift in Sources */,
 				38FDAC5A2BA5EC1E0094532C /* HomeView.swift in Sources */,
 				38954F1C2B460AE7007094E0 /* DeviceLocationService.swift in Sources */,
+				38DD89152BCB23BD004CDE51 /* ProfileView.swift in Sources */,
 				38FDAC642BA5ED5C0094532C /* LoginView.swift in Sources */,
 				387DD06F2B461743002C4BE7 /* NameView.swift in Sources */,
 				38FDAC622BA5ECF80094532C /* AgeView.swift in Sources */,

@@ -224,6 +224,8 @@ struct MainViewNew: View{
                 Settings(navigationDirection: $navigationDirection).transition(navigationDirection == .forward ? .asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)) : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
             }else if (mainViewNum == 2){
                 AboutUsView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
+            } else if (mainViewNum == 3){
+                Profile()
             }
         }
         .animation(.default, value: mainViewNum)
