@@ -41,7 +41,7 @@ struct LoginView: View {
                     .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
                 
                 HStack (spacing: 0) {
-                    Link("Terms of Service", destination: URL(string: "http://yourtermslink.com")!)
+                    Link("Terms of Service", destination: URL(string: "https://breatheeasytos.netlify.app/")!)
                         .font(Font.custom("Helvetica Neue", size: 12).weight(.medium))
                         .foregroundColor(Color(red: 0.165, green: 0.788, blue: 0.639))
                     Text(" and ")
@@ -124,23 +124,20 @@ struct LoginView: View {
             .frame(width: 320, height: 50)
             .offset(x: 0.50, y: 207)
             
-            // Create Account Button
-            Button (action: handleLogin){
-                ZStack() {
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(width: 320, height: 50)
-                        .background(Color(red: 0, green: 0.32, blue: 0.27))
-                        .cornerRadius(34)
-                        .offset(x: 0, y: 0)
-                    Text("Create Account")
-                        .font(Font.custom("Lufga", size: 18))
-                        .foregroundColor(Color(red: 0.70, green: 0.95, blue: 0))
-                        .offset(x: 0, y: 0.50)
-                }
-                .frame(width: 320, height: 50)
-                .offset(x: 0.50, y: 275)
+            ZStack() {
+                Rectangle()
+                    .foregroundColor(.clear)
+                    .frame(width: 320, height: 50)
+                    .background(Color(red: 0, green: 0.32, blue: 0.27))
+                    .cornerRadius(34)
+                    .offset(x: 0, y: 0)
+                Text("Create Account")
+                    .font(Font.custom("Lufga", size: 18))
+                    .foregroundColor(Color(red: 0.70, green: 0.95, blue: 0))
+                    .offset(x: 0, y: 0.50)
             }
+            .frame(width: 320, height: 50)
+            .offset(x: 0.50, y: 275)
             
             ZStack{
                 Rectangle()
