@@ -16,7 +16,7 @@ struct Profile: View {
     var body: some View {
         ZStack() {
             Button(action: goToSettings){
-                Image("BackArrowSettings").resizable().aspectRatio(contentMode: .fit) // Maintain the image's aspect ratio
+                Image("BackArrowSettings").resizable().aspectRatio(contentMode: .fit)
                     .frame(width: 20, height: 20)
             }
             .offset(x: -150, y: -340.50)
@@ -67,7 +67,7 @@ struct Profile: View {
                             Text("\(activity)")
                                 .font(Font.custom("Aeonik TRIAL", size: 14))
                                 .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
-                                .offset(x: -92.50, y: 26.50)
+                                .offset(x: -85.50, y: 26.50)
                         }
                         .frame(width: 251, height: 69)
                         .offset(x: -20.50, y: 43)
