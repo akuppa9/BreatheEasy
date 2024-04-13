@@ -23,6 +23,8 @@ class DeviceLocationService: NSObject, CLLocationManagerDelegate, ObservableObje
         let manager = CLLocationManager()
         manager.desiredAccuracy = kCLLocationAccuracyBest
         manager.delegate = self
+        manager.desiredAccuracy = kCLLocationAccuracyKilometer
+        manager.distanceFilter = 1000
         return manager
     }()
     

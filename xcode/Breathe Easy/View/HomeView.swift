@@ -230,7 +230,56 @@ struct MainViewNew: View{
     }
 }
 
+//class Debouncer {
+//    private var lastCallTime: DispatchTime?
+//    private let delay: TimeInterval
+//    private var workItem: DispatchWorkItem?
+//
+//    init(delay: TimeInterval) {
+//        self.delay = delay
+//    }
+//
+//    func call(_ block: @escaping () -> Void) {
+//        workItem?.cancel()
+//        workItem = DispatchWorkItem { [weak self] in
+//            self?.lastCallTime = .now()
+//            block()
+//        }
+//        if let workItem = workItem {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: workItem)
+//        }
+//    }
+//}
+
+class Throttler {
+    private var lastFireTime: DispatchTime = .now()
+    private var delay: TimeInterval
+    private var workItem: DispatchWorkItem?
+
+    init(delay: TimeInterval) {
+        self.delay = delay
+    }
+
+    func throttle(block: @escaping () -> Void) {
+        workItem?.cancel()
+        
+        let dispatchDelay = DispatchTime.now() + delay
+        if dispatchDelay > lastFireTime {
+            lastFireTime = dispatchDelay
+        }
+        
+        workItem = DispatchWorkItem {
+            block()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: lastFireTime, execute: workItem!)
+    }
+}
+
 struct HomeView3: View {
+    
+    @State private var throttler = Throttler(delay: 5)  // Delay of 5 seconds
+    
     @AppStorage("mainViewNum") var mainViewNum = 0
     @StateObject var deviceLocationService = DeviceLocationService.shared
     
@@ -240,7 +289,7 @@ struct HomeView3: View {
     @Environment(\.scenePhase) var scenePhase
     
     // Replace with your OpenWeatherMap API Key
-    @AppStorage("apikey") var apiKey = "0f9111decfea0ac7cd6457aebee611bb"
+    @AppStorage("apikey") var apiKey = "9cf777457a44dc1e9c46bc7c2b38a904"
     
     // Weather variables
     @State var humidity = 1
@@ -445,11 +494,14 @@ struct HomeView3: View {
                 print("Handle \(completion) for error and finished subscription.")
             } receiveValue: { coordinates in
                 self.coordinates = (coordinates.latitude, coordinates.longitude)
-                fetchCurrentWeather(latitude: coordinates.latitude, longitude: coordinates.longitude)
-                fetchUVIndex(latitude: coordinates.latitude, longitude: coordinates.longitude)
-                Task {
-                    await self.parseACTScore()
-                }
+//                self.throttler.throttle{
+                    fetchCurrentWeather(latitude: coordinates.latitude, longitude: coordinates.longitude)
+                    fetchUVIndex(latitude: coordinates.latitude, longitude: coordinates.longitude)
+                    Task {
+                        await self.parseACTScore()
+                    }
+//                }
+                
             }
             .store(in: &tokens)
     }
