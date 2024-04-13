@@ -138,7 +138,7 @@ struct GenderView: View {
 }
 
 struct GenderSelected: View {
-    @AppStorage("progressPage") var progressPage = 1
+    @AppStorage("progressPage") var progressPage = 0
     @AppStorage("sex") var sex: String = ""
     @AppStorage("genderSelected")
     var genderSelected = 0

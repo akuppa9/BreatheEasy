@@ -11,7 +11,7 @@ import GoogleSignIn
 
 struct SettingsView: View {
     @AppStorage("page") var page = 1
-    @AppStorage("progressPage") var progressPage = 1
+    @AppStorage("progressPage") var progressPage = 0
     @AppStorage("mainViewNum") var mainViewNum = 0
     @AppStorage("uid") var uid = ""
     @AppStorage("log_Status") var log_Status = false
@@ -225,7 +225,7 @@ struct SettingsView: View {
         work = ""
         activity = ""
         sliderValue = 50
-        progressPage = 1
+        progressPage = 0
         mainViewNum = 0
     }
     
@@ -236,7 +236,7 @@ struct SettingsView: View {
             try? Auth.auth().signOut()
             log_Status = false
             page = 1
-            progressPage = 1
+            progressPage = 0
             mainViewNum = 0
             
         } else if log_Status2{
@@ -247,7 +247,7 @@ struct SettingsView: View {
             
             log_Status2 = false
             page = 1
-            progressPage = 1
+            progressPage = 0
             mainViewNum = 0
         }
         
@@ -261,7 +261,7 @@ struct SettingsView: View {
 
 struct Settings: View {
     @AppStorage("page") var page = 1
-    @AppStorage("progressPage") var progressPage = 1
+    @AppStorage("progressPage") var progressPage = 0
     @AppStorage("mainViewNum") var mainViewNum = 0
     @AppStorage("uid") var uid = ""
     @AppStorage("log_Status") var log_Status = false
@@ -474,7 +474,7 @@ struct Settings: View {
         work = ""
         activity = ""
         sliderValue = 50
-        progressPage = 1
+        progressPage = 0
         mainViewNum = 0
     }
     
@@ -485,7 +485,7 @@ struct Settings: View {
             try? Auth.auth().signOut()
             log_Status = false
             page = 1
-            progressPage = 1
+            progressPage = 0
             mainViewNum = 0
             
         } else if log_Status2{
@@ -496,7 +496,7 @@ struct Settings: View {
             
             log_Status2 = false
             page = 1
-            progressPage = 1
+            progressPage = 0
             mainViewNum = 0
         }
         

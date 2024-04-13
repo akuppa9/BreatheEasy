@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct WorkOutdoorsView: View {
-    @AppStorage("progressPage") var progressPage = 1
+    @AppStorage("progressPage") var progressPage = 0
     @AppStorage("work") var work: String = ""
     @AppStorage("frequencySelected") var frequencySelected = 0
     @State private var showAlertWorkOutdoor = false

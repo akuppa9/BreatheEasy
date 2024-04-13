@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ProgressTabView: View{
-    @AppStorage("progressPage") var progressPage = 1
+    @AppStorage("progressPage") var progressPage = 0
     var body: some View{
         
         if (progressPage == 1){
@@ -137,7 +137,7 @@ struct ProgressTabView: View{
 struct AgeView: View {
     @AppStorage("page") var page = 1
     @AppStorage("age") var sliderValue: Int = 50
-    @AppStorage("progressPage") var progressPage = 1
+    @AppStorage("progressPage") var progressPage = 0
     @State private var showAlertAge = false
     @State private var showAlertAge1 = false
     @State private var numberInput: String = ""

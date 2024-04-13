@@ -18,6 +18,7 @@
 		38BDC3A62B1034E800D212BF /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 38BDC3A52B1034E800D212BF /* GoogleSignIn */; };
 		38C7593A2BA0C2B500C1CDCF /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C759392BA0C2B500C1CDCF /* ProgressView.swift */; };
 		38DD890F2BAF8A63004CDE51 /* AboutUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DD890E2BAF8A63004CDE51 /* AboutUsView.swift */; };
+		38DD89132BCB17EC004CDE51 /* QuestionnaireWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38DD89122BCB17EC004CDE51 /* QuestionnaireWelcome.swift */; };
 		38FDAC512BA3877F0094532C /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FDAC502BA3877F0094532C /* LaunchScreenView.swift */; };
 		38FDAC562BA5EB970094532C /* HelveticaNeueMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 38FDAC542BA5EB970094532C /* HelveticaNeueMedium.otf */; };
 		38FDAC582BA5EBC30094532C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38FDAC572BA5EBC30094532C /* SettingsView.swift */; };
@@ -96,6 +97,7 @@
 		38BDC39E2B102A4600D212BF /* Breathe-Easy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Breathe-Easy-Info.plist"; sourceTree = SOURCE_ROOT; };
 		38C759392BA0C2B500C1CDCF /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		38DD890E2BAF8A63004CDE51 /* AboutUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsView.swift; sourceTree = "<group>"; };
+		38DD89122BCB17EC004CDE51 /* QuestionnaireWelcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionnaireWelcome.swift; sourceTree = "<group>"; };
 		38FDAC502BA3877F0094532C /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
 		38FDAC542BA5EB970094532C /* HelveticaNeueMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HelveticaNeueMedium.otf; sourceTree = "<group>"; };
 		38FDAC572BA5EBC30094532C /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				38C759392BA0C2B500C1CDCF /* ProgressView.swift */,
 				38FDAC502BA3877F0094532C /* LaunchScreenView.swift */,
 				38DD890E2BAF8A63004CDE51 /* AboutUsView.swift */,
+				38DD89122BCB17EC004CDE51 /* QuestionnaireWelcome.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				38FDAC5E2BA5EC8A0094532C /* WorkOutdoorsView.swift in Sources */,
 				AC4A5CA22AED652A0001CB8A /* ContentView.swift in Sources */,
 				38FDAC582BA5EBC30094532C /* SettingsView.swift in Sources */,
+				38DD89132BCB17EC004CDE51 /* QuestionnaireWelcome.swift in Sources */,
 				38FDAC512BA3877F0094532C /* LaunchScreenView.swift in Sources */,
 				38A1BBA12B40BB70006D04CF /* LocationManager.swift in Sources */,
 				38BDC3992B10164100D212BF /* LoginPage.swift in Sources */,

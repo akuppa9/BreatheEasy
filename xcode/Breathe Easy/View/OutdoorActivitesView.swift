@@ -114,7 +114,7 @@ class NotificationManager {
 
 struct OutdoorActivitesView: View {
     @AppStorage("page") var page = 1
-    @AppStorage("progressPage") var progressPage = 1
+    @AppStorage("progressPage") var progressPage = 0
     @AppStorage("age") var sliderValue: Int = 50
     @AppStorage("sex") var sex: String = ""
     @AppStorage("work") var work: String = ""
