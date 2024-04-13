@@ -87,7 +87,7 @@ struct LoginView: View {
                 }
             }
             .frame(width: 320, height: 50)
-            .offset(x: 0.50, y: 139)
+            .offset(x: 0.50, y: 207)
             
             // Apple Sign In Button
             Button (action: loginViewModel.signInWithApple){
@@ -122,22 +122,22 @@ struct LoginView: View {
                 }
             }
             .frame(width: 320, height: 50)
-            .offset(x: 0.50, y: 207)
-            
-            ZStack() {
-                Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: 320, height: 50)
-                    .background(Color(red: 0, green: 0.32, blue: 0.27))
-                    .cornerRadius(34)
-                    .offset(x: 0, y: 0)
-                Text("Create Account")
-                    .font(Font.custom("Lufga", size: 18))
-                    .foregroundColor(Color(red: 0.70, green: 0.95, blue: 0))
-                    .offset(x: 0, y: 0.50)
-            }
-            .frame(width: 320, height: 50)
             .offset(x: 0.50, y: 275)
+            
+//            ZStack() {
+//                Rectangle()
+//                    .foregroundColor(.clear)
+//                    .frame(width: 320, height: 50)
+//                    .background(Color(red: 0, green: 0.32, blue: 0.27))
+//                    .cornerRadius(34)
+//                    .offset(x: 0, y: 0)
+//                Text("Create Account")
+//                    .font(Font.custom("Lufga", size: 18))
+//                    .foregroundColor(Color(red: 0.70, green: 0.95, blue: 0))
+//                    .offset(x: 0, y: 0.50)
+//            }
+//            .frame(width: 320, height: 50)
+//            .offset(x: 0.50, y: 275)
             
             ZStack{
                 Rectangle()

@@ -138,7 +138,7 @@ class LoginViewModel: NSObject, ObservableObject, ASAuthorizationControllerDeleg
                     if count == 1{
                         self.page = 3
                     }else{
-                        self.page = 5
+                        self.page = 2
                     }
                 }
             }
