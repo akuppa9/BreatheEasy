@@ -423,7 +423,7 @@ struct Settings: View {
                 .frame(width: 325, height: 86)
                 .offset(x: 0.50, y: -11.50)
                 
-                Button(action:deleteAccount){
+                Button(action:goToDelete){
                     ZStack() {
                         Rectangle()
                             .foregroundColor(.clear)
@@ -466,6 +466,13 @@ struct Settings: View {
         withAnimation{
           //  navigationDirection = .forward
             mainViewNum = 3
+        }
+    }
+    
+    func goToDelete(){
+        withAnimation{
+          //  navigationDirection = .forward
+            mainViewNum = 4
         }
     }
     

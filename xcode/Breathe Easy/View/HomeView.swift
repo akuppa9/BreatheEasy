@@ -226,6 +226,8 @@ struct MainViewNew: View{
                 AboutUsView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
             } else if (mainViewNum == 3){
                 Profile()
+            } else if (mainViewNum == 4){
+                DeleteAccountPage()
             }
         }
         .animation(.default, value: mainViewNum)
