@@ -30,13 +30,13 @@ class NotificationManager {
         notificationCenter.getNotificationSettings { settings in
             switch settings.authorizationStatus {
             case .authorized:
-                scheduleNotifications() // Schedule notifications here
+                scheduleNotifications()
             case .denied:
                 print("Notification permission denied")
             case .notDetermined:
                 notificationCenter.requestAuthorization(options: [.alert, .sound]) { didAllow, error in
                     if didAllow {
-                        scheduleNotifications() // Schedule notifications here
+                        scheduleNotifications()
                     } else {
                         print("Notification permission not granted")
                     }
@@ -80,7 +80,6 @@ class NotificationManager {
         
         var dateComponents = DateComponents()
         dateComponents.hour = 15
-        dateComponents.minute = 0
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         scheduleNotification(identifier: identifier, content: content, trigger: trigger)
