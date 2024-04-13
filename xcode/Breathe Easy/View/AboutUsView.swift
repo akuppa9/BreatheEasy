@@ -105,7 +105,7 @@ You now know everything you need to know to use Breathe Easy! For any clarificat
                             Text("Amogh Kuppa")
                                 .font(Font.custom("Lufga", size: 18))
                                 .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                                .offset(x: -111.50, y: 0)
+                                .offset(x: -81.50, y: 0)
                             Text("App Developer")
                                 .font(Font.custom("Aeonik TRIAL", size: 14))
                                 .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
