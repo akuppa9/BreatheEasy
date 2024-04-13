@@ -47,46 +47,51 @@ struct SettingsView: View {
                     .font(Font.custom("Aeonik TRIAL", size: 14))
                     .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
                     .offset(x: -129, y: 56.50)
-                ZStack() {
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(width: 325, height: 109)
-                        .background(.white)
-                        .cornerRadius(15)
-                        .offset(x: 0, y: 0)
+                
+                Button(action: goToProfile){
                     ZStack() {
-                        ZStack() {
-                            Text("Appearance")
-                                .font(Font.custom("Lufga", size: 18))
-                                .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                                .offset(x: -87.50, y: 0)
-                            Text("Coming soon").font(Font.custom("Lufga", size: 12))
-                                .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51)).offset(x:110)
-                        }
-                        .frame(width: 285, height: 23)
-                        .offset(x: -0.50, y: -26.50)
                         Rectangle()
                             .foregroundColor(.clear)
-                            .frame(width: 300, height: 1)
-                            .background(Color(red: 0.91, green: 0.91, blue: 0.91))
-                            .offset(x: 0, y: -0.50)
+                            .frame(width: 325, height: 109)
+                            .background(.white)
+                            .cornerRadius(15)
+                            .offset(x: 0, y: 0)
                         ZStack() {
-                            Text("Profile")
-                                .font(Font.custom("Lufga", size: 18))
-                                .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                                .offset(x: -115, y: 0)
-                            Image("RightArrow").resizable()
-                                .aspectRatio(contentMode: .fit).frame(width:15,height:15).offset(x: 130)
+                            ZStack() {
+                                Text("Appearance")
+                                    .font(Font.custom("Lufga", size: 18))
+                                    .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
+                                    .offset(x: -87.50, y: 0)
+                                Text("Coming soon").font(Font.custom("Lufga", size: 12))
+                                    .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51)).offset(x:110)
+                            }
+                            .frame(width: 285, height: 23)
+                            .offset(x: -0.50, y: -26.50)
+                            Rectangle()
+                                .foregroundColor(.clear)
+                                .frame(width: 300, height: 1)
+                                .background(Color(red: 0.91, green: 0.91, blue: 0.91))
+                                .offset(x: 0, y: -0.50)
                             
+                            ZStack() {
+                                Text("Profile")
+                                    .font(Font.custom("Lufga", size: 18))
+                                    .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
+                                    .offset(x: -115, y: 0)
+                                Image("RightArrow").resizable()
+                                    .aspectRatio(contentMode: .fit).frame(width:15,height:15).offset(x: 130)
+                                
+                            }
+                            .frame(width: 285, height: 23)
+                            .offset(x: -0.50, y: 26.50)
                         }
-                        .frame(width: 285, height: 23)
-                        .offset(x: -0.50, y: 26.50)
+                        .frame(width: 300, height: 76)
+                        .offset(x: 0.50, y: 0.50)
                     }
-                    .frame(width: 300, height: 76)
-                    .offset(x: 0.50, y: 0.50)
                 }
                 .frame(width: 325, height: 109)
                 .offset(x: 0.50, y: -126)
+                
                 Button(action: {
                     showLogoutAlert = true
                 }) {
@@ -189,6 +194,12 @@ struct SettingsView: View {
         withAnimation{
 //            navigationDirection = .forward
             mainViewNum = 2
+        }
+    }
+    
+    func goToProfile(){
+        withAnimation{
+            mainViewNum = 3
         }
     }
     
@@ -320,16 +331,26 @@ struct Settings: View {
                             .frame(width: 300, height: 1)
                             .background(Color(red: 0.91, green: 0.91, blue: 0.91))
                             .offset(x: 0, y: -0.50)
-                        ZStack() {
-                            Text("Profile")
-                                .font(Font.custom("Lufga", size: 18))
-                                .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                                .offset(x: -115, y: 0)
-                            Image("RightArrow").resizable()
-                                .aspectRatio(contentMode: .fit).frame(width:15,height:15).offset(x: 130)
+                        
+                        Button(action: goToProfile){
+                            ZStack{
+                                Rectangle()
+                                    .foregroundColor(.clear).cornerRadius(15).frame(width:325,height:64).offset(x:0,y:26)
+                                ZStack() {
+                                    Text("Profile")
+                                        .font(Font.custom("Lufga", size: 18))
+                                        .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
+                                        .offset(x: -115, y: 0)
+                                    Image("RightArrow").resizable()
+                                        .aspectRatio(contentMode: .fit).frame(width:15,height:15).offset(x: 130)
+                                    
+                                }
+                                .frame(width: 285, height: 23)
+                                .offset(x: -0.50, y: 26.50)
+                            }
                         }
-                        .frame(width: 285, height: 23)
-                        .offset(x: -0.50, y: 26.50)
+                        .offset(x:0,y:26)
+                        
                     }
                     .frame(width: 300, height: 76)
                     .offset(x: 0.50, y: 0.50)
@@ -438,6 +459,13 @@ struct Settings: View {
         withAnimation{
             navigationDirection = .forward
             mainViewNum = 2
+        }
+    }
+    
+    func goToProfile(){
+        withAnimation{
+            navigationDirection = .forward
+            mainViewNum = 3
         }
     }
     

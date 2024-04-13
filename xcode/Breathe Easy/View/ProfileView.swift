@@ -8,12 +8,19 @@
 import SwiftUI
 
 struct Profile: View {
+    @AppStorage("mainViewNum") var mainViewNum = 0
     @AppStorage("age") var sliderValue: Int = 50
     @AppStorage("sex") var sex: String = ""
     @AppStorage("work") var work: String = ""
     @AppStorage("activity") var activity: String = ""
     var body: some View {
         ZStack() {
+            Button(action: goToSettings){
+                Image("BackArrowSettings").resizable().aspectRatio(contentMode: .fit) // Maintain the image's aspect ratio
+                    .frame(width: 20, height: 20)
+            }
+            .offset(x: -150, y: -340.50)
+            
             Group {
                 Text("Profile")
                     .font(Font.custom("Lufga", size: 24))
@@ -114,8 +121,15 @@ struct Profile: View {
                 .offset(x: 1, y: -100)
             }
         }
-        .frame(width: 375, height: 812)
+        .frame(width: 1000, height: 1500)
         .background(Color(red: 0.97, green: 0.97, blue: 0.97));
+    }
+    
+    func goToSettings(){
+        withAnimation{
+//            settingsTransition = "fromAbout"
+            mainViewNum = 1
+        }
     }
 }
 
@@ -205,6 +219,6 @@ struct AgeEdit: View{
 }
 
 #Preview {
-//    Profile()
-    AgeEdit()
+    Profile()
+//    AgeEdit()
 }
