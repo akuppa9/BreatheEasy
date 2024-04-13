@@ -102,7 +102,7 @@ You now know everything you need to know to use Breathe Easy! For any clarificat
                             .background(Color(red: 0.91, green: 0.91, blue: 0.91))
                             .offset(x: 0, y: 26.50)
                         ZStack() {
-                            Text("Amogh")
+                            Text("Amogh Kuppa")
                                 .font(Font.custom("Lufga", size: 18))
                                 .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
                                 .offset(x: -111.50, y: 0)
