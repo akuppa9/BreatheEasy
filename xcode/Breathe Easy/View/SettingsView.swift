@@ -287,7 +287,7 @@ struct Settings: View {
     @State private var showAlertActivityOutdoor = false
     @AppStorage("frequencySelectedActivity") var frequencySelectedActivity = 0
     @AppStorage("fromAbout") var fromAbout = 0
-    @Binding var navigationDirection: NavigationDirection
+    //@Binding var navigationDirection: NavigationDirection
     var body: some View {
         ZStack() {
             Button(action: goToHome){
@@ -340,9 +340,9 @@ struct Settings: View {
                                     Text("Profile")
                                         .font(Font.custom("Lufga", size: 18))
                                         .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                                        .offset(x: -115, y: 0)
+                                        .offset(x: -115, y: -23)
                                     Image("RightArrow").resizable()
-                                        .aspectRatio(contentMode: .fit).frame(width:15,height:15).offset(x: 130)
+                                        .aspectRatio(contentMode: .fit).frame(width:15,height:15).offset(x: 130, y: -23)
                                     
                                 }
                                 .frame(width: 285, height: 23)
@@ -450,21 +450,21 @@ struct Settings: View {
     
     func goToHome(){
         withAnimation{
-            navigationDirection = .backward
+           // navigationDirection = .backward
             mainViewNum = 0
         }
     }
     
     func goToAbout(){
         withAnimation{
-            navigationDirection = .forward
+          //  navigationDirection = .forward
             mainViewNum = 2
         }
     }
     
     func goToProfile(){
         withAnimation{
-            navigationDirection = .forward
+          //  navigationDirection = .forward
             mainViewNum = 3
         }
     }
@@ -537,6 +537,6 @@ struct Settings: View {
 }
 
 #Preview {
-        SettingsView()
-//    Settings(navigationDirection: $navigationDirection)
+        //SettingsView()
+    Settings()
 }

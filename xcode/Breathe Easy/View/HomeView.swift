@@ -221,7 +221,7 @@ struct MainViewNew: View{
             if (mainViewNum == 0){
                 HomeView3(navigationDirection: $navigationDirection).transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
             }else if (mainViewNum == 1){
-                Settings(navigationDirection: $navigationDirection).transition(navigationDirection == .forward ? .asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)) : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
+                Settings()//navigationDirection: $navigationDirection).transition(navigationDirection == .forward ? .asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)) : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
             }else if (mainViewNum == 2){
                 AboutUsView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
             } else if (mainViewNum == 3){
