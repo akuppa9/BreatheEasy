@@ -12,6 +12,7 @@ import Firebase
 import GoogleSignIn
 import Combine
 import UserNotifications
+import CoreLocation
 
 enum NavigationDirection {
     case forward, backward
@@ -281,6 +282,8 @@ class Throttler {
 }
 
 struct HomeView3: View {
+    @State private var lastFetchedCoordinates: (latitude: Double, longitude: Double)?
+    var fetchThreshold: Double = 500 // meters
     
     @State private var throttler = Throttler(delay: 5)  // Delay of 5 seconds
     
@@ -492,20 +495,58 @@ struct HomeView3: View {
     }
     
     func observeCoordinateUpdates() {
+        
         deviceLocationService.coordinatesPublisher
             .receive(on: DispatchQueue.main)
             .sink { completion in
                 print("Handle \(completion) for error and finished subscription.")
             } receiveValue: { coordinates in
                 self.coordinates = (coordinates.latitude, coordinates.longitude)
-                fetchCurrentWeather(latitude: coordinates.latitude, longitude: coordinates.longitude)
-                fetchUVIndex(latitude: coordinates.latitude, longitude: coordinates.longitude)
-                Task {
-                    await self.parseACTScore()
+                Task{
+                    await fetchCurrentWeather(latitude: coordinates.latitude, longitude: coordinates.longitude)
+                    await fetchUVIndex(latitude: coordinates.latitude, longitude: coordinates.longitude)
+                    await parseACTScore()
                 }
+//                Task {
+//                    await self.parseACTScore()
+//                }
             }
             .store(in: &tokens)
     }
+    
+//    func observeCoordinateUpdates2() {
+//        deviceLocationService.coordinatesPublisher
+//            .receive(on: DispatchQueue.main)
+//            .sink { completion in
+//                print("Handle \(completion) for error and finished subscription.")
+//            } receiveValue: { coordinates in
+//                let newCoordinates = (latitude: coordinates.latitude, longitude: coordinates.longitude)
+//                if shouldFetchForNewCoordinates(newCoordinates) {
+//                    lastFetchedCoordinates = newCoordinates
+//                    fetchCurrentWeather(latitude: coordinates.latitude, longitude: coordinates.longitude)
+//                    fetchUVIndex(latitude: coordinates.latitude, longitude: coordinates.longitude)
+//                    Task {
+//                        await parseACTScore()
+//                    }
+//                }
+//            }
+//            .store(in: &tokens)
+//    }
+    
+    func shouldFetchForNewCoordinates(_ newCoordinates: (latitude: Double, longitude: Double)) -> Bool {
+            guard var lastFetchedCoordinates = lastFetchedCoordinates else {
+                // Always fetch the first time
+                return true
+            }
+
+            return distanceBetween(lastFetchedCoordinates, and: newCoordinates) > fetchThreshold
+        }
+
+        func distanceBetween(_ coordinates1: (latitude: Double, longitude: Double), and coordinates2: (latitude: Double, longitude: Double)) -> Double {
+            var location1 = CLLocation(latitude: coordinates1.latitude, longitude: coordinates1.longitude)
+            var location2 = CLLocation(latitude: coordinates2.latitude, longitude: coordinates2.longitude)
+            return location1.distance(from: location2)
+        }
     
     func observeDeniedLocationAccess() {
         deviceLocationService.deniedLocationAccessPublisher
@@ -517,7 +558,7 @@ struct HomeView3: View {
     }
     
     // Function to fetch current weather data
-    func fetchCurrentWeather(latitude: Double, longitude: Double) {
+    func fetchCurrentWeather(latitude: Double, longitude: Double) async{
         let weatherURLString = "https://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&appid=\(apiKey)&units=metric"
         
         fetchWeatherData(from: weatherURLString) { jsonResult in
@@ -536,7 +577,7 @@ struct HomeView3: View {
     }
     
     // Function to fetch UV index
-    func fetchUVIndex(latitude: Double, longitude: Double) {
+    func fetchUVIndex(latitude: Double, longitude: Double) async{
         let uvURLString = "https://api.openweathermap.org/data/2.5/uvi?lat=\(latitude)&lon=\(longitude)&appid=\(apiKey)"
         
         fetchWeatherData(from: uvURLString) { jsonResult in
@@ -601,9 +642,6 @@ struct HomeView3: View {
         
         let ACTURLString = "https://nkumar04.pythonanywhere.com/predict?param1=2&param2=\(sliderValueModified)&param3=\(sexNum)&param4=\(workNum)&param5=\(activityNum)&param6=\(humidity)&param7=\(pressure)&param8=\(temperature)&param9=\(uviModified)&param10=\(windSpeed)"
         
-        // wait 5 seconds
-        //        try? await Task.sleep(nanoseconds: 5_000_000_000)
-        
         fetchACTScore(from: ACTURLString) { jsonResult in
             DispatchQueue.main.async {
                 if let ACTData = jsonResult as? [String: Any] {
@@ -611,6 +649,13 @@ struct HomeView3: View {
                     self.ACTScore = pred > 25.0 && pred < 100 ? 25 : pred.rounded()
                     //                    self.ACTScore = ACTData["prediction"] as? Double ?? 0.0
                 }
+            }
+        }
+        
+        DispatchQueue.main.async {
+            // Check if the ACT score is within the desired range
+            if 0.1...25 ~= self.ACTScore {
+                deviceLocationService.setDistanceFilter(100)  // Set distance filter based on ACT score
             }
         }
     }

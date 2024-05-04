@@ -51,14 +51,14 @@ struct Profile: View {
                             Text("How often do you work outdoors?")
                                 .font(Font.custom("Lufga", size: 18))
                                 .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                                .offset(x: 0, y: -11.50)
+                                .offset(x: 20.5, y: -11.50)
                             Text("\(work)")
                                 .font(Font.custom("Aeonik TRIAL", size: 14))
                                 .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
-                                .offset(x: -113, y: 15)
+                                .offset(x: -85.50, y: 15)
                         }
                         .frame(width: 292, height: 46)
-                        .offset(x: 0, y: -54.50)
+                        .offset(x: -20.5, y: -54.50)
                         ZStack() {
                             Text("How frequently do you\nengage in outdoor activities?")
                                 .font(Font.custom("Lufga", size: 18))

@@ -13,6 +13,7 @@ class DeviceLocationService: NSObject, CLLocationManagerDelegate, ObservableObje
     
     var coordinatesPublisher = PassthroughSubject<CLLocationCoordinate2D, Error>()
     var deniedLocationAccessPublisher = PassthroughSubject<Void, Never>()
+//    private var initialFetchDone = false
     
     private override init() {
         super.init()
@@ -39,6 +40,10 @@ class DeviceLocationService: NSObject, CLLocationManagerDelegate, ObservableObje
         default:
             deniedLocationAccessPublisher.send()
         }
+    }
+    
+    func setDistanceFilter(_ distance: CLLocationDistance){
+        locationManager.distanceFilter = 100
     }
     
     func startMonitoringSignificantLocationChanges(){
