@@ -559,7 +559,6 @@ struct GenderSelected: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 progressPage = 3
             }
-            genderSelected = 0
         }
     }
     

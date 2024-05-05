@@ -10,6 +10,7 @@ import Firebase
 import GoogleSignIn
 
 struct DeleteAccountPage: View {
+    @AppStorage("genderSelected") var genderSelected = 0
     @AppStorage("page") var page = 1
     @AppStorage("progressPage") var progressPage = 0
     @AppStorage("mainViewNum") var mainViewNum = 0
@@ -110,6 +111,7 @@ struct DeleteAccountPage: View {
         sex = ""
         work = ""
         activity = ""
+        genderSelected = 0
         sliderValue = 50
         progressPage = 0
         mainViewNum = 0

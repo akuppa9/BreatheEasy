@@ -98,7 +98,6 @@ class LoginViewModel: NSObject, ObservableObject, ASAuthorizationControllerDeleg
             }
             
             self.uid = user2.uid
-            self.name = self.fullname
                 
             // Attempt to fetch the full name
 //            if let fullName = credential.fullName?.givenName {

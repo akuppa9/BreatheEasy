@@ -13,6 +13,7 @@ struct Profile: View {
     @AppStorage("sex") var sex: String = ""
     @AppStorage("work") var work: String = ""
     @AppStorage("activity") var activity: String = ""
+    @AppStorage("genderSelected") var genderSelected = 0
     var body: some View {
         ZStack() {
             Button(action: goToSettings){
@@ -112,10 +113,17 @@ struct Profile: View {
                         .background(.white)
                         .cornerRadius(15)
                         .offset(x: 0, y: 0)
-                    Text("\(sex)")
-                        .font(Font.custom("Lufga", size: 18))
-                        .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                        .offset(x: -121, y: 0.50)
+                    if(genderSelected == 3){
+                        Text("Non-binary")
+                            .font(Font.custom("Lufga", size: 18))
+                            .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
+                            .offset(x: -121, y: 0.50)
+                    }else{
+                        Text("\(sex)")
+                            .font(Font.custom("Lufga", size: 18))
+                            .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
+                            .offset(x: -121, y: 0.50)
+                    }
                 }
                 .frame(width: 325, height: 56)
                 .offset(x: 1, y: -100)
