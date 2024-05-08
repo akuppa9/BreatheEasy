@@ -107,23 +107,21 @@ struct Profile: View {
                     .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
                     .offset(x: 146.50, y: -341.50)
             }; Group {
-                ZStack() {
+                ZStack(alignment: .leading) {
                     Rectangle()
                         .foregroundColor(.clear)
                         .frame(width: 325, height: 56)
                         .background(.white)
                         .cornerRadius(15)
                         .offset(x: 0, y: 0)
-                    if(genderSelected == 3){
-                        Text("Non-binary")
+                    
+                    GeometryReader { geometry in
+                        let textWidth = geometry.size.width
+                        Text(genderSelected == 3 ? "Non-binary" : "\(sex)")
                             .font(Font.custom("Lufga", size: 18))
                             .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                            .offset(x: -121, y: 0.50)
-                    }else{
-                        Text("\(sex)")
-                            .font(Font.custom("Lufga", size: 18))
-                            .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                            .offset(x: -121, y: 0.50)
+                            .frame(width: textWidth, alignment: .leading)
+                            .offset(x: 18, y: 15)
                     }
                 }
                 .frame(width: 325, height: 56)
