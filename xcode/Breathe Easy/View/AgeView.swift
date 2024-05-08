@@ -198,23 +198,14 @@ struct AgeView: View {
             .offset(x: 0.50, y: 327)
             .alert(isPresented: $showAlertAge) {
                 Alert(
-                    title: Text("Incomplete Information"),
-                    message: Text("Please fill out this field with an age of atleast 12"),
+                    title: Text("Invalid Information"),
+                    message: Text("Please fill out this field with an age between 12 and 100"),
                     dismissButton: .default(Text("OK")) {
                         showAlertAge = false
                     }
                 )
             }
-            .alert(isPresented: $showAlertAge1) {
-                Alert(
-                    title: Text("Invalid Information"),
-                    message: Text("Must be atleast 12 years old to continue"),
-                    dismissButton: .default(Text("OK")) {
-                        showAlertAge1 = false
-                    }
-                )
-            }
-           
+            
             
             // Type age here
             CustomTextField(placeholder: "Type here", text: $numberInput, fontSize: 30)
@@ -233,13 +224,9 @@ struct AgeView: View {
     
     func cont(){
         sliderValue = Int(numberInput) ?? 0
-        if sliderValue == 0{
+        if sliderValue < 12 || sliderValue > 100{
             showAlertAge = true
-        }
-        else if sliderValue < 12 && sliderValue != 0{
-            showAlertAge1 = true
-        }
-            else{
+        } else {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                     progressPage = 2
                 }
@@ -268,7 +255,7 @@ struct AgeView: View {
             textField.textColor = UIColor(Color(red: 0, green: 0.27, blue: 0.23).opacity(0.45))
             
             let placeholderColor = UIColor(Color(red: 0, green: 0.27, blue: 0.23).opacity(0.45)) // Adjust color as needed
-                      textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
+            textField.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: placeholderColor])
             
             // Add a "Done" button to the keyboard
             let toolbar = UIToolbar()

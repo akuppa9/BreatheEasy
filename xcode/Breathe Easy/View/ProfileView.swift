@@ -48,27 +48,28 @@ struct Profile: View {
                             .frame(width: 300, height: 1)
                             .background(Color(red: 0.91, green: 0.91, blue: 0.91))
                             .offset(x: 0, y: -10)
-                        ZStack() {
+                        ZStack(alignment: .leading) {
                             Text("How often do you work outdoors?")
                                 .font(Font.custom("Lufga", size: 18))
                                 .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                                .offset(x: 20.5, y: -11.50)
+                                .offset(y: -11.50)
                             Text("\(work)")
                                 .font(Font.custom("Aeonik TRIAL", size: 14))
                                 .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
-                                .offset(x: -85.50, y: 15)
+                                .offset(y: 15)
                         }
+
                         .frame(width: 292, height: 46)
-                        .offset(x: -20.5, y: -54.50)
-                        ZStack() {
+                        .offset(x: 0, y: -54.50)
+                        ZStack(alignment: .leading) {
                             Text("How frequently do you\nengage in outdoor activities?")
                                 .font(Font.custom("Lufga", size: 18))
                                 .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                                .offset(x: 0, y: -11.50)
+                                .offset(y: -11.50)
                             Text("\(activity)")
                                 .font(Font.custom("Aeonik TRIAL", size: 14))
                                 .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
-                                .offset(x: -85.50, y: 26.50)
+                                .offset(y: 26.50)
                         }
                         .frame(width: 251, height: 69)
                         .offset(x: -20.50, y: 43)
