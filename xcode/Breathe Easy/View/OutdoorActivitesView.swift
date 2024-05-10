@@ -564,11 +564,6 @@ struct OutdoorActivitesView: View {
             page = 3
         }
         
-        // Schedule the update to happen after a 2-second delay so transition doesn't get messed up
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            frequencySelectedActivity = 0
-        }
-        //        }
     }
     
     func freqPress(){

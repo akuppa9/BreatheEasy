@@ -25,6 +25,8 @@ struct SettingsView: View {
     @AppStorage("tracked") var tracked = false
     @State private var showAlertActivityOutdoor = false
     @AppStorage("frequencySelectedActivity") var frequencySelectedActivity = 0
+    @AppStorage("frequencySelected") var frequencySelected = 0
+    @AppStorage("genderSelected") var genderSelected = 0
     @AppStorage("fromAbout") var fromAbout = 0
 //    @Binding var navigationDirection: NavigationDirection
     var body: some View {
@@ -235,9 +237,14 @@ struct SettingsView: View {
         sex = ""
         work = ""
         activity = ""
+        genderSelected = 0
         sliderValue = 50
         progressPage = 0
         mainViewNum = 0
+        frequencySelected = 0
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            frequencySelectedActivity = 0
+        }
     }
     
     func logOut(){

@@ -14,6 +14,8 @@ struct Profile: View {
     @AppStorage("work") var work: String = ""
     @AppStorage("activity") var activity: String = ""
     @AppStorage("genderSelected") var genderSelected = 0
+    @AppStorage("progressPage") var progressPage = 0
+    @AppStorage("page") var page = 1
     var body: some View {
         ZStack() {
             Button(action: goToSettings){
@@ -58,7 +60,7 @@ struct Profile: View {
                                 .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
                                 .offset(y: 15)
                         }
-
+                        
                         .frame(width: 292, height: 46)
                         .offset(x: 0, y: -54.50)
                         ZStack(alignment: .leading) {
@@ -101,11 +103,19 @@ struct Profile: View {
                     .font(Font.custom("Aeonik TRIAL", size: 14))
                     .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
                     .offset(x: -108.50, y: -47)
-                Text("Edit")
-                    .font(Font.custom("Lufga", size: 18))
-                    .underline()
-                    .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                    .offset(x: 146.50, y: -341.50)
+                Button(action:{
+                    progressPage = 1
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        page = 2
+                    }
+                }) {
+                    Text("Edit")
+                        .font(Font.custom("Lufga", size: 18))
+                        .underline()
+                        .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
+                        
+                }
+                .offset(x: 146.50, y: -341.50)
             }; Group {
                 ZStack(alignment: .leading) {
                     Rectangle()
@@ -134,98 +144,13 @@ struct Profile: View {
     
     func goToSettings(){
         withAnimation{
-//            settingsTransition = "fromAbout"
+            //            settingsTransition = "fromAbout"
             mainViewNum = 1
-        }
-    }
-}
-
-struct AgeEdit: View{
-    @AppStorage("page") var page = 1
-    @AppStorage("age") var sliderValue: Int = 50
-    @AppStorage("progressPage") var progressPage = 0
-    @State private var showAlertAge = false
-    @State private var showAlertAge1 = false
-    @State private var numberInput: String = ""
-    var body: some View {
-        ZStack() {
-            
-            // Prompt text
-            Text("For accurate results,\nwhat’s your age?")
-                .font(Font.custom("Lufga", size: 24))
-                .foregroundColor(Color(red: 0, green: 0.27, blue: 0.23))
-                .offset(x: 0, y: -232)
-                .multilineTextAlignment(.center)
-            
-            // Continue Button
-            Button (action: save){
-                ZStack() {
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(width: 320, height: 50)
-                        .background(Color(red: 0, green: 0.32, blue: 0.27))
-                        .cornerRadius(34)
-                        .offset(x: 0, y: 0)
-                    Text("Save")
-                        .font(Font.custom("Lufga", size: 18))
-                        .foregroundColor(Color(red: 0.70, green: 0.95, blue: 0))
-                        .offset(x: 0, y: 0.50)
-                }
-            }
-            .frame(width: 320, height: 50)
-            .offset(x: 0.50, y: 327)
-            .alert(isPresented: $showAlertAge) {
-                Alert(
-                    title: Text("Incomplete Information"),
-                    message: Text("Please fill out this field with an age of atleast 12"),
-                    dismissButton: .default(Text("OK")) {
-                        showAlertAge = false
-                    }
-                )
-            }
-            .alert(isPresented: $showAlertAge1) {
-                Alert(
-                    title: Text("Invalid Information"),
-                    message: Text("Must be atleast 12 years old to continue"),
-                    dismissButton: .default(Text("OK")) {
-                        showAlertAge1 = false
-                    }
-                )
-            }
-            
-            
-            // Type age here
-            CustomTextField(placeholder: "Type here", text: $numberInput, fontSize: 30)
-                .font(Font.custom("Lufga", size: 30))
-                .frame(width: 0, height: 50)
-                .foregroundColor(Color(red: 0, green: 0.27, blue: 0.23).opacity(0.25))
-                .offset(x: -1, y: -96.50)
-                .keyboardType(.numberPad)
-                .padding()
-                .multilineTextAlignment(.center)
-            
-        }
-        .frame(width: 1000, height: 1500)
-        .background(Color(red: 0.97, green: 0.97, blue: 0.97));
-    }
-    
-    func save(){
-        sliderValue = Int(numberInput) ?? 0
-        if sliderValue == 0{
-            showAlertAge = true
-        }
-        else if sliderValue < 12 && sliderValue != 0{
-            showAlertAge1 = true
-        }
-        else{
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                progressPage = 2
-            }
         }
     }
 }
 
 #Preview {
     Profile()
-//    AgeEdit()
+    //    AgeEdit()
 }

@@ -433,7 +433,6 @@ struct WorkOutdoorsView: View {
                 progressPage = 4
             }
             
-            frequencySelected = 0
         }
     }
     
