@@ -1,6 +1,6 @@
 # Explicitly track my source code
 # !venv/src
-xcode/Breathe Easy/View/Secrets.swift
+xcode/"Breathe Easy"/View/Secrets.swift
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
