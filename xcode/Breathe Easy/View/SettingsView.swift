@@ -271,6 +271,7 @@ struct SettingsView: View {
 }
 
 struct Settings: View {
+    @AppStorage("genderSelected") var genderSelected = 0
     @AppStorage("page") var page = 1
     @AppStorage("progressPage") var progressPage = 0
     @AppStorage("mainViewNum") var mainViewNum = 0
@@ -539,6 +540,7 @@ struct Settings: View {
         sex = ""
         work = ""
         activity = ""
+        genderSelected = 0
         sliderValue = 50
     }
 }
