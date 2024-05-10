@@ -48,7 +48,6 @@
 		AC4A5CDD2AED65C10001CB8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC4A5CDC2AED65C10001CB8A /* Assets.xcassets */; };
 		AC4A5CE12AED65C10001CB8A /* Breathe Easy WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AC4A5CCD2AED65BF0001CB8A /* Breathe Easy WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AC6C60562B44CC2900FC8B67 /* DeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C60552B44CC2900FC8B67 /* DeleteAccountView.swift */; };
-		ACBA32C82BEE8FAC00E569E2 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBA32C72BEE8FAC00E569E2 /* Secrets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,7 +133,6 @@
 		AC4A5CDC2AED65C10001CB8A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AC4A5CDE2AED65C10001CB8A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AC6C60552B44CC2900FC8B67 /* DeleteAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAccountView.swift; sourceTree = "<group>"; };
-		ACBA32C72BEE8FAC00E569E2 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,7 +190,6 @@
 				38FDAC5D2BA5EC890094532C /* WorkOutdoorsView.swift */,
 				38FDAC5B2BA5EC600094532C /* OutdoorActivitesView.swift */,
 				38FDAC592BA5EC1E0094532C /* HomeView.swift */,
-				ACBA32C72BEE8FAC00E569E2 /* Secrets.swift */,
 				38FDAC572BA5EBC30094532C /* SettingsView.swift */,
 				AC6C60552B44CC2900FC8B67 /* DeleteAccountView.swift */,
 				38BDC3982B10164100D212BF /* LoginPage.swift */,
@@ -500,7 +497,6 @@
 				38DD890F2BAF8A63004CDE51 /* AboutUsView.swift in Sources */,
 				AC6C60562B44CC2900FC8B67 /* DeleteAccountView.swift in Sources */,
 				38DD89172BCB436E004CDE51 /* DeleteAccountPage.swift in Sources */,
-				ACBA32C82BEE8FAC00E569E2 /* Secrets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -295,7 +295,7 @@ struct HomeView3: View {
     
     @Environment(\.scenePhase) var scenePhase
     
-    @AppStorage("apikey") var apiKey = Secrets.apiKey
+    @AppStorage("apikey") var apiKey = "9cf777457a44dc1e9c46bc7c2b38a904"
     
     // Weather variables
     @State var humidity = 1
