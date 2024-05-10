@@ -482,7 +482,7 @@ struct HomeView3: View {
                         .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
                         .offset(x: 16, y: 30)
                 }
-                .offset(x: -133, y: 190)
+                .offset(x: -133, y: 210)
             };Group {
                 ZStack() {
                     ZStack() {
