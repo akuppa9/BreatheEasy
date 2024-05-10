@@ -393,6 +393,11 @@ struct HomeView3: View {
                                 .foregroundColor(Color(red: 0.2, green: 0.4588235294117647, blue: 0))
                                 .offset(x: 30, y: -8.50)
                                 .opacity(0.80)
+                            Text("/25")
+                                .font(Font.custom("Lufga", size: 15))
+                                .foregroundColor(Color(red: 0.2, green: 0.4588235294117647, blue: 0))
+                                .offset(x: 65, y: -5.50)
+                                .opacity(0.80)
                             Text("Predicted Asthma Control Test Score")
                                 .font(Font.custom("Aeonik TRIAL", size: 14))
                                 .foregroundColor(Color(red: 0.2, green: 0.4588235294117647, blue: 0))
@@ -408,6 +413,11 @@ struct HomeView3: View {
                                 .font(Font.custom("Lufga", size: 30))
                                 .foregroundColor(Color(red: 0.4666666666666667, green: 0.36470588235294116, blue: 0))
                                 .offset(x: 30, y: -8.50)
+                                .opacity(0.80)
+                            Text("/25")
+                                .font(Font.custom("Lufga", size: 15))
+                                .foregroundColor(Color(red: 0.4666666666666667, green: 0.36470588235294116, blue: 0))
+                                .offset(x: 65, y: -5.50)
                                 .opacity(0.80)
                             Text("Predicted Asthma Control Test Score")
                                 .font(Font.custom("Aeonik TRIAL", size: 14))
@@ -425,17 +435,37 @@ struct HomeView3: View {
                                 .foregroundColor(Color(red: 0.5647058823529412, green: 0.27058823529411763, blue: 0))
                                 .offset(x: 30, y: -8.50)
                                 .opacity(0.80)
+                            Text("/25")
+                                .font(Font.custom("Lufga", size: 15))
+                                .foregroundColor(Color(red: 0.5647058823529412, green: 0.27058823529411763, blue: 0))
+                                .offset(x: 65, y: -5.50)
+                                .opacity(0.80)
                             Text("Predicted Asthma Control Test Score")
                                 .font(Font.custom("Aeonik TRIAL", size: 14))
                                 .foregroundColor(Color(red: 0.5647058823529412, green: 0.27058823529411763, blue: 0))
                                 .offset(x: 30, y: 20)
                         }
+                        
                     }
                     .frame(width: 235, height: 56)
                     .offset(x: -18, y: -2.50)
                 }
                 .frame(width: 325, height: 111)
                 .offset(x: 0, y: 88.50)
+                
+                Button(action: {
+                    mainViewNum = 2
+                }){
+                    ZStack(alignment: .leading){
+                        Text("Learn more about what your score means")
+                            .font(Font.custom("Lufga", size: 12))
+                            .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
+                            .underline()
+                        Image(systemName: "arrow.right.circle").resizable().foregroundStyle(Color(red: 0.48, green: 0.51, blue: 0.51)).frame(width: 10, height: 10).offset(x:248)
+                    }
+                }
+                .offset(x: -35, y: 160)
+                
                 ZStack() {
                     Text("ACT Score")
                         .font(Font.custom("Lufga", size: 24))
@@ -452,7 +482,7 @@ struct HomeView3: View {
                         .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
                         .offset(x: 16, y: 30)
                 }
-                .offset(x: -133, y: 180)
+                .offset(x: -133, y: 190)
             };Group {
                 ZStack() {
                     ZStack() {
