@@ -448,6 +448,9 @@ struct HomeView3: View {
                         .font(Font.custom("Lufga", size: 24))
                         .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
                         .offset(x: 20, y: 0)
+                    Text("Coming soon").font(Font.custom("Lufga", size: 12))
+                        .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
+                        .offset(x: 16, y: 30)
                 }
                 .offset(x: -133, y: 180)
             };Group {
