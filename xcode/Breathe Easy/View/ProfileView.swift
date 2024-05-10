@@ -94,7 +94,7 @@ struct Profile: View {
                             .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
                             .offset(x: 0, y: 0)
                     }
-                    .frame(width: 20, height: 23)
+                    .frame(width: 100, height: 100)
                     .offset(x: -132.50, y: 0.50)
                 }
                 .frame(width: 325, height: 56)
