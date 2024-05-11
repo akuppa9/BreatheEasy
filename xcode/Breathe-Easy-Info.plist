@@ -23,12 +23,5 @@
 	<array>
 		<string>location</string>
 	</array>
-	<key>UILaunchScreen</key>
-	<dict>
-		<key>UIColorName</key>
-		<string>launch-screen-background</string>
-		<key>UIImageName</key>
-		<string>BreatheEasyLogo</string>
-	</dict>
 </dict>
 </plist>

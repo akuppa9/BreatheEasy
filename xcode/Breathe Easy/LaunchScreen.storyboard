@@ -28,17 +28,20 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BreatheEasyLogo" translatesAutoresizingMaskIntoConstraints="NO" id="k3D-t4-2Yn">
-                                <rect key="frame" x="97" y="375" width="198" height="103"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" name="launch-screen-background"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BreatheEasyLogo" translatesAutoresizingMaskIntoConstraints="NO" id="ckG-g6-Rya">
+                                <rect key="frame" x="112" y="382.66666666666669" width="169" height="87"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="169" id="5KY-VB-j5b"/>
+                                    <constraint firstAttribute="height" constant="87" id="ezp-mk-26c"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
                         <color key="backgroundColor" name="launch-screen-background"/>
-                        <color key="tintColor" name="launch-screen-background"/>
                         <constraints>
+                            <constraint firstItem="ckG-g6-Rya" firstAttribute="centerX" secondItem="GJd-Yh-RWb" secondAttribute="centerX" id="3XR-oN-B0s"/>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="centerX" secondItem="obG-Y5-kRd" secondAttribute="centerX" id="5cz-MP-9tL"/>
+                            <constraint firstItem="ckG-g6-Rya" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="PaX-Nq-R4J"/>
                             <constraint firstItem="Bcu-3y-fUS" firstAttribute="centerX" secondItem="GJd-Yh-RWb" secondAttribute="centerX" id="Q3B-4B-g5h"/>
                             <constraint firstItem="obG-Y5-kRd" firstAttribute="leading" secondItem="Bcu-3y-fUS" secondAttribute="leading" symbolic="YES" id="SfN-ll-jLj"/>
                             <constraint firstAttribute="bottom" secondItem="obG-Y5-kRd" secondAttribute="bottom" constant="20" id="Y44-ml-fuU"/>
