@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct AboutUsView: View {
+    @Binding var ACTScore: Double
     @Binding var mainViewNum: Int
 //    @AppStorage("settingsTransition") var settingsTransition = ""
     var body: some View {

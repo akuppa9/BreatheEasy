@@ -186,6 +186,15 @@ struct OutdoorActivitesView: View {
                 )
             }
             
+            Text("Note: You will need to restart Breathe Easy\n to update your ACT Score once you start tracking")
+                .font(Font.custom("Lufga", size: 12))
+                .foregroundColor(Color(red: 0.48, green: 0.51, blue: 0.51))
+                .frame(maxWidth: .infinity)  // Ensures the text can center within the available width
+                .multilineTextAlignment(.center)  // Centers the text
+                .lineLimit(nil)  // Allows text to wrap onto multiple lines
+                .padding(.horizontal, 20)
+                .offset(y:260)
+            
             ZStack() {
                 
                 if(frequencySelectedActivity == 0){

@@ -278,6 +278,7 @@ struct SettingsView: View {
 }
 
 struct Settings: View {
+    @Binding var ACTScore: Double
     @Binding var mainViewNum: Int
     @AppStorage("genderSelected") var genderSelected = 0
     @AppStorage("page") var page = 1

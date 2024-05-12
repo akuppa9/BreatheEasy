@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Profile: View {
+    @Binding var ACTScore: Double
     @Binding var mainViewNum: Int
     @AppStorage("age") var sliderValue: Int = 50
     @AppStorage("sex") var sex: String = ""

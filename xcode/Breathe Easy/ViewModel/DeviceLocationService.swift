@@ -43,7 +43,7 @@ class DeviceLocationService: NSObject, CLLocationManagerDelegate, ObservableObje
     }
     
     func setDistanceFilter(_ distance: CLLocationDistance){
-        locationManager.distanceFilter = 100
+        locationManager.distanceFilter = distance
     }
     
     func startMonitoringSignificantLocationChanges(){

@@ -14,6 +14,7 @@ struct DeleteAccountPage: View {
     @AppStorage("page") var page = 1
     @AppStorage("progressPage") var progressPage = 0
     @Binding var mainViewNum: Int
+    @Binding var ACTScore: Double
     @AppStorage("uid") var uid = ""
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false

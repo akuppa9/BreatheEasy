@@ -213,6 +213,7 @@ struct HomeView: View {
 
 struct MainViewNew: View{
 //    @AppStorage("mainViewNum") var mainViewNum = 0
+    @State var ACTScore = 0.0
     @State var mainViewNum = 0
     @AppStorage("fromAbout") var fromAbout = 0
     
@@ -221,15 +222,15 @@ struct MainViewNew: View{
     var body: some View{
         ZStack{
             if (mainViewNum == 0){
-                HomeView3(mainViewNum: $mainViewNum, navigationDirection: $navigationDirection).transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
+                HomeView3(mainViewNum: $mainViewNum, ACTScore: $ACTScore, navigationDirection: $navigationDirection).transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
             }else if (mainViewNum == 1){
-                Settings(mainViewNum: $mainViewNum)//navigationDirection: $navigationDirection).transition(navigationDirection == .forward ? .asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)) : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
+                Settings(ACTScore: $ACTScore, mainViewNum: $mainViewNum)//navigationDirection: $navigationDirection).transition(navigationDirection == .forward ? .asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)) : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
             }else if (mainViewNum == 2){
-                AboutUsView(mainViewNum: $mainViewNum).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
+                AboutUsView(ACTScore: $ACTScore, mainViewNum: $mainViewNum).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
             } else if (mainViewNum == 3){
-                Profile(mainViewNum: $mainViewNum)
+                Profile(ACTScore: $ACTScore,mainViewNum: $mainViewNum)
             } else if (mainViewNum == 4){
-                DeleteAccountPage(mainViewNum: $mainViewNum)
+                DeleteAccountPage(mainViewNum: $mainViewNum, ACTScore: $ACTScore)
             }
         }
         .animation(.default, value: mainViewNum)
@@ -284,6 +285,7 @@ class Throttler {
 
 struct HomeView3: View {
     @Binding var mainViewNum: Int
+    @Binding var ACTScore: Double
     @State private var lastFetchedCoordinates: (latitude: Double, longitude: Double)?
     var fetchThreshold: Double = 500 // meters
     
@@ -304,7 +306,6 @@ struct HomeView3: View {
     @State var temperature = 1.0
     @State var uvi = 1.0
     @State var windSpeed = 1.0
-    @State var ACTScore = 0.0
     
     @AppStorage("age") var sliderValue: Int = 50
     @AppStorage("sex") var sex: String = ""
@@ -388,16 +389,20 @@ struct HomeView3: View {
                                 .background(Color(red: 0.698, green: 0.945, blue: 0))
                                 .cornerRadius(15)
                                 .offset(x: 10, y: 0)
-                            Text(String(format: "%.0f",ACTScore))
-                                .font(Font.custom("Lufga", size: 30))
-                                .foregroundColor(Color(red: 0.2, green: 0.4588235294117647, blue: 0))
-                                .offset(x: 30, y: -8.50)
-                                .opacity(0.80)
-                            Text("/25")
-                                .font(Font.custom("Lufga", size: 15))
-                                .foregroundColor(Color(red: 0.2, green: 0.4588235294117647, blue: 0))
-                                .offset(x: 65, y: -5.50)
-                                .opacity(0.80)
+                            
+                            HStack(spacing: 2){
+                                Text(String(format: "%.0f",ACTScore))
+                                    .font(Font.custom("Lufga", size: 30))
+                                    .foregroundColor(Color(red: 0.2, green: 0.4588235294117647, blue: 0))
+                                    .offset(y: -8.50)
+                                    .opacity(0.80)
+                                Text("/25")
+                                    .font(Font.custom("Lufga", size: 15))
+                                    .foregroundColor(Color(red: 0.2, green: 0.4588235294117647, blue: 0))
+                                    .offset(y: -5.50)
+                                    .opacity(0.80)
+                            }.offset(x:30)
+                            
                             Text("Predicted Asthma Control Test Score")
                                 .font(Font.custom("Aeonik TRIAL", size: 14))
                                 .foregroundColor(Color(red: 0.2, green: 0.4588235294117647, blue: 0))
@@ -409,16 +414,21 @@ struct HomeView3: View {
                                 .background(Color(red: 1, green: 0.92, blue: 0.2))
                                 .cornerRadius(15)
                                 .offset(x: 10, y: 0)
-                            Text(String(format: "%.0f",ACTScore))
-                                .font(Font.custom("Lufga", size: 30))
-                                .foregroundColor(Color(red: 0.4666666666666667, green: 0.36470588235294116, blue: 0))
-                                .offset(x: 30, y: -8.50)
-                                .opacity(0.80)
-                            Text("/25")
-                                .font(Font.custom("Lufga", size: 15))
-                                .foregroundColor(Color(red: 0.4666666666666667, green: 0.36470588235294116, blue: 0))
-                                .offset(x: 65, y: -5.50)
-                                .opacity(0.80)
+                            
+                            HStack(spacing: 2){
+                                Text(String(format: "%.0f",ACTScore))
+                                    .font(Font.custom("Lufga", size: 30))
+                                    .foregroundColor(Color(red: 0.4666666666666667, green: 0.36470588235294116, blue: 0))
+                                    .offset(y: -8.50)
+                                    .opacity(0.80)
+                                Text("/25")
+                                    .font(Font.custom("Lufga", size: 15))
+                                    .foregroundColor(Color(red: 0.4666666666666667, green: 0.36470588235294116, blue: 0))
+                                    .offset(y: -5.50)
+                                    .opacity(0.80)
+                            }
+                            .offset(x:30)
+                            
                             Text("Predicted Asthma Control Test Score")
                                 .font(Font.custom("Aeonik TRIAL", size: 14))
                                 .foregroundColor(Color(red: 0.4666666666666667, green: 0.36470588235294116, blue: 0))
@@ -430,16 +440,21 @@ struct HomeView3: View {
                                 .background(Color(red: 0.98, green: 0.57, blue: 0.20))
                                 .cornerRadius(15)
                                 .offset(x: 10, y: 0)
-                            Text(String(format: "%.0f",ACTScore))
-                                .font(Font.custom("Lufga", size: 30))
-                                .foregroundColor(Color(red: 0.5647058823529412, green: 0.27058823529411763, blue: 0))
-                                .offset(x: 30, y: -8.50)
-                                .opacity(0.80)
-                            Text("/25")
-                                .font(Font.custom("Lufga", size: 15))
-                                .foregroundColor(Color(red: 0.5647058823529412, green: 0.27058823529411763, blue: 0))
-                                .offset(x: 65, y: -5.50)
-                                .opacity(0.80)
+                            
+                            HStack(spacing:2){
+                                Text(String(format: "%.0f",ACTScore))
+                                    .font(Font.custom("Lufga", size: 30))
+                                    .foregroundColor(Color(red: 0.5647058823529412, green: 0.27058823529411763, blue: 0))
+                                    .offset(y: -8.50)
+                                    .opacity(0.80)
+                                Text("/25")
+                                    .font(Font.custom("Lufga", size: 15))
+                                    .foregroundColor(Color(red: 0.5647058823529412, green: 0.27058823529411763, blue: 0))
+                                    .offset(y: -5.50)
+                                    .opacity(0.80)
+                            }
+                            .offset(x:30)
+                            
                             Text("Predicted Asthma Control Test Score")
                                 .font(Font.custom("Aeonik TRIAL", size: 14))
                                 .foregroundColor(Color(red: 0.5647058823529412, green: 0.27058823529411763, blue: 0))
@@ -484,6 +499,7 @@ struct HomeView3: View {
                         .offset(x: 16, y: 30)
                 }
                 .offset(x: -133, y: 210)
+                
             };Group {
                 ZStack() {
                     ZStack() {
