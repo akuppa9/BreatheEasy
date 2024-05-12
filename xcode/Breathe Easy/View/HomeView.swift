@@ -563,40 +563,6 @@ struct HomeView3: View {
             .store(in: &tokens)
     }
     
-//    func observeCoordinateUpdates2() {
-//        deviceLocationService.coordinatesPublisher
-//            .receive(on: DispatchQueue.main)
-//            .sink { completion in
-//                print("Handle \(completion) for error and finished subscription.")
-//            } receiveValue: { coordinates in
-//                let newCoordinates = (latitude: coordinates.latitude, longitude: coordinates.longitude)
-//                if shouldFetchForNewCoordinates(newCoordinates) {
-//                    lastFetchedCoordinates = newCoordinates
-//                    fetchCurrentWeather(latitude: coordinates.latitude, longitude: coordinates.longitude)
-//                    fetchUVIndex(latitude: coordinates.latitude, longitude: coordinates.longitude)
-//                    Task {
-//                        await parseACTScore()
-//                    }
-//                }
-//            }
-//            .store(in: &tokens)
-//    }
-    
-    func shouldFetchForNewCoordinates(_ newCoordinates: (latitude: Double, longitude: Double)) -> Bool {
-            guard var lastFetchedCoordinates = lastFetchedCoordinates else {
-                // Always fetch the first time
-                return true
-            }
-
-            return distanceBetween(lastFetchedCoordinates, and: newCoordinates) > fetchThreshold
-        }
-
-        func distanceBetween(_ coordinates1: (latitude: Double, longitude: Double), and coordinates2: (latitude: Double, longitude: Double)) -> Double {
-            var location1 = CLLocation(latitude: coordinates1.latitude, longitude: coordinates1.longitude)
-            var location2 = CLLocation(latitude: coordinates2.latitude, longitude: coordinates2.longitude)
-            return location1.distance(from: location2)
-        }
-    
     func observeDeniedLocationAccess() {
         deviceLocationService.deniedLocationAccessPublisher
             .receive(on: DispatchQueue.main)

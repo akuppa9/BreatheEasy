@@ -57,11 +57,20 @@ class LoginViewModel: NSObject, ObservableObject, ASAuthorizationControllerDeleg
     }
     
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        // Assuming you're targeting iOS 13 or later and using SwiftUI.
-        // This needs to return a window that the ASAuthorizationController can use for its UI.
-        // The method below is a commonly used approach prior to iOS 15.
-        return UIApplication.shared.windows.first { $0.isKeyWindow }!
+        // Search for a window scene that is currently active and in the foreground
+        guard let windowScene = UIApplication.shared.connectedScenes
+            .first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene else {
+                fatalError("No active window scene in the foreground found")
+        }
+
+        // From the active window scene, find the key window
+        guard let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) else {
+            fatalError("No key window available in the active window scene")
+        }
+
+        return keyWindow
     }
+
 
     
     func authenticate(credential: ASAuthorizationAppleIDCredential){
