@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ProgressView: View{
+struct ProgressView2: View{
     @AppStorage("progressPage") var progressPage = 0
     var body: some View{
         if (progressPage == 0){
@@ -25,5 +25,5 @@ struct ProgressView: View{
 }
 
 #Preview {
-    ProgressView()
+    ProgressView2()
 }

@@ -212,7 +212,8 @@ struct HomeView: View {
 }
 
 struct MainViewNew: View{
-    @AppStorage("mainViewNum") var mainViewNum = 0
+//    @AppStorage("mainViewNum") var mainViewNum = 0
+    @State var mainViewNum = 0
     @AppStorage("fromAbout") var fromAbout = 0
     
     @State var navigationDirection: NavigationDirection = .forward
@@ -220,15 +221,15 @@ struct MainViewNew: View{
     var body: some View{
         ZStack{
             if (mainViewNum == 0){
-                HomeView3(navigationDirection: $navigationDirection).transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
+                HomeView3(mainViewNum: $mainViewNum, navigationDirection: $navigationDirection).transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
             }else if (mainViewNum == 1){
-                Settings()//navigationDirection: $navigationDirection).transition(navigationDirection == .forward ? .asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)) : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
+                Settings(mainViewNum: $mainViewNum)//navigationDirection: $navigationDirection).transition(navigationDirection == .forward ? .asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)) : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
             }else if (mainViewNum == 2){
-                AboutUsView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
+                AboutUsView(mainViewNum: $mainViewNum).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
             } else if (mainViewNum == 3){
-                Profile()
+                Profile(mainViewNum: $mainViewNum)
             } else if (mainViewNum == 4){
-                DeleteAccountPage()
+                DeleteAccountPage(mainViewNum: $mainViewNum)
             }
         }
         .animation(.default, value: mainViewNum)
@@ -282,12 +283,12 @@ class Throttler {
 }
 
 struct HomeView3: View {
+    @Binding var mainViewNum: Int
     @State private var lastFetchedCoordinates: (latitude: Double, longitude: Double)?
     var fetchThreshold: Double = 500 // meters
     
     @State private var throttler = Throttler(delay: 5)  // Delay of 5 seconds
     
-    @AppStorage("mainViewNum") var mainViewNum = 0
     @StateObject var deviceLocationService = DeviceLocationService.shared
     
     @State var tokens: Set<AnyCancellable> = []
@@ -443,8 +444,9 @@ struct HomeView3: View {
                                 .font(Font.custom("Aeonik TRIAL", size: 14))
                                 .foregroundColor(Color(red: 0.5647058823529412, green: 0.27058823529411763, blue: 0))
                                 .offset(x: 30, y: 20)
+                        } else{
+                            ProgressView().offset(x:18)
                         }
-                        
                     }
                     .frame(width: 235, height: 56)
                     .offset(x: -18, y: -2.50)
@@ -516,7 +518,6 @@ struct HomeView3: View {
                 break
             }
         }
-        
     }
     
     func goToSettings(){

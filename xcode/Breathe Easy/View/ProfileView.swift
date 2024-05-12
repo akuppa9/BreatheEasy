@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Profile: View {
-    @AppStorage("mainViewNum") var mainViewNum = 0
+    @Binding var mainViewNum: Int
     @AppStorage("age") var sliderValue: Int = 50
     @AppStorage("sex") var sex: String = ""
     @AppStorage("work") var work: String = ""
@@ -150,7 +150,13 @@ struct Profile: View {
     }
 }
 
-#Preview {
-    Profile()
-    //    AgeEdit()
+struct Profile2: View{
+    var body: some View{
+        ProgressView()
+    }
 }
+
+//#Preview {
+//    Profile()
+////    Profile2().offset(x: 100, y:50)
+//}

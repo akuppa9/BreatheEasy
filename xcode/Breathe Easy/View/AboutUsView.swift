@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AboutUsView: View {
-    @AppStorage("mainViewNum") var mainViewNum = 0
+    @Binding var mainViewNum: Int
 //    @AppStorage("settingsTransition") var settingsTransition = ""
     var body: some View {
         ZStack() {
@@ -151,6 +151,6 @@ You now know everything you need to know to use Breathe Easy! For any clarificat
     }
 }
 
-#Preview {
-    AboutUsView()
-}
+//#Preview {
+//    AboutUsView()
+//}

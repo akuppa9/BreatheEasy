@@ -278,10 +278,10 @@ struct SettingsView: View {
 }
 
 struct Settings: View {
+    @Binding var mainViewNum: Int
     @AppStorage("genderSelected") var genderSelected = 0
     @AppStorage("page") var page = 1
     @AppStorage("progressPage") var progressPage = 0
-    @AppStorage("mainViewNum") var mainViewNum = 0
     @AppStorage("uid") var uid = ""
     @AppStorage("log_Status") var log_Status = false
     @AppStorage("log_Status2") var log_Status2 = false
@@ -552,7 +552,7 @@ struct Settings: View {
     }
 }
 
-#Preview {
-        //SettingsView()
-    Settings()
-}
+//#Preview {
+//        //SettingsView()
+//    Settings()
+//}

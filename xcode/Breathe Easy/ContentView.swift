@@ -1376,19 +1376,9 @@ struct ContentView: View {
                 LoginView().transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
             }
             if(page == 2){
-//                StartTracking().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                ProgressView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-                
-                
+                ProgressView2().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
             }
             if(page == 3){
-                //  ProfileView(sliderValue: $sliderValue, sex: $sex, work: $work, activity: $activity)
-                //   .tabItem(){
-                //        Image(systemName: "person.fill")
-                //        Text("Profile")
-                //     }.toolbarBackground(Color.white, for: .tabBar)
-//                MainView().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
-//                TestView().transition(.asymmetric(insertion: .slide, removal: .slide))
                 MainViewNew().transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
             }
             if(page == 4){
