@@ -226,7 +226,7 @@ struct MainViewNew: View{
             }else if (mainViewNum == 1){
                 Settings(ACTScore: $ACTScore, mainViewNum: $mainViewNum)//navigationDirection: $navigationDirection).transition(navigationDirection == .forward ? .asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)) : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
             }else if (mainViewNum == 2){
-                AboutUsView(ACTScore: $ACTScore, mainViewNum: $mainViewNum).transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
+                AboutUsView(ACTScore: $ACTScore, mainViewNum: $mainViewNum)/*.transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))*/
             } else if (mainViewNum == 3){
                 Profile(ACTScore: $ACTScore,mainViewNum: $mainViewNum)
             } else if (mainViewNum == 4){
