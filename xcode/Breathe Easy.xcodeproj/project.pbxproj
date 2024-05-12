@@ -39,14 +39,6 @@
 		AC4A5CB12AED652C0001CB8A /* Breathe_EasyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A5CB02AED652C0001CB8A /* Breathe_EasyTests.swift */; };
 		AC4A5CBB2AED652C0001CB8A /* Breathe_EasyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A5CBA2AED652C0001CB8A /* Breathe_EasyUITests.swift */; };
 		AC4A5CBD2AED652C0001CB8A /* Breathe_EasyUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A5CBC2AED652C0001CB8A /* Breathe_EasyUITestsLaunchTests.swift */; };
-		AC4A5CD02AED65BF0001CB8A /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC4A5CCF2AED65BF0001CB8A /* WidgetKit.framework */; };
-		AC4A5CD22AED65BF0001CB8A /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC4A5CD12AED65BF0001CB8A /* SwiftUI.framework */; };
-		AC4A5CD52AED65BF0001CB8A /* Breathe_Easy_WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A5CD42AED65BF0001CB8A /* Breathe_Easy_WidgetBundle.swift */; };
-		AC4A5CD72AED65BF0001CB8A /* Breathe_Easy_WidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A5CD62AED65BF0001CB8A /* Breathe_Easy_WidgetLiveActivity.swift */; };
-		AC4A5CD92AED65BF0001CB8A /* Breathe_Easy_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A5CD82AED65BF0001CB8A /* Breathe_Easy_Widget.swift */; };
-		AC4A5CDB2AED65BF0001CB8A /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC4A5CDA2AED65BF0001CB8A /* AppIntent.swift */; };
-		AC4A5CDD2AED65C10001CB8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC4A5CDC2AED65C10001CB8A /* Assets.xcassets */; };
-		AC4A5CE12AED65C10001CB8A /* Breathe Easy WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = AC4A5CCD2AED65BF0001CB8A /* Breathe Easy WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		AC6C60562B44CC2900FC8B67 /* DeleteAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6C60552B44CC2900FC8B67 /* DeleteAccountView.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,13 +57,6 @@
 			remoteGlobalIDString = AC4A5C9B2AED652A0001CB8A;
 			remoteInfo = "Breathe Easy";
 		};
-		AC4A5CDF2AED65C10001CB8A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AC4A5C942AED652A0001CB8A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AC4A5CCC2AED65BF0001CB8A;
-			remoteInfo = "Breathe Easy WidgetExtension";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -81,7 +66,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				AC4A5CE12AED65C10001CB8A /* Breathe Easy WidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -123,7 +107,6 @@
 		AC4A5CB62AED652C0001CB8A /* Breathe EasyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Breathe EasyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC4A5CBA2AED652C0001CB8A /* Breathe_EasyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breathe_EasyUITests.swift; sourceTree = "<group>"; };
 		AC4A5CBC2AED652C0001CB8A /* Breathe_EasyUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breathe_EasyUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		AC4A5CCD2AED65BF0001CB8A /* Breathe Easy WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Breathe Easy WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC4A5CCF2AED65BF0001CB8A /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		AC4A5CD12AED65BF0001CB8A /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		AC4A5CD42AED65BF0001CB8A /* Breathe_Easy_WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Breathe_Easy_WidgetBundle.swift; sourceTree = "<group>"; };
@@ -157,15 +140,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AC4A5CCA2AED65BF0001CB8A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AC4A5CD22AED65BF0001CB8A /* SwiftUI.framework in Frameworks */,
-				AC4A5CD02AED65BF0001CB8A /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,7 +205,6 @@
 				AC4A5C9C2AED652A0001CB8A /* Breathe Easy.app */,
 				AC4A5CAC2AED652C0001CB8A /* Breathe EasyTests.xctest */,
 				AC4A5CB62AED652C0001CB8A /* Breathe EasyUITests.xctest */,
-				AC4A5CCD2AED65BF0001CB8A /* Breathe Easy WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -317,7 +290,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				AC4A5CE02AED65C10001CB8A /* PBXTargetDependency */,
 			);
 			name = "Breathe Easy";
 			packageProductDependencies = (
@@ -365,23 +337,6 @@
 			productReference = AC4A5CB62AED652C0001CB8A /* Breathe EasyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		AC4A5CCC2AED65BF0001CB8A /* Breathe Easy WidgetExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AC4A5CE22AED65C10001CB8A /* Build configuration list for PBXNativeTarget "Breathe Easy WidgetExtension" */;
-			buildPhases = (
-				AC4A5CC92AED65BF0001CB8A /* Sources */,
-				AC4A5CCA2AED65BF0001CB8A /* Frameworks */,
-				AC4A5CCB2AED65BF0001CB8A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Breathe Easy WidgetExtension";
-			productName = "Breathe Easy WidgetExtension";
-			productReference = AC4A5CCD2AED65BF0001CB8A /* Breathe Easy WidgetExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -402,9 +357,6 @@
 					AC4A5CB52AED652C0001CB8A = {
 						CreatedOnToolsVersion = 15.0.1;
 						TestTargetID = AC4A5C9B2AED652A0001CB8A;
-					};
-					AC4A5CCC2AED65BF0001CB8A = {
-						CreatedOnToolsVersion = 15.0.1;
 					};
 				};
 			};
@@ -428,7 +380,6 @@
 				AC4A5C9B2AED652A0001CB8A /* Breathe Easy */,
 				AC4A5CAB2AED652C0001CB8A /* Breathe EasyTests */,
 				AC4A5CB52AED652C0001CB8A /* Breathe EasyUITests */,
-				AC4A5CCC2AED65BF0001CB8A /* Breathe Easy WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -459,14 +410,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AC4A5CCB2AED65BF0001CB8A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AC4A5CDD2AED65C10001CB8A /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,17 +460,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AC4A5CC92AED65BF0001CB8A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AC4A5CD72AED65BF0001CB8A /* Breathe_Easy_WidgetLiveActivity.swift in Sources */,
-				AC4A5CDB2AED65BF0001CB8A /* AppIntent.swift in Sources */,
-				AC4A5CD52AED65BF0001CB8A /* Breathe_Easy_WidgetBundle.swift in Sources */,
-				AC4A5CD92AED65BF0001CB8A /* Breathe_Easy_Widget.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -540,11 +472,6 @@
 			isa = PBXTargetDependency;
 			target = AC4A5C9B2AED652A0001CB8A /* Breathe Easy */;
 			targetProxy = AC4A5CB72AED652C0001CB8A /* PBXContainerItemProxy */;
-		};
-		AC4A5CE02AED65C10001CB8A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AC4A5CCC2AED65BF0001CB8A /* Breathe Easy WidgetExtension */;
-			targetProxy = AC4A5CDF2AED65C10001CB8A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -818,60 +745,6 @@
 			};
 			name = Release;
 		};
-		AC4A5CE32AED65C10001CB8A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 29UT49FYG7;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Breathe Easy Widget/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Breathe Easy Widget";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.webview.Breathe-Easy.Breathe-Easy-Widget";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		AC4A5CE42AED65C10001CB8A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 29UT49FYG7;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Breathe Easy Widget/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Breathe Easy Widget";
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.webview.Breathe-Easy.Breathe-Easy-Widget";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -907,15 +780,6 @@
 			buildConfigurations = (
 				AC4A5CC72AED652C0001CB8A /* Debug */,
 				AC4A5CC82AED652C0001CB8A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AC4A5CE22AED65C10001CB8A /* Build configuration list for PBXNativeTarget "Breathe Easy WidgetExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AC4A5CE32AED65C10001CB8A /* Debug */,
-				AC4A5CE42AED65C10001CB8A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
