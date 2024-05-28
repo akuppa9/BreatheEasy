@@ -547,9 +547,6 @@ struct OutdoorActivitesView: View {
     }
     
     func startTracking(){
-        //        if frequencySelectedActivity == 0{
-        //            showAlertActivityOutdoor = true
-        //        } else{
         NotificationManager.checkForPermission()
         let db = Firestore.firestore()
         
@@ -563,10 +560,6 @@ struct OutdoorActivitesView: View {
         ]
         
         docRef.setData(docData)
-        //            sex = "";
-        //            work = "";
-        //            activity = "";
-        //            sliderValue = 50;
         
         tracked = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {

@@ -10,7 +10,6 @@ import SwiftUI
 struct AboutUsView: View {
     @Binding var ACTScore: Double
     @Binding var mainViewNum: Int
-//    @AppStorage("settingsTransition") var settingsTransition = ""
     var body: some View {
         ZStack() {
             Button(action: goToSettings){
@@ -146,7 +145,6 @@ You now know everything you need to know to use Breathe Easy! For any clarificat
     
     func goToSettings(){
         withAnimation{
-//            settingsTransition = "fromAbout"
             mainViewNum = 1
         }
     }

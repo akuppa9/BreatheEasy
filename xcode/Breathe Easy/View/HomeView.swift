@@ -18,201 +18,7 @@ enum NavigationDirection {
     case forward, backward
 }
 
-struct HomeView2: View {
-    @AppStorage("mainViewNum") var mainViewNum = 0
-    var body: some View {
-        ZStack() {
-            Group {
-                ZStack() {
-                    Text("Insights")
-                        .font(Font.custom("Lufga", size: 30))
-                        .foregroundColor(Color(red: 0, green: 0.27, blue: 0.23))
-                        .offset(x: -108, y: 0.50)
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(width: 42, height: 42)
-                        .background(
-                            AsyncImage(url: URL(string: "https://via.placeholder.com/42x42"))
-                        )
-                        .offset(x: 141.50, y: 0)
-                }
-                .offset(x: 0, y: -338)
-                ZStack() { }
-                    .frame(width: 0, height: 0)
-                    .offset(x: -187.50, y: -406)
-                Text("ACT Score")
-                    .font(Font.custom("Lufga", size: 30))
-                    .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                    .offset(x: -87.50, y: 19.50)
-                Text("Predicted Asthma Control Test")
-                    .font(Font.custom("Aeonik TRIAL", size: 14))
-                    .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                    .offset(x: -67, y: 56)
-            };Group {
-                Text("FAQ")
-                    .font(Font.custom("Lufga", size: 30))
-                    .foregroundColor(.clear)
-                    .offset(x: -133, y: 208.50)
-                Rectangle()
-                    .foregroundColor(Color(red: 0.97, green: 0.97, blue: 0.97))
-                    .frame(width: 375, height: 60)
-                    .background(Color(red: 1, green: 1, blue: 1).opacity(0.75))
-                    .offset(x: 0, y: 376)
-                ZStack() {
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(width: 42, height: 42)
-                        .background(
-                            Image("HomeHome").resizable()
-                                .aspectRatio(contentMode: .fit)
-                        )
-                        .offset(x: -100, y: 0)
-                    
-                    Button(action: goToSettings){
-                        Rectangle()
-                            .foregroundColor(.clear)
-                            .frame(width: 42, height: 42)
-                            .background(
-                                Image("HomeSettings").resizable()
-                                    .aspectRatio(contentMode: .fit)
-                            )
-                    }
-                    .offset(x: 0, y: 0)
-                    
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(width: 42, height: 42)
-                        .background(
-                            Image("HomeHelp").resizable()
-                                .aspectRatio(contentMode: .fit)
-                        )
-                        .offset(x: 100, y: 0)
-                }
-                .frame(height: 42)
-                .offset(x: 0.50, y: 376)
-                ZStack() {
-                    ZStack() {
-                        ZStack() {
-                            ZStack() { }
-                                .frame(width: 287, height: 191)
-                                .offset(x: 8, y: 39.59)
-                        }
-                        .frame(width: 215, height: 199.82)
-                        .offset(x: 0, y: 0)
-                    }
-                    .frame(width: 215, height: 199.82)
-                    .offset(x: 0, y: 0)
-                    Image("HomeLung").resizable()
-                    Text("25")
-                        .font(Font.custom("Lufga", size: 30))
-                        .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                        .offset(x: 0.50, y: 120.59)
-                }
-                .frame(width: 215, height: 199.82)
-                .offset(x: 0, y: -153.09)
-            }
-        }
-        .frame(width: 1000, height: 1500)
-        .background(Color(red: 0.97, green: 0.97, blue: 0.97));
-    }
-    
-    func goToSettings(){
-        withAnimation{
-            mainViewNum = 1
-        }
-    }
-}
-
-struct HomeView: View {
-    @AppStorage("mainViewNum") var mainViewNum = 0
-    var body: some View {
-        ZStack() {
-            Group {
-                ZStack() {
-                    Text("Insights")
-                        .font(Font.custom("Lufga", size: 30))
-                        .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                        .offset(x: -108, y: 0.50)
-                    Button(action: goToSettings){
-                        Rectangle()
-                            .foregroundColor(.clear)
-                            .frame(width: 42, height: 42)
-                            .background(
-                                Image("HomeSettings").resizable()
-                                    .aspectRatio(contentMode: .fit)
-                            )
-                    }
-                    .offset(x: 141.50, y: 0)
-                }
-                .offset(x: 0, y: -338)
-                ZStack() { }
-                    .frame(width: 0, height: 0)
-                    .offset(x: -187.50, y: -406)
-                ZStack() {
-                    Rectangle()
-                        .foregroundColor(.clear)
-                        .frame(width: 325, height: 111)
-                        .background(Color(red: 0, green: 0.32, blue: 0.27))
-                        .cornerRadius(15)
-                        .offset(x: 0, y: 0)
-                    ZStack() {
-                        Text("25")
-                            .font(Font.custom("Lufga", size: 30))
-                            .foregroundColor(Color(red: 0.70, green: 0.95, blue: 0))
-                            .offset(x: -100.50, y: -8.50)
-                        Text("Predicted Asthma Control Test Score")
-                            .font(Font.custom("Aeonik TRIAL", size: 14))
-                            .foregroundColor(Color(red: 0.54, green: 0.73, blue: 0))
-                            .offset(x: 0, y: 20)
-                    }
-                    .frame(width: 235, height: 56)
-                    .offset(x: -18, y: -2.50)
-                }
-                .frame(width: 325, height: 111)
-                .offset(x: 0, y: 107.50)
-                ZStack() {
-                    Text("ACT Score")
-                        .font(Font.custom("Lufga", size: 30))
-                        .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                        .offset(x: 0, y: 0)
-                }
-                .offset(x: -87.50, y: 12.50)
-            };Group {
-                ZStack() {
-                    ZStack() {
-                        ZStack() {
-                            ZStack() { }
-                                .frame(width: 287, height: 191)
-                                .offset(x: 8, y: 39.59)
-                        }
-                        .frame(width: 215, height: 199.82)
-                        .offset(x: 0, y: 0)
-                    }
-                    .frame(width: 215, height: 199.82)
-                    .offset(x: 0, y: 0)
-                    Text("25")
-                        .font(Font.custom("Lufga", size: 30))
-                        .foregroundColor(Color(red: 0, green: 0.32, blue: 0.27))
-                        .offset(x: 0.50, y: 6.59)
-                }
-                .frame(width: 215, height: 199.82)
-                .offset(x: 0, y: -153.09)
-            }
-        }
-        .frame(width: 1000, height: 1500)
-        .background(Color(red: 0.97, green: 0.97, blue: 0.97));
-    }
-    
-    func goToSettings(){
-        withAnimation{
-            mainViewNum = 1
-        }
-    }
-    
-}
-
 struct MainViewNew: View{
-//    @AppStorage("mainViewNum") var mainViewNum = 0
     @State var ACTScore = 0.0
     @State var mainViewNum = 0
     @AppStorage("fromAbout") var fromAbout = 0
@@ -224,9 +30,9 @@ struct MainViewNew: View{
             if (mainViewNum == 0){
                 HomeView3(mainViewNum: $mainViewNum, ACTScore: $ACTScore, navigationDirection: $navigationDirection).transition(.asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)))
             }else if (mainViewNum == 1){
-                Settings(ACTScore: $ACTScore, mainViewNum: $mainViewNum)//navigationDirection: $navigationDirection).transition(navigationDirection == .forward ? .asymmetric(insertion: .move(edge: .leading), removal: .move(edge: .leading)) : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))
+                Settings(ACTScore: $ACTScore, mainViewNum: $mainViewNum)
             }else if (mainViewNum == 2){
-                AboutUsView(ACTScore: $ACTScore, mainViewNum: $mainViewNum)/*.transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .trailing)))*/
+                AboutUsView(ACTScore: $ACTScore, mainViewNum: $mainViewNum)
             } else if (mainViewNum == 3){
                 Profile(ACTScore: $ACTScore,mainViewNum: $mainViewNum)
             } else if (mainViewNum == 4){
@@ -237,59 +43,11 @@ struct MainViewNew: View{
     }
 }
 
-//class Debouncer {
-//    private var lastCallTime: DispatchTime?
-//    private let delay: TimeInterval
-//    private var workItem: DispatchWorkItem?
-//
-//    init(delay: TimeInterval) {
-//        self.delay = delay
-//    }
-//
-//    func call(_ block: @escaping () -> Void) {
-//        workItem?.cancel()
-//        workItem = DispatchWorkItem { [weak self] in
-//            self?.lastCallTime = .now()
-//            block()
-//        }
-//        if let workItem = workItem {
-//            DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: workItem)
-//        }
-//    }
-//}
-
-class Throttler {
-    private var lastFireTime: DispatchTime = .now()
-    private var delay: TimeInterval
-    private var workItem: DispatchWorkItem?
-
-    init(delay: TimeInterval) {
-        self.delay = delay
-    }
-
-    func throttle(block: @escaping () -> Void) {
-        workItem?.cancel()
-        
-        let dispatchDelay = DispatchTime.now() + delay
-        if dispatchDelay > lastFireTime {
-            lastFireTime = dispatchDelay
-        }
-        
-        workItem = DispatchWorkItem {
-            block()
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: lastFireTime, execute: workItem!)
-    }
-}
-
 struct HomeView3: View {
     @Binding var mainViewNum: Int
     @Binding var ACTScore: Double
     @State private var lastFetchedCoordinates: (latitude: Double, longitude: Double)?
     var fetchThreshold: Double = 500 // meters
-    
-    @State private var throttler = Throttler(delay: 5)  // Delay of 5 seconds
     
     @StateObject var deviceLocationService = DeviceLocationService.shared
     
@@ -521,24 +279,10 @@ struct HomeView3: View {
             observeDeniedLocationAccess()
             deviceLocationService.requestLocationUpdates()
         }
-        .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
-            deviceLocationService.startMonitoringSignificantLocationChanges()
-        }
-        .onChange(of: scenePhase) { newScenePhase, _ in
-            switch newScenePhase {
-            case .active:
-                deviceLocationService.requestLocationUpdates()
-            case .background:
-                deviceLocationService.startMonitoringSignificantLocationChanges()
-            default:
-                break
-            }
-        }
     }
     
     func goToSettings(){
         withAnimation{
-            //            navigationDirection = .forward
             mainViewNum = 1
         }
     }
@@ -556,9 +300,6 @@ struct HomeView3: View {
                     await fetchUVIndex(latitude: coordinates.latitude, longitude: coordinates.longitude)
                     await parseACTScore()
                 }
-//                Task {
-//                    await self.parseACTScore()
-//                }
             }
             .store(in: &tokens)
     }
@@ -662,7 +403,6 @@ struct HomeView3: View {
                 if let ACTData = jsonResult as? [String: Any] {
                     let pred = ACTData["prediction"] as? Double ?? 0.0
                     self.ACTScore = pred > 25.0 && pred < 100 ? 25 : pred.rounded()
-                    //                    self.ACTScore = ACTData["prediction"] as? Double ?? 0.0
                 }
             }
         }
@@ -741,5 +481,4 @@ struct HomeView3: View {
 
 #Preview {
     MainViewNew()
-    //    HomeView3()
 }

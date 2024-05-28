@@ -125,7 +125,6 @@ struct DeleteAccountPage: View {
     
     func goToSettings(){
         withAnimation{
-//            settingsTransition = "fromAbout"
             mainViewNum = 1
         }
     }

@@ -107,17 +107,6 @@ class LoginViewModel: NSObject, ObservableObject, ASAuthorizationControllerDeleg
             }
             
             self.uid = user2.uid
-                
-            // Attempt to fetch the full name
-//            if let fullName = credential.fullName?.givenName {
-//                self.name += fullName
-//            } else if let displayName = user2.displayName {
-//                // If fullName is not available, try to use user2.displayName
-//                self.name = displayName
-//            } else {
-//                // If both are nil, use a default value
-//                self.name = "Name Undefined"
-//            }
             
             // Directing user to home page
             self.log_Status2 = true
@@ -134,13 +123,11 @@ class LoginViewModel: NSObject, ObservableObject, ASAuthorizationControllerDeleg
                         
                         if document.documentID == self.uid{
                             count = count + 1
-                            //                                    tracked = true
                             self.sliderValue = fetchAge()
                             self.sex = fetchSex()
                             self.work = fetchWork()
                             self.activity = fetchActivity()
                         }
-                        //                        print("\(document.documentID) => \(document.data())")
                     }
                     
                     if count == 1{
