@@ -13,12 +13,6 @@ Breathe Easy is an iOS app that consistently estimates and notifies a users' rel
  - [Raw Data Files (saved in repository under AsthmaFiles)](https://datashare.ed.ac.uk/handle/10283/4761)
 
 
-
-## Demo
-
-Insert gif or link to demo
-
-
 ## Local Model Deployment
 
 To deploy local flask application to call model
@@ -28,11 +22,4 @@ To deploy local flask application to call model
 ```
 [Example URL to test model](http://127.0.0.1:5000/22.0/2.54/0.77/4.84/1040.0/98.0/0.51/0.0/2.0/283.72/20.39/21.99/2.27/11.64/16.40/0.39/83.0)
 
-## Moving Forward
-
-- Hosting model on AWS Sagemaker
-- Improve Model through addition of paramters
-- Create User test to provide feedback for model
-- Create WatchOS app
-- Connect to weather API's
 
