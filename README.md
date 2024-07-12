@@ -5,7 +5,7 @@
 
 # Breathe Easy: Take Control of Your Asthma with AI-Powered Management
 
-## Struggling to manage your asthma? Breathe Easy, a mobile application built with Swift, leverages the power of deep learning to constantly assess 10+ asthma triggers to provide you with a personalize Asthma Control Test Score in real time, allowing you to gain insight on the severity of environmental and physical triggers at your current location.
+## Struggling to manage your asthma? Breathe Easy, a mobile application built with Swift, Firebase, Tensorflow, and iOS core frameworks, leverages the power of deep learning to constantly assess 10+ asthma triggers to provide you with a personalize Asthma Control Test Score in real time, allowing you to gain insight on the severity of environmental and physical triggers at your current location.
 
 ## Your Personalized Asthma Guardian:
 
