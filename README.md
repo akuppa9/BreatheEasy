@@ -29,6 +29,11 @@ Breathe Easy works seamlessly in the background, keeping a watchful eye on your 
 
 ### 🏠 [App Store Link]()
 
+## Useful Links:
+- [What is Asthma?](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6157154/)
+- [Significance of Biosignals and Environmental Factors for Predicting Asthma ](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8656014/#:~:text=There%20are%20two%20categories%20of,and%20clinical%20data%20%5B4%5D)
+- [How the Data was the Collected](https://bmjopen.bmj.com/content/12/10/e064166)
+- [Raw Data Files](https://datashare.ed.ac.uk/handle/10283/4761)
 
 ## Developers
 
